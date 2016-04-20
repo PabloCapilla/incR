@@ -13,7 +13,7 @@
 #' 
 #' @return Daily percentage (in 0 to 1 scale) of time in nest.
 #' @examples
-#' 
+#' coming soon
 #' @seealso \code{\link{incR_prep}} \code{\link{incR_scan}} \code{\link{incR_activity}}
 
 
