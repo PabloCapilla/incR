@@ -15,7 +15,7 @@
 #' ausence of nests.
 #' 
 #' @examples
-#' 
+#' Coming soon
 #' @seealso \code{\link{incR_prep}} \code{\link{incR_scan}}
 
 
