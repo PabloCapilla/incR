@@ -1,0 +1,18 @@
+{
+    "contents" : "#' @title Calculation of percentage of daily time spent in incubation.\n#' @description not available\n#' @param data: NA\n#' @param sampling.rate: NA\n#' @param vector.presence: NA\n#' \n#' @return \n#' \n#' @examples\n#' \n#' @seealso \\code{\\link{incR_prep}} \\code{\\link{incR_scan}} \\code{\\link{incR_activity}}\n\n\n\nincR_constancy<- function (data, sampling.rate, vector.presence=\"female\") {\n  # split data set by day\n  data.time <- split (data, data$date)\n  # data frame to fill later\n  day.latency <- data.frame (date=rep(NA, length(data.time)))\n  \n  # loop to assess each day\n  for (d in 1:length(data.time)) {\n    day.latency$date[d] <- as.character(unique(data.time[[d]]$date))\n    day.in <- sum(data.time[[d]][[vector.presence]])\n    seg.day <- length(data.time[[d]][[vector.presence]])\n    \n    day.latency$perc.in[d] <- (day.in/seg.day)\n    \n  }\n  return (day.latency)\n}\n",
+    "created" : 1461152737885.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2222517212",
+    "id" : "4D0DC0D8",
+    "lastKnownWriteTime" : 1461153057,
+    "path" : "D:/R development/incR/R/incR_constancy.r",
+    "project_path" : "R/incR_constancy.r",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

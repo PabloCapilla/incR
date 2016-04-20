@@ -1,0 +1,17 @@
+{
+    "contents" : "#' incR: A package designed to analyse avian incubation\n#' data. \n#' \n#' The functions contained in this package help the user to get\n#' useful biological information from a raw time-series of temperatures.\n#' \n#' @section incR functions:\n#' \n#' \\code{\\link{incR_prep}}, \\code{\\link{incR_scan}},\n#' \\code{\\link{incR_activity}}, \\code{\\link{incR_constancy}}\n#' \n#' @docType package\n#' @name incR\nNULL",
+    "created" : 1461153386991.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3423085700",
+    "id" : "8394C775",
+    "lastKnownWriteTime" : 1461153767,
+    "path" : "D:/R development/incR/R/incR.R",
+    "project_path" : "R/incR.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
