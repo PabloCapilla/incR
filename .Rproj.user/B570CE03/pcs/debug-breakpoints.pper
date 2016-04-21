@@ -2,19 +2,19 @@
     "debugBreakpointsState" : {
         "breakpoints" : [
             {
-                "editor_line_number" : 88,
+                "editor_line_number" : 30,
                 "editor_state" : 1,
-                "function_name" : "incR_scan",
-                "function_steps" : "8,4,3",
-                "id" : 0,
-                "is_package_breakpoint" : true,
+                "function_name" : "toplevel",
+                "function_steps" : "",
+                "id" : 1,
+                "is_package_breakpoint" : false,
                 "is_pending_debug_completion" : false,
-                "line_number" : 88,
-                "needs_updated_steps" : false,
-                "package_name" : "incR",
-                "path" : "D:/R development/incR/R/incR_scan.r",
+                "line_number" : 30,
+                "needs_updated_steps" : true,
+                "package_name" : "",
+                "path" : "D:/R development/incR/R/incR_prep.r",
                 "state" : 1,
-                "type" : 0
+                "type" : 1
             }
         ]
     }

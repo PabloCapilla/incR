@@ -16,7 +16,7 @@
 #' coming soon
 #' @seealso \code{\link{incR.prep}} \code{\link{incR.scan}} \code{\link{incR.activity}}
 
-incR_constancy<- function (data, sampling.rate, vector.presence) {
+incR.constancy<- function (data, sampling.rate, vector.presence) {
   ##### CHECKING FOR COLUMN NAMES #####
   if (is.null (data$date)){
     stop("No column for 'date")

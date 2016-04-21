@@ -49,7 +49,7 @@
 #' To be included
 #' @seealso \code{\link{incR.prep}} \code{\link{incR.contancy}} \code{\link{incR.activity}}
 
-incR_scan <- function (data, 
+incR.scan <- function (data, 
                        lower.time=22,
                        upper.time=3,
                        maxinc.Temp,
