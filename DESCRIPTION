@@ -14,7 +14,8 @@ Description: incR contains a suite of functions
     calculate several measures of incubation behaviour.
 License: GLP-3
 Imports:
-    codetools
+    base,
+    codetools   
 Suggests:
     codetools
 RoxygenNote: 5.0.1
