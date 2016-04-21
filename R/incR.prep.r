@@ -32,7 +32,6 @@
 #' @author Pablo Capilla
 #' @examples
 #' To be included
-#' 
 #' @importFrom base length seq as.Date as.numeric  strftime
 #' @export 
 incR.prep <- function (data, date.name,
