@@ -1,88 +1,102 @@
-#' @title Calculation of incubation behaviour.
-#' @description This is the core algorithm of incR and classifies time points as 1s or 0s depeding on
+#' @title Calculation of incubation behaviour
+#' @description This is the core algorithm of \emph{incR} and classifies time points as 1s or 0s depeding on
 #' whether or not the incubating individual is estimated to be on the eggs. 
 #' The algorithm
-#' uses night variation to calibrate itself to temperature variation when the incubating
+#' uses night variation to daily-calibrate itself to temperature variation when the incubating
 #' individual is (assumed to be) on the eggs. 
 #' Therefore, a major assumption of this algorithm is that
 #' there is a period of time in which temperature can be assumed to be constant or
 #' representative of time windows of effective incubation. This time window is defined by
 #' two arguments: lower.time and upper.time. The function is optimised to work using
-#' a data frame produced by incR_prep.
+#' a data frame produced by incR.prep.
 #' 
-#' The algorithm can be adapted to different environmental circunstances. Its
-#' performance has been evaluated in several species and geographic areas, but calibration
-#' using pilot data is recommended. 
-#' @param data: ny
-#' @param lower.time: ny
-#' @param upper.time: ny
-#' @param env.data: ny
-#' @param sensitivity: ny
-#' @param time.dif: ny
-#' @param MAX.T: ny
-#' @param maxNightVar_accepted: ny
+#' In the near future, extended functionality will be included, especially including
+#' environemtal temperature information into analysis. The
+#' performance of this function has been evaluated in several bird species and geographic areas, 
+#' but calibration using pilot data is recommended. 
+#' 
+#' @param data: data frame for analysis. It must contained four columns named as follow:
+#' 'date', 'temp1', 'dec.time' and 'index'. \code{\link{incR.prep}} returns a data frame
+#' ready to be passed through \emph{incR.scan}
+#' @param lower.time: lower limit of time window for calibration (numeric).
+#' @param upper.time: upper limit of time window for calibration (numeric).
+#' @param maxinc.Temp: maximum temperature of incubation. 
+#' @param sensitivity: ratio of reduction in temperature threshold. When nest temperature
+#' does not drop close to environmental temperatures, this value can be kept to 1. If 
+#' nest temperature follows environmental temperature, then adjustment of this value may
+#' be required to detect short on/off-bouts.
+#' @param time.dif: temperature difference between \emph{maxinc.Temp} and an observation which
+#' triggers the sensitivity parameter.
+#' @param maxNightVar_accepted: maximum temperature variation between two consecutive points
+#' within the calibrating window that is accepted. If this variation value is surpassed, 
+#' a previous night is used for calibration.
+#' @param env.data: not yet supported
 #' 
 #' @return 
+#' The function returns a list with two objects. The first object is the original
+#' data frame with an extra column named 'inc.vector'. This vector is formed by 1s and 0s,
+#' representing whether the incubating individual is (1) or outside the nest (0).
 #' 
+#' The second object is a data frame with one day per row. Four columns tell the user
+#' the thersholds employed to estimate incubating individual behaviuor. A fifth column accounts
+#' for the ratio between the calibrating window temperature variation and the variation in temperature 
+#' between 11am and 3pm. The lower this value the more clear the pattern between night and day
+#' variation. It may serve the user for indication of the performance of the algorithm.
+#' @details 
+#' Description of the algorithm
+#' @author Pablo Capilla
 #' @examples
-#' 
-#' @seealso \code{\link{incR_prep}}
+#' To be included
+#' @seealso \code{\link{incR.prep}} \code{\link{incR.contancy}} \code{\link{incR.activity}}
 
-
-incR_scan <- function (data=data, 
+incR_scan <- function (data, 
                        lower.time=22,
                        upper.time=3,
-                       env.data=FALSE,
+                       maxinc.Temp,
                        sensitivity=0.15,
                        time.dif=20,
-                       MAX.T=38,
-                       maxNightVar_accepted=2) {
-  # NEW INTERNAL VECTORS
-  # 
-  # big list to store the final vector of female position (in or out the nest)
-  female.list <- as.list(NA)  
-  # lists and vectors used within the function
-  list.threshold <- as.list(NA)
-  vector.days <- as.vector(NA)  
-  # final list to store all the data frame that the function returns
-  incubation.list <- as.list(NA)
+                       maxNightVar_accepted,
+                       env.data=FALSE) {
+  ##### CHECKING THE PRESENCE OF APPROPRIATE COLUMN NAMES #####
+  if (is.null(data$date) || is.null(data$dec.time) || is.null(data$temp1) || is.null(data$index)){
+    stop("Please, check that the columns 'date', 'dec.time', 'temp1' and 'index' exist in your data frame")
+  }
   
+  ##### NEW INTERNAL VECTORS AND LISTS #####
+  # big list to store the final vector of inc. individual position (in or out the nest)
+  incubation.list <- as.list(NA)  
+  # lists and vectors used within the function
+  threshold.list <- as.list(NA)
+  vector.days <- as.vector(NA)  
   # splits data by date
   list.day <- split (data, data$date)
   
+  ##### SELECTING NIGHT TIME WINDOW #####
   # selects the defined night time window
   if (lower.time < 24 && lower.time < upper.time) {
     subset.data <- data [data$dec.time > lower.time & data$dec.time < upper.time, ]
     subset.list <- split (subset.data, subset.data$date)
-    
   } else {
     if (lower.time < 24 && lower.time > upper.time) {
       # night period
       subset.nightBefore <- data [data$dec.time > lower.time & data$dec.time < 24, ]
       ## matching night periods with next day's morning
       subset.nightBefore$effec.date <- subset.nightBefore$date + 1
-      
       # day period
       subset.morning <- data [data$dec.time > 0 & data$dec.time < upper.time, ]
       ## replicating new date column
       subset.morning$effec.date <- subset.morning$date
-      
       # combining both periods
       subset.data <- rbind(subset.nightBefore, subset.morning)
-      
-      
       # splitting by effec.date
       subset.list <- split (subset.data, subset.data$effec.date)
       
     } 
   }
-  # 
-  # FUNCTION ITSELF - THROUGH DAY LOOPS
-  #
+  ##### FUNCTION ITSELF - THROUGH DAY LOOPS #####
   # loop to analyse each day separately
   for (d in 1:length(list.day)) {
     data.day <- list.day [[d]]
-    
     # if there is no night ref for any day, then warning message and jump
     # to next day
     if (sort(names (subset.list)==as.character(unique(data.day$date)),
@@ -97,7 +111,7 @@ incR_scan <- function (data=data,
       final.leaving.threshold <- NA
       final.entering.threshold <- NA
       night_day_varRatio <- NA
-      list.threshold[[d]] <- c(as.character(unique (data.day$date)), 
+      threshold.list[[d]] <- c(as.character(unique (data.day$date)), 
                                old.entering.threshold, 
                                final.entering.threshold,
                                old.leaving.threshold, 
@@ -127,7 +141,7 @@ incR_scan <- function (data=data,
         final.entering.threshold <- NA
         final.leaving.threshold <- NA 
         night_day_varRatio <-  NA
-        list.threshold[[d]] <- c(as.character(unique (data.day$date)), 
+        threshold.list[[d]] <- c(as.character(unique (data.day$date)), 
                                  old.entering.threshold, 
                                  final.entering.threshold,
                                  old.leaving.threshold, 
@@ -137,7 +151,7 @@ incR_scan <- function (data=data,
       } else {
         old.entering.threshold <- max (subset.night$temp1, na.rm=TRUE)
         old.leaving.threshold <- min (subset.night$temp1, na.rm=TRUE)
-        if (is.na(list.threshold[[d-1]][3]) || is.na(list.threshold[[d-1]][5])){
+        if (is.na(threshold.list[[d-1]][3]) || is.na(threshold.list[[d-1]][5])){
           warning (paste ("Night drop limit exit on ", paste(
             as.character(unique(subset.night$date)[1]),
             as.character(unique(subset.night$date)[2]), sep="/"),
@@ -146,7 +160,7 @@ incR_scan <- function (data=data,
           final.leaving.threshold <- NA 
           night_day_varRatio <-  var (subset.night$temp1, na.rm=TRUE) / 
             var(data.day$temp1[data.day$dec.time>11 & data.day$dec.time<15], na.rm=TRUE)
-          list.threshold[[d]] <- c(as.character(unique (data.day$date)), 
+          threshold.list[[d]] <- c(as.character(unique (data.day$date)), 
                                    old.entering.threshold, 
                                    final.entering.threshold,
                                    old.leaving.threshold, 
@@ -154,8 +168,8 @@ incR_scan <- function (data=data,
                                    night_day_varRatio)
           next()
         } else {
-          final.entering.threshold <- as.numeric(list.threshold[[d-1]][3])
-          final.leaving.threshold <- as.numeric(list.threshold[[d-1]][5])
+          final.entering.threshold <- as.numeric(threshold.list[[d-1]][3])
+          final.leaving.threshold <- as.numeric(threshold.list[[d-1]][5])
           night_day_varRatio <-  var (subset.night$temp1, na.rm=TRUE) / 
             var(data.day$temp1[data.day$dec.time>11 & data.day$dec.time<15], na.rm=TRUE)
         }
@@ -171,7 +185,7 @@ incR_scan <- function (data=data,
     }
     
     # storing data
-    list.threshold[[d]] <- c(as.character(unique (data.day$date)), 
+    threshold.list[[d]] <- c(as.character(unique (data.day$date)), 
                              old.entering.threshold, 
                              final.entering.threshold,
                              old.leaving.threshold, 
@@ -180,9 +194,8 @@ incR_scan <- function (data=data,
     
     # assessment of differential temperature
     for (i in 2:length(data.day$temp1)) {
-      
-      data.day$leaving[1] <- 0
-      data.day$entering[1] <- 1
+      data.day$leaving[1] <- 0  # initial state
+      data.day$entering[1] <- 1 # initial state
       
       # distance from nest temperature to env.temperature
       if (is.na(data.day$valueT[i])) {next()}
@@ -190,9 +203,9 @@ incR_scan <- function (data=data,
       if (env.data==TRUE) {
         statement <-  (data.day$valueT[i] - data.day$env.temp[i]) < time.dif
       } else {
-        if (MAX.T==NULL) {stop ("No maximum temperature assigned")
+        if (is.null(maxinc.Temp)) {stop ("No maximum temperature assigned")
         } else {
-          statement <-  (MAX.T - data.day$valueT[i]) > time.dif
+          statement <-  (maxinc.Temp - data.day$valueT[i]) > time.dif
         }
       }
       # now the evaluation of statement
@@ -286,13 +299,13 @@ incR_scan <- function (data=data,
     }
     
     # compiling list
-    female.list[[d]] <- data.day
+    incubation.list[[d]] <- data.day
   }
   # data with the new vector for in/out female
-  final.data <- do.call("rbind",female.list)
+  final.data <- do.call("rbind",incubation.list)
   incubation.list[[1]] <-  final.data
   
-  final.threshold <- as.data.frame(do.call("rbind",list.threshold))
+  final.threshold <- as.data.frame(do.call("rbind",threshold.list))
   names(final.threshold) <- c("date", 
                               "old.entering.threshold", 
                               "final.entering.threshold",

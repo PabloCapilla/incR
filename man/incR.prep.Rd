@@ -4,7 +4,7 @@
 \alias{incR.prep}
 \title{Data manipulation for incubation data analysis}
 \usage{
-incR.prep(data, date.name, date.format, timezone)
+incR.prep(data, date.name, date.format, timezone, temperature.name)
 }
 \arguments{
 \item{data:}{raw data from incubation time series. It must contain a column 
@@ -15,13 +15,15 @@ handle date and time concatenated in one unique column (see example below).}
 
 \item{date.format:}{date and time format for date + time column. 
 It must be a character object as specified in the function \emph{strptime}.   
-\emph{incR_prep} assumes the the date + time column contains date and time, 
+\emph{incR.prep} assumes the the date + time column contains date and time, 
 If date and time are in different columns, please concatenate them in one
 column before running the function (see example below).
 its format accordingly.}
 
 \item{timezone:}{time zone for time calculations. See \emph{strptime}
 documentation for more details.}
+
+\item{temperature.name:}{name of the column storing temperature information.}
 }
 \value{
 The original data frame (data) with additional colunms for:
@@ -32,6 +34,7 @@ The original data frame (data) with additional colunms for:
 \item hour: in 'H' format.
 \item year: in 'Y' format.
 \item date: in  'Y-m-d' format.
+\item temp1: difference between the ith temperature value (Ti) and the previous one (Ti-1).
 }
 }
 \description{

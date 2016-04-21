@@ -19,8 +19,7 @@ for incubating individual presence/absence of nests. \code{\link{incR.scan}} pro
 this vector named "inc.vector".}
 }
 \value{
-a data frame containing a column (vector) for incubating individual presence/
-ausence of nests.
+a data frame containing onset and end of activity times for each day in \emph{data}.
 }
 \description{
 Using a vector of incubating individual presence in nest, 

@@ -4,16 +4,24 @@
 \name{incR}
 \alias{incR}
 \alias{incR-package}
-\title{incR: A package designed to analyse avian incubation
-data.}
+\title{incR: Analysis of animal incubation}
 \description{
-The functions contained in this package help the user to get
-useful biological information from a raw time-series of temperatures.
+This packages is formed by a suite of R functions that help the user to get
+useful biological information from raw time series data of 
+incubation temperatures. So far, this package is written in R language to allow the
+contribution of a wide audience.
 }
+\section{Release notes and caveats}{
+
+The current version of \code{\link{incR}} is in an early stage of development.
+Documentation and code are actively being apdated and bugs are likely to be
+found. If so, please, send me your recommendation.
+}
+
 \section{incR functions}{
 
-
-\code{\link{incR_prep}}, \code{\link{incR_scan}},
-\code{\link{incR_activity}}, \code{\link{incR_constancy}}
+So far this package contains the following functions:
+\code{\link{incR.prep}}, \code{\link{incR.scan}},
+\code{\link{incR.activity}}, \code{\link{incR.constancy}}
 }
 

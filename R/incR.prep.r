@@ -12,12 +12,13 @@
 #' @param date.name: name of the date + time column
 #' @param date.format: date and time format for date + time column. 
 #' It must be a character object as specified in the function \emph{strptime}.   
-#' \emph{incR_prep} assumes the the date + time column contains date and time, 
+#' \emph{incR.prep} assumes the the date + time column contains date and time, 
 #' If date and time are in different columns, please concatenate them in one
 #' column before running the function (see example below).
 #' its format accordingly.
 #' @param timezone: time zone for time calculations. See \emph{strptime}
 #' documentation for more details.
+#' @param  temperature.name: name of the column storing temperature information.
 #' @return The original data frame (data) with additional colunms for:
 #' \enumerate{
 #' \item index: a running number identifying every row in the data set.
@@ -26,12 +27,14 @@
 #' \item hour: in 'H' format.
 #' \item year: in 'Y' format.
 #' \item date: in  'Y-m-d' format.
+#' \item temp1: difference between the ith temperature value (Ti) and the previous one (Ti-1).
 #' }
 #' @author Pablo Capilla
 #' @examples
 #' To be included
 incR.prep <- function (data, date.name,
-                       date.format, timezone) {
+                       date.format, timezone,
+                       temperature.name) {
   # checking for correct column names
   ## date name
   if (date.name=="date"){
@@ -54,5 +57,17 @@ incR.prep <- function (data, date.name,
                             x <- as.numeric(x)
                             x[1]+x[2]/60
                           })
+  
+  # diferential temperatures
+  # loop to calculate t - (t-1) and -(t-2)
+  # t - t-1
+  loop1 <- length(data[["temperature.name"]])
+  temperature.original <- data[["temperature.name"]]
+  data[["temp1"]] <- NA
+  for (i in 2:loop1) {
+    data$temp1[1] <- NA
+    data$temp1[i] <- temperature.original[i]-temperature.original[i-1]
+  }
+
   return (data)
 }
