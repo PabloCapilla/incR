@@ -43,11 +43,12 @@
 #' between 11am and 3pm. The lower this value the more clear the pattern between night and day
 #' variation. It may serve the user for indication of the performance of the algorithm.
 #' @details 
-#' Description of the algorithm
+#' Description of the algorithm as it currently works. Future updates will
+#' deal with environmental data.
 #' @author Pablo Capilla
 #' @examples
 #' To be included
-#' @seealso \code{\link{incR.prep}} \code{\link{incR.contancy}} \code{\link{incR.activity}}
+#' @seealso \code{\link{incR.prep}} \code{\link{incR.constancy}} \code{\link{incR.activity}} 
 
 incR.scan <- function (data, 
                        lower.time=22,

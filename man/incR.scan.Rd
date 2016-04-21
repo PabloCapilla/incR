@@ -62,7 +62,8 @@ performance of this function has been evaluated in several bird species and geog
 but calibration using pilot data is recommended.
 }
 \details{
-Description of the algorithm
+Description of the algorithm as it currently works. Future updates will
+deal with environmental data.
 }
 \examples{
 To be included
@@ -71,6 +72,6 @@ To be included
 Pablo Capilla
 }
 \seealso{
-\code{\link{incR.prep}} \code{\link{incR.contancy}} \code{\link{incR.activity}}
+\code{\link{incR.prep}} \code{\link{incR.constancy}} \code{\link{incR.activity}}
 }
 
