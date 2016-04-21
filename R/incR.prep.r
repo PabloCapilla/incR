@@ -32,7 +32,6 @@
 #' @author Pablo Capilla
 #' @examples
 #' To be included
-#' @importFrom base length seq as.Date as.numeric  strftime
 #' @export 
 incR.prep <- function (data, date.name,
                        date.format, timezone,
@@ -44,25 +43,25 @@ incR.prep <- function (data, date.name,
   }
   ### re-formating date and time and generating new time columns
   # index for each row
-  data$index <- seq(1, to=length(data$valueT), by=1)
+  data$index <- base::seq(1, to=base::length(data$valueT), by=1)
   # converting time and date in different formats
-  dt <- strptime(data[[date.name]], format=date.format, tz=timezone)
+  dt <- base::strptime(data[[date.name]], format=date.format, tz=timezone)
   data$time <- strftime (dt, format= "%H:%M")
   # variables for hour and year
-  data$hour <- as.numeric(format (data$time, "%H"))
-  data$year <- as.numeric(format(data$time, "%Y")) 
+  data$hour <- base::as.numeric(base::format (data$time, "%H"))
+  data$year <- base::as.numeric(base::format(data$time, "%Y")) 
   # date
-  data$date <- as.Date(format(dt,"%Y-%m-%d"))
+  data$date <- base::as.Date(base::format(dt,"%Y-%m-%d"))
   # time in min decimals
-  data$dec.time <- sapply(strsplit(data$time,":"),
+  data$dec.time <- base::sapply(base::strsplit(data$time,":"),
                           function(x) {
-                            x <- as.numeric(x)
+                            x <- base::as.numeric(x)
                             x[1]+x[2]/60
                           })
   # diferential temperatures
   # loop to calculate t - (t-1) and -(t-2)
   # t - t-1
-  loop1 <- length(data[[temperature.name]])
+  loop1 <- base::length(data[[temperature.name]])
   temperature.original <- data[[temperature.name]]
   data[["temp1"]] <- NA
   for (i in 2:loop1) {
