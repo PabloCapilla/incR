@@ -59,12 +59,11 @@ incR.prep <- function (data, date.name,
                             x <- as.numeric(x)
                             x[1]+x[2]/60
                           })
-  
   # diferential temperatures
   # loop to calculate t - (t-1) and -(t-2)
   # t - t-1
-  loop1 <- length(data[["temperature.name"]])
-  temperature.original <- data[["temperature.name"]]
+  loop1 <- length(data[[temperature.name]])
+  temperature.original <- data[[temperature.name]]
   data[["temp1"]] <- NA
   for (i in 2:loop1) {
     data$temp1[1] <- NA

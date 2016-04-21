@@ -48,7 +48,6 @@ automatically.
 }
 \examples{
 To be included
-
 }
 \author{
 Pablo Capilla
