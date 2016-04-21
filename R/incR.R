@@ -8,7 +8,7 @@
 #' @section Release notes and caveats:
 #' The current version of \code{\link{incR}} is in an early stage of development.
 #' Documentation and code are actively being apdated and bugs are likely to be
-#' found. If so, please, send me your recommendation.
+#' found. If so, please, send me your recommendations.
 #' 
 #' @section incR functions:
 #' So far this package contains the following functions:
