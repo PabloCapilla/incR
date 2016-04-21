@@ -10,7 +10,8 @@
 #' @param sampling.rate: time between two consecutive temperature recordings.
 #' @param vector.presence: name of the column (vector) storing the
 #' information about the presence/ausence of the incubating indiviual in the nest.
-#' @return Daily percentage (in 0 to 1 scale) of time in nest.
+#' @return Daily percentage (in 0 to 1 scale) of time in nest. Return in a 
+#' data frame with one day per raw.
 #' @examples
 #' coming soon
 #' @seealso \code{\link{incR.prep}} \code{\link{incR.scan}} \code{\link{incR.activity}}

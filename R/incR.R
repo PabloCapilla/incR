@@ -16,5 +16,5 @@
 #' \code{\link{incR.activity}}, \code{\link{incR.constancy}}
 #' 
 #' @docType package
-#' @name incR 
+#' @name incR  
 NULL
