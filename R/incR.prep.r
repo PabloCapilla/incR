@@ -48,8 +48,8 @@ incR.prep <- function (data, date.name,
   dt <- base::strptime(data[[date.name]], format=date.format, tz=timezone)
   data$time <- strftime (dt, format= "%H:%M")
   # variables for hour and year
-  data$hour <- base::as.numeric(base::format (data$time, "%H"))
-  data$year <- base::as.numeric(base::format(data$time, "%Y")) 
+  data$hour <- base::as.numeric(base::format (dt, "%H"))
+  data$year <- base::as.numeric(base::format(dt, "%Y")) 
   # date
   data$date <- base::as.Date(base::format(dt,"%Y-%m-%d"))
   # time in min decimals
