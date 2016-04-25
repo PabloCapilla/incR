@@ -4,18 +4,17 @@
 \alias{incR.constancy}
 \title{Calculation of the percentage of daily time spent in incubation.}
 \usage{
-incR.constancy(data, sampling.rate, vector.presence)
+incR.constancy(data, vector.incubation)
 }
 \arguments{
 \item{data:}{data frame containing a time-series vector of 1 and 0, where "1"
-means "females inside nests" and "0" means "female" off the nests. This vector, 
+means "incubating individual inside nest" and "0" means "incubating individual
+ outside nest". This vector, 
 under the name of "inc.vector" is provided by \code{\link{incR.scan}} in the 
 first object of the returned list. A column named "date" is needed to refer to daily
 calculations.}
 
-\item{sampling.rate:}{time between two consecutive temperature recordings.}
-
-\item{vector.presence:}{name of the column (vector) storing the
+\item{vector.incubation:}{name of the column (vector class) storing the
 information about the presence/ausence of the incubating indiviual in the nest.}
 }
 \value{

@@ -15,7 +15,9 @@ Description: incR contains a suite of functions
 License: GLP-3
 Imports:
     base,
-    codetools   
+    codetools,
+    stats,
+    utils   
 Suggests:
     codetools
 RoxygenNote: 5.0.1

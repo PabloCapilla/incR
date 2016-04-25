@@ -10,7 +10,7 @@
 #' under the name of "inc.vector" is provided by \code{\link{incR.scan}} in the 
 #' first object of the returned list. A column named "date" is needed to refer to daily
 #' calculations.
-#' @param vector.presence: (character class) name of the vector containing information
+#' @param vector.incubation: (character class) name of the vector containing information
 #' for incubating individual presence/absence of nests. \code{\link{incR.scan}} produces
 #' this vector named "inc.vector".
 #' 
@@ -19,28 +19,28 @@
 #' @examples
 #' To be included
 #' @seealso \code{\link{incR.prep}} \code{\link{incR.scan}}
-
-incR.activity <- function (data, vector.presence) {
-  # checking whether there is a dat column
-  if (is.null(data$date)) {
+#' @export 
+incR.activity <- function (data, vector.incubation) {
+  # checking whether there is a date column
+  if (base::is.null(data$date)) {
     stop("No column with name 'date' found")
   }
   
   # actual function
   ## day by day list
-  df01 <- split (data, data$date)
+  df01 <- base::split (data, data$date)
   ## data frame to store data
-  data.final <- data.frame (date=rep(NA, length=length(df01)),
+  data.final <- base::data.frame (date=rep(NA, length=length(df01)),
                             onset=rep(NA, length=length(df01)),
                             offset=rep(NA, length=length(df01)))
   # loop to iteratively use each day for calculations
-  for (k in 1:length(df01)) {
+  for (k in 1:base::length(df01)) {
     df00 <- df01[[k]]                                      # k day
-    data.final$date[k] <- as.character(unique(df00$date)) # kth day date
+    data.final$date[k] <- base::as.character(base::unique(df00$date)) # kth day date
     
-    # checking every point in "vector.presence" 
-    for (s in 1:length(df00[[vector.presence]])) {      # starting from 1st point of a day
-      if (df00[[vector.presence]][s] == 0) {            # when inc. ind. is first out
+    # checking every point in "verctor.incubation" 
+    for (s in 1:base::length(df00[[vector.incubation]])) {      # starting from 1st point of a day
+      if (df00[[vector.incubation]][s] == 0) {            # when inc. ind. is first out
         data.final$onset[k] <- df00$dec.time[s]         # onset time
         break()                                         # break that day
       } else {
@@ -48,12 +48,12 @@ incR.activity <- function (data, vector.presence) {
       }
     }
     # same loop as before to evaluate end of activity
-    for (s in 1:length(rev(df00[[vector.presence]]))) { # starting point from last one
-      if (rev(df00[[vector.presence]])[s] == 0) {       # when last time inc. ind. was out? 
-        if (head(rev(df00[[vector.presence]]), 1)==0) { # does the time series for th day ends in 0. Then no end of activity is calculated.
+    for (s in 1:base::length(base::rev(df00[[vector.incubation]]))) { # starting point from last one
+      if (base::rev(df00[[vector.incubation]])[s] == 0) {       # when last time inc. ind. was out? 
+        if (utils::head(base::rev(df00[[vector.incubation]]), 1)==0) { # does the time series for th day ends in 0. Then no end of activity is calculated.
           data.final$offset[k] <- NA                   
         } else {
-          data.final$offset[k] <- rev(df00$dec.time)[s-1] # end point is the s-1 point - last onbout
+          data.final$offset[k] <- base::rev(df00$dec.time)[s-1] # end point is the s-1 point - last onbout
         }
         break()                                           # one end point is got, finish loop
       } else {
