@@ -1,26 +1,28 @@
-#' @title Calculation of onset and end of daily activity.
-#' @description Using a vector of incubating individual presence in nest, 
-#' \emph{incR.activity}
-#' calculates onset of daily activity (first off-bout of a day),
-#' and end of daily activity (last on-bout of a day). A column for dates, named "date"
+#' @title Calculation of onset and end of daily activity
+#' @description Using a vector of incubating individual presence in nest, this function extracts
+#' \emph{incRactivity}
+#' calculates onset of activity (first off-bout in the morning),
+#' and end of daily activity (last on-bout in the evening) per day. A column for dates, named "date"
 #' is needed in the data argument.
-#' @param data: data frame containing a time-series vector of 1s and 0s, where "1"
+#' @param data data frame containing a time-series vector of 1s and 0s, where "1"
 #' means "incubating individual inside nest" and "0" means "incubating individual 
 #' outside the nests". This vector, 
-#' under the name of "inc.vector" is provided by \code{\link{incR.scan}} in the 
+#' under the name of "inc.vector" is provided by \code{\link{incRscan}} in the 
 #' first object of the returned list. A column named "date" is needed to refer to daily
 #' calculations.
-#' @param vector.incubation: (character class) name of the vector containing information
-#' for incubating individual presence/absence of nests. \code{\link{incR.scan}} produces
+#' @param vector.incubation (character class) name of the vector containing information
+#' for incubating individual presence/absence of nests. \code{\link{incRscan}} produces
 #' this vector named "inc.vector".
-#' 
 #' @return a data frame containing onset and end of activity times for each day in \emph{data}.
 #' @author Pablo Capilla
 #' @examples
-#' To be included
-#' @seealso \code{\link{incR.prep}} \code{\link{incR.scan}}
+#' #' # loading example data
+#' data(incRincubationExample)
+#' incRactivity (data=incRincubationExample, 
+#'                vector.incubation="inc.vector")
+#' @seealso \code{\link{incRprep}} \code{\link{incRscan}}
 #' @export 
-incR.activity <- function (data, vector.incubation) {
+incRactivity <- function (data, vector.incubation) {
   # checking whether there is a date column
   if (base::is.null(data$date)) {
     stop("No column with name 'date' found")

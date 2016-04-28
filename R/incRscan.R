@@ -1,5 +1,5 @@
 #' @title Calculation of incubation behaviour
-#' @description This is the core algorithm of \emph{incR} and classifies time points as 1s or 0s depeding on
+#' @description This is the core algorithm of \code{incR} and classifies time points as 1s or 0s depending on
 #' whether or not the incubating individual is estimated to be on the eggs. 
 #' The algorithm
 #' uses night variation to daily-calibrate itself to temperature variation when the incubating
@@ -8,56 +8,80 @@
 #' there is a period of time in which temperature can be assumed to be constant or
 #' representative of time windows of effective incubation. This time window is defined by
 #' two arguments: lower.time and upper.time. The function is optimised to work using
-#' a data frame produced by incR.prep.
+#' a data frame produced by \code{\link{incRprep}}.
 #' 
 #' In the near future, extended functionality will be included, especially including
-#' environemtal temperature information into analysis. The
+#' environmental temperature information into analysis. The
 #' performance of this function has been evaluated in several bird species and geographic areas, 
-#' but calibration using pilot data is recommended. 
+#' but calibration using pilot data is always recommended. 
 #' 
-#' @param data: data frame for analysis. It must contained four columns named as follow:
-#' 'date', 'temp1', 'dec.time' and 'index'. \code{\link{incR.prep}} returns a data frame
-#' ready to be passed through \emph{incR.scan}
-#' @param lower.time: lower limit of time window for calibration (numeric).
-#' @param upper.time: upper limit of time window for calibration (numeric).
-#' @param maxinc.Temp: maximum temperature of incubation. 
-#' @param sensitivity: ratio of reduction in temperature threshold. When nest temperature
+#' @param data data frame for analysis. It must contained four columns named as follow:
+#' 'date', 'temp1', 'dec.time' and 'index', where 'temp1' is the difference between
+#' the \emph{ith} and  \emph{ith-1} temperature recordings; 'dec.time' is time in
+#' decimal hours; and index is a running number from 1 to \emph{N}, N being the 
+#' total number of observations. \code{\link{incRprep}} returns a data frame with
+#' this variables and the correct names, ready to be passed through \emph{incRscan}.
+#' @param lower.time lower limit of time window for calibration (numeric).
+#' @param upper.time upper limit of time window for calibration (numeric).
+#' @param maxinc.Temp temperature of constant incubation.
+#' @param sensitivity ratio of reduction in temperature threshold. When nest temperature
 #' does not drop close to environmental temperatures, this value can be kept to 1. If 
-#' nest temperature follows environmental temperature, then adjustment of this value may
-#' be required to detect short on/off-bouts.
-#' @param time.dif: temperature difference between \emph{maxinc.Temp} and an observation which
+#' nest temperature follows environmental temperature at any point, 
+#' then adjustment of this value may
+#' be required to detect short on/off-bouts at lower nest temperatures (see details).
+#' @param time.dif temperature difference between \emph{maxinc.Temp} and an observation which
 #' triggers the sensitivity parameter.
-#' @param maxNightVar_accepted: maximum temperature variation between two consecutive points
+#' @param maxNightVar_accepted maximum temperature variation between two consecutive points
 #' within the calibrating window that is accepted. If this variation value is surpassed, 
-#' a previous night is used for calibration.
-#' @param env.data: not yet supported
-#' 
+#' calibratinng window is discarded and a previous one is used for calibration.
+#' @param env.data not yet supported
+#' @param env.temp not yet supported
 #' @return 
 #' The function returns a list with two objects. The first object is the original
 #' data frame with an extra column named 'inc.vector'. This vector is formed by 1s and 0s,
 #' representing whether the incubating individual is (1) or outside the nest (0).
 #' 
 #' The second object is a data frame with one day per row. Four columns tell the user
-#' the thersholds employed to estimate incubating individual behaviuor. A fifth column accounts
+#' the thresholds employed to estimate incubating individual behaviour. A fifth column accounts
 #' for the ratio between the calibrating window temperature variation and the variation in temperature 
 #' between 11am and 3pm. The lower this value the more clear the pattern between night and day
-#' variation. It may serve the user for indication of the performance of the algorithm.
-#' @details 
-#' Description of the algorithm as it currently works. Future updates will
-#' deal with environmental data.
+#' variation. It may serve the user as an indication of the signal / noise ratio in the analysed
+#' data set.
+#' @section details of the algorithmic calculation 
+#' 
 #' @author Pablo Capilla
 #' @examples
-#' To be included
-#' @seealso \code{\link{incR.prep}} \code{\link{incR.constancy}} \code{\link{incR.activity}}
+#' #' # loading example data
+#' data(incRdataExample)
+#' # first incRprep prepares the data
+#' new.data <- incRprep (data=incRdataExample,
+#'                        date.name= "DATE",
+#'                        date.format= "%d/%m/%Y %H:%M",
+#'                        timezone="GMT",
+#'                        temperature.name="valueT")
+#' # then the data frame is ready for incRscan                      
+#' incubation.analysis <- incRscan (data=new.data, 
+#'                                   lower.time=22,
+#'                                   upper.time=3,
+#'                                   maxinc.Temp=38,
+#'                                   sensitivity=0.15,
+#'                                   time.dif=20,
+#'                                   maxNightVar_accepted=2,
+#'                                   env.data=FALSE,
+#'                                   env.temp=NULL)
+#' inc.data <- incubation.analysis[[1]]
+#' inc.thresholds <- incubation.analysis[[2]]
+#' @seealso \code{\link{incRprep}} \code{\link{incRconstancy}} \code{\link{incRactivity}}
 #' @export 
-incR.scan <- function (data, 
+incRscan <- function (data, 
                        lower.time=22,
                        upper.time=3,
-                       maxinc.Temp,
+                       maxinc.Temp=38,
                        sensitivity=0.15,
                        time.dif=20,
-                       maxNightVar_accepted,
-                       env.data=FALSE) {
+                       maxNightVar_accepted=2,
+                       env.data=FALSE,
+                       env.temp=NULL) {
   ##### CHECKING THE PRESENCE OF APPROPRIATE COLUMN NAMES #####
   if (base::is.null(data$date) || base::is.null(data$dec.time) || base::is.null(data$temp1) || base::is.null(data$index)){
     stop("Please, check that the columns 'date', 'dec.time', 'temp1' and 'index' exist in your data frame")
@@ -204,7 +228,8 @@ incR.scan <- function (data,
       if (base::is.na(data.day$valueT[i])) {next()}
       # is there environmental data?
       if (env.data==TRUE) {
-        statement <-  (data.day$valueT[i] - data.day$env.temp[i]) < time.dif
+        if (env.temp==NULL){stop("Provide the name of the column with environmental temperatures")}
+        statement <-  (data.day$valueT[i] - data.day[[env.temp]][i]) < time.dif
       } else {
         if (base::is.null(maxinc.Temp)) {stop ("No maximum temperature assigned")
         } else {

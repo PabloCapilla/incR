@@ -1,23 +1,26 @@
-#' @title Calculation of the percentage of daily time spent in incubation.
-#' @description This function calculates % of day time spent incubating
-#' based on the "inc.vector" produced by \code{\link{incR.prep}}.
+#' @title Calculation of the percentage of daily time spent in the nest
+#' @description This function calculates % of day time spent inside the nest
+#' based on the "inc.vector" produced by \code{\link{incRscan}}.
 #' Current versions do not discriminate day and night times.
-#' @param data: data frame containing a time-series vector of 1 and 0, where "1"
+#' @param data data frame containing a time-series vector of 1 and 0, where "1"
 #' means "incubating individual inside nest" and "0" means "incubating individual
-#'  outside nest". This vector, 
-#' under the name of "inc.vector" is provided by \code{\link{incR.scan}} in the 
+#' outside nest". This vector, 
+#' under the name of "inc.vector" is provided by \code{\link{incRscan}} in the 
 #' first object of the returned list. A column named "date" is needed to refer to daily
 #' calculations.
-#' @param vector.incubation: name of the column (vector class) storing the
-#' information about the presence/ausence of the incubating indiviual in the nest.
+#' @param vector.incubation name of the column (vector class) storing the
+#' information about the presence/absence of the incubating individual in the nest.
 #' @return Daily percentage (in 0 to 1 scale) of time in nest. Return in a 
 #' data frame with one day per raw.
 #' @examples
-#' coming soon
-#' @seealso \code{\link{incR.prep}} \code{\link{incR.scan}} \code{\link{incR.activity}}
+#' #' # loading example data
+#' data(incRincubationExample)
+#' incRconstancy (data=incRincubationExample, 
+#'                vector.incubation="inc.vector")
+#' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
 #' @export 
 
-incR.constancy<- function (data, vector.incubation) {
+incRconstancy<- function (data, vector.incubation) {
   ##### CHECKING FOR COLUMN NAMES #####
   if (base::is.null (data$date)){
     stop("No column for 'date")

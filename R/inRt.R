@@ -1,39 +1,66 @@
-#' @title Calculation of temperature average and variation for customised
-#' time windows.
+#' @title Calculation of temperature average and variance for customised
+#' time windows
 #' @description Calculation of temperature average and variation between two customised
-#' time periods per day. Originally, this function was thought to calculate temperature
-#' of incubation between day and night. 'Day' and 'night' being defined either by the user, 
+#' time periods per day. Originally, this function was thought to calculate nest temperature
+#' between day and night. 'Day' and 'night' being defined either by the user, 
 #' by activity times or by civil twilight times.
-#' @param data: data frame containing a time-series vector of 1s and 0s, where "1"
+#' @param data data frame containing a time-series vector of 1s and 0s, where "1"
 #' means "incubating individual inside nest" and "0" means "incubating individual 
 #' outside the nests". This vector, 
-#' under the name of "inc.vector", is provided by \code{\link{incR.scan}} in the 
+#' under the name of "inc.vector", is provided by \code{\link{incRscan}} in the 
 #' first object of the returned list. A column named "date" is needed to refer to daily
 #' calculations.
-#' @param limits: vector of length = 2 giving the time limits for calculaitons. For example,
-#' 'c(6,20)" would calculate temperature averages and variation for two time periods, from 6 to 20
+#' @param limits vector of length = 2 giving the time limits for calculations. For example,
+#' 'c(6,20)' would calculate temperature averages and variance for two time periods, from 6 to 20
 #' and from 20 to 6 of the next day. 'civil.twilight' and 'activiy.times' must be
 #' FALSE to allow the use of 'limits'.
-#' @param coor: coordenates for the location where temperature was recorded. 
-#' When 'civil.twilight' is TRUE, 'coor' allows to define sunrise and sunset times
-#' based on the \code{\link{crepuscule}} function (in maptools package). 
-#' @param civil.twilight: TRUE or FALSE. Set as TRUE when time periods for calculation
-#' are to be defined by civil twilight times - calculated using \code{\link{crepuscule}}.If
-#' 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.
-#' @param activity.times: TRUE or FALSE. Set as TRUE when time periods for calculation
-#' are defined by \code{\link{incR.activity}}.
-#' @param time.zone: time zone for \code{\link{crepuscule}} dawn and dusk calculations.
+#' @param coor coordinates for the location where temperature was recorded,
+#' formatted as decimal degrees N/S, decimal degress E/W.
+#' When 'civil.twilight' is TRUE, 'coor' allows the user to define sunrise and sunset times
+#' based on the \code{\link{crepuscule}} function (in 'maptools' package). 
+#' @param civil.twilight TRUE or FALSE. Set as TRUE when time periods for calculation
+#' are to be defined by civil twilight times - calculated using \emph{crepuscule{maptools}}. 
+#' If civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.
+#' @param activity.times TRUE or FALSE. Set as TRUE when time periods for calculation
+#' are defined by \code{\link{incRactivity}}. Data must contain a column named 
+#' 'inc.vector' for the use of \code{\link{incRactivity}}.
+#' @param time.zone time zone for \emph{crepuscule{maptools}} dawn and dusk calculations.
 #' @return a data frame containing onset and end of activity times for each day in \emph{data}.
 #' @author Pablo Capilla
 #' @examples
-#' To be included
-#' @seealso \code{\link{incR.prep}} \code{\link{incR.scan}} \code{\link{incR.activity}}
+#' # loading example data
+#' data(incRincubationExample)
+#' 
+#' # calculation based on chosen times from 6am to 7pm and 7pm to 6am
+#' incRt (data=incRincubationExample, 
+#'         limits=c(6,19), 
+#'         coor=NULL, 
+#'         civil.twilight=FALSE, 
+#'         activity.times=FALSE,
+#'         time.zone=NULL)
+#'         
+#' # calculation based on activity times
+#' incRt (data=incRincubationExample, 
+#'         limits=NULL, 
+#'         coor=NULL, 
+#'         civil.twilight=FALSE, 
+#'         activity.times=TRUE,
+#'         time.zone=NULL)
+#'         
+#' # calculation based on civil twilight
+#' incRt (data=incRincubationExample, 
+#'         limits=NULL, 
+#'         coor=c(42,0.89), 
+#'         civil.twilight=TRUE, 
+#'         activity.times=FALSE,
+#'         time.zone="GMT")
+#' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
 #' \code{\link{crepuscule}}
 #' @export 
 
-incR.t <- function (data, 
+incRt <- function (data, 
                     limits=NULL, 
-                    coor, 
+                    coor=NULL, 
                     activity.times=FALSE, 
                     civil.twilight=FALSE, 
                     time.zone=NULL) {
@@ -57,26 +84,26 @@ incR.t <- function (data,
   # two periods of time within 24hrs.
   # (1) you specify the time window you want
   ## to compute day and night mean and variation; 
-  # (2) it takes onset and offset activity using incR.activity; or,
+  # (2) it takes onset and offset activity using incRactivity; or,
   # (3) uses civil twilight times to define night 
   # times to define day and night periods and calculate variation and temperature.
   #
   # First I create a table which specifies such periods depending on 1, 2 or 3.
   if (activity.times==TRUE) {
     # calculates onset and offset activity times
-    act.times <- incR.activity (data= data.onoff.act, 
+    act.times <- incRactivity (data= data.onoff.act, 
                                 vector.incubation="inc.vector")
     if (base::is.null(data.onoff.act$inc.vector)) {
-      stop ("Your incubation.vector for incR.activity is not named 'inc.vector',
+      stop ("Your incubation.vector for incRactivity is not named 'inc.vector',
               please, change its name to 'inc.vector' or specify it in
-              incR.t adding an argument as in incR.activity: 'incubation.vector= '")
+              incRt adding an argument as in incRactivity: 'incubation.vector= '")
     }
     act.times$index <- base::seq (1,to=base::nrow(act.times), by=1)
   } else {
     if (civil.twilight==TRUE) {
       if (base::is.null(time.zone)|| base::is.null(coor)) {
         stop ("Time zone and/or coor not specified; please, do it by passing the argument
-              to the incR.t function")
+              to the incRt function")
       }
       # calculates civil twilinght times
       dawn <- stats::na.omit(maptools::crepuscule(crds=base::matrix(c(coor[1], coor[2]), nrow=1), 

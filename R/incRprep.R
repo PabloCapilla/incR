@@ -1,24 +1,24 @@
-#' @title Data manipulation for incubation data analysis
-#' @description Preparing incubation time series for further analysis. 
-#' Initial data manipulation.
-#' This function takes a data file containing a temporal series of temperature
+#' @title Data preparation for incubation analysis in incR
+#' @description Preparing incubation time series for further analysis
+#' Initial data manipulation
+#' This function takes a data file containing a temporal series of temperature recordings
 #' and adds some the extra variables needed to use
 #' further functions embedded in the incR package. 
-#' It simply acommodates the raw data frame, reformating dates and times 
+#' It simply accommodates a raw data frame, reformatting date and time columns
 #' automatically.
-#' @param data: raw data from incubation time series. It must contain a column 
+#' @param data raw data from incubation time series. It must contain a column 
 #' with date + time information for each observation. The function is written to
 #' handle date and time concatenated in one unique column (see example below).
-#' @param date.name: name of the date + time column
-#' @param date.format: date and time format for date + time column. 
-#' It must be a character object as specified in the function \emph{strptime}.   
-#' \emph{incR.prep} assumes the the date + time column contains date and time, 
+#' @param date.name name of the date + time column
+#' @param date.format date and time format for date + time column. 
+#' It must be a character object as specified in the function \code{\link{strptime}}.   
+#' \code{\link{incRprep}} assumes the the date + time column contains date and time, 
 #' If date and time are in different columns, please concatenate them in one
-#' column before running the function (see example below).
+#' column before running the function.
 #' its format accordingly.
-#' @param timezone: time zone for time calculations. See \emph{strptime}
+#' @param timezone time zone for time calculations. See \code{\link{strptime}}.
 #' documentation for more details.
-#' @param  temperature.name: name of the column storing temperature information.
+#' @param  temperature.name name of the column storing temperature information.
 #' @return The original data frame (data) with additional colunms for:
 #' \enumerate{
 #' \item index: a running number identifying every row in the data set.
@@ -31,9 +31,16 @@
 #' }
 #' @author Pablo Capilla
 #' @examples
-#' To be included
+#' # loading example data
+#' data(incRdataExample)
+#' new.data <- incRprep (data=incRdataExample,
+#'                        date.name= "DATE",
+#'                        date.format= "%d/%m/%Y %H:%M",
+#'                        timezone="GMT",
+#'                        temperature.name="valueT")
+#' head (new.data, 3)
 #' @export 
-incR.prep <- function (data, date.name,
+incRprep <- function (data, date.name,
                        date.format, timezone,
                        temperature.name) {
   # checking for correct column names

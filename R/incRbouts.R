@@ -1,29 +1,34 @@
 #' @title Calculation of the number of daily on- and off-bouts
 #' @description Calculation of number and duration of incubation
 #'  on- and off-bouts.
-#' @param data: data frame containing a time-series vector of 1 and 0, where "1"
+#' @param data data frame containing a time-series vector of 1 and 0, where "1"
 #' means "incubating individual inside nest" and "0" means "incubating individual
 #' outside nest". This vector, 
-#' under the name of "inc.vector", is provided by \code{\link{incR.scan}} in the 
+#' under the name of "inc.vector", is provided by \code{\link{incRscan}} in the 
 #' first object of the returned list. A column named "date" is needed to refer to daily
 #' calculations.
-#' @param vector.incubation: name of the column (vector class) storing the
-#' information about the presence/ausence of the incubating indiviual in the nest.
-#' @param sampling.rate: time difference between two consecutive recording points.
-#' Effectively, the rate at which data points were recorded (eg. 1 data point per 50seg).
-#' The units of the object returns will depend on the units of this argument.
+#' @param vector.incubation name of the column (vector class) storing the
+#' information about the presence/absence of the incubating indiviual in the nest.
+#' @param sampling.rate time difference between two consecutive recording points.
+#' Effectively, the rate at which data points were recorded 
+#' (eg. 1 data point per 50sec).
+#' The time units of the returned object will depend on the units of this argument.
 #' @return a 5-column data frame with one day of study per row.
 #' Date, number on-bouts, number of off-bouts (number of on-bouts + 1 by definition) and 
 #' mean time duration of on- and off-bouts are displayed in the 5 columns 
 #' respectively. Mean times are shown in those time units you specify the argument
-#' *sampling.rate*.
+#' \emph{sampling.rate}.
 #' @author Pablo Capilla
 #' @examples
-#' To be included
-#' @seealso \code{\link{incR.prep}} \code{\link{incR.scan}} \code{\link{incR.activity}}
-#' \code{\link{incR.constancy}}
+#' #' # loading example data
+#' data(incRincubationExample)
+#' incRbouts (data=incRincubationExample, 
+#'             vector.incubation="inc.vector", 
+#'             sampling.rate=240) # sampling rate in seconds.
+#' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
+#' \code{\link{incRconstancy}}
 #' @export
-incR.bouts <- function (data, vector.incubation, sampling.rate) {
+incRbouts <- function (data, vector.incubation, sampling.rate) {
   ##### CHECKING FOR COLUMN NAMES #####
   if (base::is.null (data$date)){
     stop("No column for 'date")
