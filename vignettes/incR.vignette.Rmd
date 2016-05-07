@@ -1,18 +1,16 @@
 ---
 title: "Analysis of incubation behaviour using incR"
 author: "Pablo Capilla"
-date: "`r Sys.Date()`"
+date: '`r Sys.Date()`'
 output: pdf_document
-vignette: >
-  %\VignetteIndexEntry{Workflow using the incR package}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+vignette: |
+  %\VignetteIndexEntry{Workflow using the incR package} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
 # 1 - Introduction
  
 In this short vignette I would like to describe a recommended workflow to analyse
-incubation behaviour using the *incR* R package and present its funtions. This package is
+incubation behaviour using the *incR* R package and present its functions. This package is
 currently available
 through GitHub. It is in active development and the user should not expect to
 find either perfect code or documentation. However, it is 
@@ -20,7 +18,7 @@ my intention to further develop both if the method results to be appropriate.
 
 My main aim writing this report is to introduce the functions to potential users
 in order to provide a piece of code they can use and, at the same time, evaluate
-the usefulness of the functions that this package contains in a wide suite of circunstances.
+the usefulness of the functions that this package contains in a wide suite of circumstances.
 
 ## 1.1 - The package in short
  
@@ -37,20 +35,20 @@ suggested positions for the incubating individual, these "positions" being
 Compared to previous methods [1], this algorithm exploits daily variation
 in nest temperatures and calibrates itself based on daily conditions. *incRscan*
 analyses temperature variation between pairs of consecutive points,
-potentically increasing the sensitibity to detect short incubation off-bouts. 
+potentially increasing the sensitivity to detect short incubation off-bouts. 
 
 At the heart of *incR* lays *incRscan*; however, *incR* aims at being more than only
 such function. If the job of *incRscan* is performed by other means (or *incRscan* is 
-modified), *incR* still provides a suite of functions that allow the extraction of biogically
+modified), *incR* still provides a suite of functions that allow the extraction of biologically
 meaningful metrics from a series of observations of the incubating individual. 
 This allows for
-the development of *incRscan* without affecting the functionallity of the package
+the development of *incRscan* without affecting the functionality of the package
 as a whole.
 
 ## 1.2 - Description of the algorithm implemented by *incRscan*
 
-The idea of developing this approach came up studying blue and great tits in the northerm 
-hemisphere in temperate zones. The characteristic nest temperature of incubation
+The idea of developing this approach came up studying blue and great tits in the northern
+hemisphere in a temperate zone (Scotland). The characteristic nest temperature of incubation
 in these species varies around 35ºC, therefore, always well above environmental temperature.
 When incubating individuals leave the nest, there exists a strong gradient between nest 
 (around 35ºC) and environmental temperatures (somewhere between 5 and 25ºC 
@@ -63,7 +61,7 @@ situation, however, an incubation on-bout would be reflected in a large increase
 temperature 
 (the gradient between environmental temperature and incubation temperature circa.35ºC is large). 
 
-This dynamic in nest temperature is exploited by *incRscan*, setting thresholdsin temperature
+The dynamics in nest temperature is exploited by *incRscan*, setting thresholds in temperature
 variation which characterised incubation on- and off-bouts. The algorithm is thought to work
 well when there is a marked difference between incubation and environmental temperatures. The utility of the algorithm to analyse data collected in hot conditions has not been tested yet.
 In this scenario the difference between incubation and
@@ -75,7 +73,7 @@ I, therefore, explain here the
 analytical approach summarising one day of incubation (day 1); however, the explanation can
 be easily extended to understand the analysis of several sequential days. 
 
-I differenciatte two scenrios: i) when nest temperature is higher than
+I differentiate two scenarios: i) when nest temperature is higher than
 environmental temperature by more than *temp.diff* degrees; and, ii) when nest temperature
 is within *temp.diff* degrees of environmental temperature. Incubation temperature data 
 between *lower.time* and *upper.time*, when incubating
@@ -130,11 +128,11 @@ information can be extracted.
 especially when environmental temperature is much lower than incubation temperature.
 However, this threshold may not detect off-bouts when nest and environmental temperatures
 are very similar (see above  for further clarification), eg. when after a long incubation 
-off-bout, an off-bout comes after a short on-bout (Figure below). To circunvent this problem,
+off-bout, an off-bout comes after a short on-bout (Figure below). To circumvent this problem,
 *incRscan* allows the user to reduce the value of
 "maxDrop" by a proportion (given by the *sensitivity* argument) when the difference
 between nest and environmental temperatures is lower than *temp.diff*. The default values for
-*sensitivity* and *temp.diff* work well for blue and great tits in northerm latitudes in 
+*sensitivity* and *temp.diff* work well for blue and great tits in northern latitudes in 
 Europe; however, it is highly recommended that the user tries different values and assesses the
 consistency of the results. Additionally, validated data (for example, using cameras along 
 with temperature loggers to estimate incubation on- and off-bouts) for a subset of incubation
@@ -300,7 +298,7 @@ df.activity
 ```
 It contains onset and offset of activity per day. **WARNING**: this function
 returns the first off-bout and last on-bout of a day. If the time series is
-incompleted for one day, onset or offset times should be discarded, as it happens
+incomplete for one day, onset or offset times should be discarded, as it happens
 in the example above for the offset time on 2015-05-08. On that day the temperature
 recording ended around 13:30, and the last on-bout was around 13:15, but it
 does not biologically represent the offset of activity (see table above). 
@@ -328,7 +326,7 @@ legend ("bottomleft", bty="n",         # legend
         legend=c("Ind. in", "Ind. out"), cex=1.3)
 abline (v=c(df.activity[1,c(2:3)]), lty=2, col="grey", lwd=2) # lines for onset and offset
 ``` 
-**Figure 2.** A day of blue tit incubation. Onset and offset estimations are illuestrated by grey-dashed lines.
+**Figure 2.** A day of blue tit incubation. Onset and offset estimations are illustrated by grey-dashed lines.
 
 #### 2.4.2 - Daily incubation constancy
  
@@ -388,7 +386,7 @@ incRt (data=df.incubation,
 ```{r eval=FALSE}
 ?incRt
 ```
-In this example I calculate temperatures based on acitivity times estimated by
+In this example I calculate temperatures based on activity times estimated by
 *incRactivity*. Note that there are no night calculations for the 8th of May.
 Such night is defined by the offset of activity of the 8th and the onset of 
 activity of the 9th. There are no data for the 9th and, therefore, such calculation
