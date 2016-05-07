@@ -3,34 +3,22 @@
 \docType{data}
 \name{incRdataExample2}
 \alias{incRdataExample2}
-\title{An example of incubation temperature time-series after 
+\title{A second example of incubation temperature time-series after 
 the use of \code{link{incRprep}}.}
-\format{A data frame with 954 rows and 10 variables, representing three days of nest
+\format{A data frame with 709 rows and 3 variables, representing three days of nest
 temperatures.
 \describe{
-  \item{DATE}{a date + time column. Both elements are concatenated in one column.}
-  \item{valueT}{temperature recordings.}
-  \item{index}{running number from first to last observation.}
-  \item{time}{}
-  \item{hour}{}
-  \item{year}{}
-  \item{date}{}
-  \item{dec.time}{time in decimal hours.}
-  \item{temp1}{difference between the \emph{ith} and the \emph{ith-1} 
-  temperature recording.}
-  \item{env.temp}{environmetal temperature, calculated per as hour average}
+  \item{DATE}{a date + time column. Both elements are concatenated in one column}
+  \item{valueT}{temperature recordings}
+  \item{env.temp}{environmental temperature}
 }}
 \usage{
 incRdataExample2
 }
 \description{
-A dataset containing temperatures, time and date for a blue tit nest. 
-It also includes variables added by \code{\link{incRprep}} and the
-and column with environmental temperature-
-The raw data set \code{\link{incRdataExample2}}
-}
-\details{
-see \code{\link{incRprep}} for more details on the variables of this data set.
+A dataset containing temperatures, time and date for a blue tit nest. This data set
+was produced by an iButton® device (Maxim) and represents raw data to start the analysis
+of incubation behaviour. Environmental temperature have been added as average per hour.
 }
 \keyword{datasets}
 

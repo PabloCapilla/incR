@@ -1,5 +1,5 @@
 #' @title Calculation of onset and end of daily activity
-#' @description Using a vector of incubating individual presence in nest, this function extracts
+#' @description Using a vector of incubating individual presence in nest, 
 #' \emph{incRactivity}
 #' calculates onset of activity (first off-bout in the morning),
 #' and end of daily activity (last on-bout in the evening) per day. A column for dates, named "date"

@@ -4,7 +4,7 @@
 \name{incRincubationExample}
 \alias{incRincubationExample}
 \title{An example of incubation temperature time-series after 
-the use of \code{link{incRscan}}.}
+the use of \code{link{incRprep}} and \code{link{incRscan}}.}
 \format{A data frame with 954 rows and 10 variables, representing three days of nest
 temperatures.
 \describe{

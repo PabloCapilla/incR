@@ -1,5 +1,5 @@
 #' An example of incubation temperature time-series after 
-#' the use of \code{link{incRscan}}.
+#' the use of \code{link{incRprep}} and \code{link{incRscan}}.
 #'
 #' A dataset containing temperatures, time and date for a blue tit nest. 
 #' It also includes variables added by \code{\link{incRprep}} and the

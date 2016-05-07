@@ -61,7 +61,7 @@ one, the decrease in temperature after an incubation off-bout would not be very 
 (the temperature gradient between the nest and the environment is small). In this 
 situation, however, an incubation on-bout would be reflected in a large increase in nest
 temperature 
-(the gradient between environmental temperature and incubation temperature ~35ºC is large). 
+(the gradient between environmental temperature and incubation temperature circa.35ºC is large). 
 
 This dynamic in nest temperature is exploited by *incRscan*, setting thresholdsin temperature
 variation which characterised incubation on- and off-bouts. The algorithm is thought to work
@@ -82,19 +82,21 @@ between *lower.time* and *upper.time*, when incubating
 individuals are assumed to be in their nests (given the biology of many species, 
 this period can be set at night, when the incubating individual rests on the nest), are
 chosen to calibrate the algorithm. Within this calibrating window, the minimum difference in
-temperature between two consecutive data points  (eg. minimum (T~i~ – T~i-1~), this is
+temperature between two consecutive data points  (eg. minimum ($T_{i}$ - $T_{i-1}$),
+this is
 equal to the maximum decrease in temperature between pairs of consecutive) is set as a
 threshold for incubation off-bouts ("maxDrop") in scenario i): assuming that nest temperatures
 are above environmental values, when the incubating individual is in the nest this value is
 thought to effectively represent the
 maximum drop in temperature associated with periods when the incubating individual is in
 the nest. The threshold for incubation off-bout in scenario ii) is set to 
-$\"maxDrop" x *sensitivity*$  (a default value for  *sensitivity* of 0.15 has been
+$"maxDrop" X sensitivity$  (a default value for  *sensitivity* of 0.15 has been
 found adequate for blue tits in Scotland, however, this value can be set by the user
 depending on the species of study). 
 
 "maxIncrease" is defined as the maximum difference in
-temperature between two consecutive data points  (eg. maximum (T~i~ – T~i-1~), equal to the
+temperature between two consecutive data points  (eg. maximum ($T_{i}$ - $T_{i-1}$),
+equal to the
 maximum increase in temperature between pairs of consecutive), and is set as a threshold for
 incubation on-bouts ("maxIncrease") under scenario ii). The threshold for
 incubation on-bouts in scenario ii) is set to 0, as any increase in nest temperature well
@@ -104,19 +106,21 @@ Once these thresholds are set, temperature differences between successive pairs 
 points throughout the day and after *upper.time* are calculated and orderly compared with the
 value of "maxDrop" and "maxIncrease" following:
 
-$$T~i~ - T~i-1~ < maxDrop (= minimum (T~i~ – T~i-1~)) (1)$$
-$$T~i~ - T~i-1~ > maxIncrease (= maximum (T~i~ – T~i-1~)) (2)$$
+$T_{i}$ - $T_{i-1}$ < maxDrop (= minimum ($T_{i}$ - $T_{i-1}$)) (1) 
 
-T~i~ being the i*th* temperature record from i=2 to i=I (I equal to the last data point, and
-total number of
-temperature recordings). Off-bout periods are, then, defined between T~i's~ satisfying (1) and
-the closest forward situation in which T~j~, when i < j, satisfies (2) (raise in temperature
+$T_{i}$ - $T_{i-1}$ > maxIncrease (= maximum ($T_{i}$ - $T_{i-1}$)) (2) 
+
+
+$T_{i}$ - $T_{i-1}$ being the i*th* temperature record from *i=2* to *i=I* (*I* equal to the last 
+data point, and total number of temperature recordings). Off-bout periods are, then, defined between
+$T_{i's}$ satisfying (1) and
+the closest forward situation in which $T_{j}$, when *i < j*, satisfies (2) (raise in temperature
 above 
 what it is expected when the incubating individual is in the nest). On-bout periods start
 after an off-bout finishes and last until (1) is fulfilled again: when temperature variation
-between T~i~ and T~i-1~ indicates the incubating individual has left the nest. To make this
-calculation conservative and robust against highly variable calibrating periods, whenever
-|*maxDrop*| > *maxNightVar_accepted* (in degrees C) for a particular studied day, the value
+between $T_{i}$ and $T_{i-1}$ indicates the incubating individual has left the nest. 
+To make thiscalculation conservative and robust against highly variable calibrating periods, 
+whenever |*maxDrop*| > *maxNightVar_accepted* (in degrees C) for a particular studied day, the value
 of "maxDrop" of the previous day is instead applied. The result of this
 algorithm is a temporal sequence of 0's and 1's representing on-bout (1) and off-bout (0)
 periods. Based on this sequence and using other functions of *incR* biological meaningful
@@ -136,11 +140,13 @@ consistency of the results. Additionally, validated data (for example, using cam
 with temperature loggers to estimate incubation on- and off-bouts) for a subset of incubation
 days can help to calculate the optimal values of *sensitivity* and *temp.diff* in any
 circumstances.
-
-```{r echo = FALSE}
+```{r echo= FALSE}
+library(incR) # attaching incR
 data(incRdataExample2)
 df1 <- incRdataExample2 #reading data
-str(df1) # preliminar exploration
+```
+
+```{r echo = FALSE, warning = FALSE}
 df.prep <- incRprep (data= df1,                   
                       date.name="DATE",         
                       date.format="%d/%m/%Y %H:%M",
@@ -153,8 +159,6 @@ inc.example <- incRscan (data=df.prep,
                           temp.diff=10,             
                           maxNightVar_accepted=2,  
                           env.temp="env.temp")[[1]]
-```
-```{r echo = FALSE, warning=FALSE}
 plot.example <- inc.example[inc.example$date=="2015-05-09",]
 # plot
 plot (valueT ~ dec.time, data=plot.example,
@@ -169,12 +173,8 @@ lines (env.temp ~ dec.time, data=plot.example)
 axis (side=1,                       # x-axis
       at= plot.example$dec.time,    # location of marks
       labels=plot.example$time)     # label for marks
-legend ("bottomleft", bty="n", 
-        pch=c(19,19),
-        col=c("red", "black"),
-        legend=c("Ind. in", "Ind. out"), cex=1.3)
 ```
-**Figure 1**. Incubation and environmental temperatures. Classification of on- and off-bouts performed in incR.
+**Figure 1**. Incubation and environmental temperatures. Classification of on- and off-bouts performed in incR. Environmental temperature in solid black line. On-bouts in black and off-bouts in red.
 
 # 2 - Workflow: from raw data to biological metrics
 

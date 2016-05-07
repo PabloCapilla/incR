@@ -5,7 +5,7 @@
 \title{Calculation of incubation behaviour}
 \usage{
 incRscan(data, lower.time, upper.time, sensitivity = 0.15, temp.diff = 5,
-  maxNightVar_accepted = 2, env.data = FALSE, env.temp = NULL)
+  maxNightVar_accepted = 2, env.temp)
 }
 \arguments{
 \item{data}{data frame for analysis. It must contained four columns named as follow:
@@ -31,9 +31,6 @@ triggers the sensitivity parameter.}
 \item{maxNightVar_accepted}{maximum temperature variation between two consecutive points
 within the calibrating window that is accepted. If this variation value is surpassed, 
 calibratinng window is discarded and a previous one is used for calibration.}
-
-\item{env.data}{\emph{TRUE} or \emph{FALSE} for whether environmental temperatures 
-are provided.}
 
 \item{env.temp}{\emph{env.data} = \emph{TRUE}, name of column with environmental 
 temperatures.}
@@ -67,8 +64,11 @@ environmental temperature information into analysis. The
 performance of this function has been evaluated in several bird species and geographic areas, 
 but calibration using pilot data is always recommended.
 }
-\section{details of the algorithmic calculation}{
+\section{Details}{
 
+Details of the algorithmic calculation 
+See package vignette for a description of how this function works. This
+section will be updated soon.
 }
 \examples{
 #' # loading example data
@@ -86,8 +86,7 @@ incubation.analysis <- incRscan (data=new.data,
                                   sensitivity=0.15,
                                   temp.diff=5,
                                   maxNightVar_accepted=2,
-                                  env.data=FALSE,
-                                  env.temp=NULL)
+                                  env.temp="env.temp")
 inc.data <- incubation.analysis[[1]]
 inc.thresholds <- incubation.analysis[[2]]
 }

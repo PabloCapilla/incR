@@ -1,6 +1,6 @@
-#' @title Calculation of the percentage of daily time spent in the nest
-#' @description This function calculates % of day time spent inside the nest
-#' based on the "inc.vector" produced by \code{\link{incRscan}}.
+#' @title Calculation of the percentage of daily time spent in nest
+#' @description This function calculates % of day time spent inside nest
+#' based on the "inc.vector" variable produced by \code{\link{incRscan}} (or anyother method).
 #' Current versions do not discriminate day and night times.
 #' @param data data frame containing a time-series vector of 1 and 0, where "1"
 #' means "incubating individual inside nest" and "0" means "incubating individual

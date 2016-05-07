@@ -33,8 +33,6 @@
 #' @param maxNightVar_accepted maximum temperature variation between two consecutive points
 #' within the calibrating window that is accepted. If this variation value is surpassed, 
 #' calibratinng window is discarded and a previous one is used for calibration.
-#' @param env.data \emph{TRUE} or \emph{FALSE} for whether environmental temperatures 
-#' are provided.
 #' @param env.temp \emph{env.data} = \emph{TRUE}, name of column with environmental 
 #' temperatures.
 #' @return 
@@ -48,8 +46,10 @@
 #' between 11am and 3pm. The lower this value the more clear the pattern between night and day
 #' variation. It may serve the user as an indication of the signal / noise ratio in the analysed
 #' data set.
-#' @section details of the algorithmic calculation 
-#' 
+#' @section Details:
+#' Details of the algorithmic calculation 
+#' See package vignette for a description of how this function works. This
+#' section will be updated soon.
 #' @author Pablo Capilla
 #' @examples
 #' #' # loading example data
@@ -67,8 +67,7 @@
 #'                                   sensitivity=0.15,
 #'                                   temp.diff=5,
 #'                                   maxNightVar_accepted=2,
-#'                                   env.data=FALSE,
-#'                                   env.temp=NULL)
+#'                                   env.temp="env.temp")
 #' inc.data <- incubation.analysis[[1]]
 #' inc.thresholds <- incubation.analysis[[2]]
 #' @seealso \code{\link{incRprep}} \code{\link{incRconstancy}} \code{\link{incRactivity}}
@@ -79,8 +78,7 @@ incRscan <- function (data,
                        sensitivity=0.15,
                        temp.diff=5,
                        maxNightVar_accepted=2,
-                       env.data=FALSE,
-                       env.temp=NULL) {
+                       env.temp) {
   ##### CHECKING THE PRESENCE OF APPROPRIATE COLUMN NAMES #####
   if (base::is.null(data$date) || base::is.null(data$dec.time) || base::is.null(data$temp1) || base::is.null(data$index)){
     stop("Please, check that the columns 'date', 'dec.time', 'temp1' and 'index' exist in your data frame")

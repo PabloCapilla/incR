@@ -2,7 +2,7 @@
 % Please edit documentation in R/incRconstancy.R
 \name{incRconstancy}
 \alias{incRconstancy}
-\title{Calculation of the percentage of daily time spent in the nest}
+\title{Calculation of the percentage of daily time spent in nest}
 \usage{
 incRconstancy(data, vector.incubation)
 }
@@ -22,8 +22,8 @@ Daily percentage (in 0 to 1 scale) of time in nest. Return in a
 data frame with one day per raw.
 }
 \description{
-This function calculates % of day time spent inside the nest
-based on the "inc.vector" produced by \code{\link{incRscan}}.
+This function calculates % of day time spent inside nest
+based on the "inc.vector" variable produced by \code{\link{incRscan}} (or anyother method).
 Current versions do not discriminate day and night times.
 }
 \examples{
