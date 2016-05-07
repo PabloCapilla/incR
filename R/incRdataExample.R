@@ -2,7 +2,7 @@
 #'
 #' A dataset containing temperatures, time and date for a blue tit nest. This data set
 #' was produced by an iButton® device (Maxim) and represents raw data to start the analysis
-#' of incubation behaviour
+#' of incubation behaviour. Environmental temperature have been added as average per hour.
 #' 
 #'
 #' @format A data frame with 954 rows and 2 variables, representing three days of nest
@@ -10,6 +10,7 @@
 #' \describe{
 #'   \item{DATE}{a date + time column. Both elements are concatenated in one column}
 #'   \item{valueT}{temperature recordings}
-#'   ...
+#'   \item{env.temp}{environmental temperature}
 #' }
 "incRdataExample"
+

@@ -21,9 +21,9 @@ found. If so, please, send me your recommendations.
 
 In the near future:
 \enumerate{
-\item \code{\link{incR.scan}} will be further improved
+\item \code{\link{incRscan}} will be further improved
 to include environmental temperatures into the analysis of incubation behaviour.
-\item \code{\link{incR.bouts}} will be extended to produce off-bout-specific
+\item \code{\link{incRbouts}} will be extended to produce off-bout-specific
 data, giving temperature drop, duration and time per individual off-bout.
 }
 }
@@ -31,8 +31,8 @@ data, giving temperature drop, duration and time per individual off-bout.
 \section{incR functions}{
 
 So far this package contains the following functions:
-\code{\link{incR.prep}}, \code{\link{incR.scan}},
-\code{\link{incR.activity}}, \code{\link{incR.constancy}}
-\code{\link{incR.bouts}}, \code{\link{incR.t}}
+\code{\link{incRprep}}, \code{\link{incRscan}},
+\code{\link{incRactivity}}, \code{\link{incRconstancy}}
+\code{\link{incRbouts}}, \code{\link{incRt}}
 }
 

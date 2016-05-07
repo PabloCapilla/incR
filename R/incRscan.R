@@ -23,19 +23,20 @@
 #' this variables and the correct names, ready to be passed through \emph{incRscan}.
 #' @param lower.time lower limit of time window for calibration (numeric).
 #' @param upper.time upper limit of time window for calibration (numeric).
-#' @param maxinc.Temp temperature of constant incubation.
 #' @param sensitivity ratio of reduction in temperature threshold. When nest temperature
 #' does not drop close to environmental temperatures, this value can be kept to 1. If 
 #' nest temperature follows environmental temperature at any point, 
 #' then adjustment of this value may
 #' be required to detect short on/off-bouts at lower nest temperatures (see details).
-#' @param time.dif temperature difference between \emph{maxinc.Temp} and an observation which
+#' @param temp.diff temperature difference between \emph{maxinc.Temp} and an observation which
 #' triggers the sensitivity parameter.
 #' @param maxNightVar_accepted maximum temperature variation between two consecutive points
 #' within the calibrating window that is accepted. If this variation value is surpassed, 
 #' calibratinng window is discarded and a previous one is used for calibration.
-#' @param env.data not yet supported
-#' @param env.temp not yet supported
+#' @param env.data \emph{TRUE} or \emph{FALSE} for whether environmental temperatures 
+#' are provided.
+#' @param env.temp \emph{env.data} = \emph{TRUE}, name of column with environmental 
+#' temperatures.
 #' @return 
 #' The function returns a list with two objects. The first object is the original
 #' data frame with an extra column named 'inc.vector'. This vector is formed by 1s and 0s,
@@ -63,9 +64,8 @@
 #' incubation.analysis <- incRscan (data=new.data, 
 #'                                   lower.time=22,
 #'                                   upper.time=3,
-#'                                   maxinc.Temp=38,
 #'                                   sensitivity=0.15,
-#'                                   time.dif=20,
+#'                                   temp.diff=5,
 #'                                   maxNightVar_accepted=2,
 #'                                   env.data=FALSE,
 #'                                   env.temp=NULL)
@@ -74,11 +74,10 @@
 #' @seealso \code{\link{incRprep}} \code{\link{incRconstancy}} \code{\link{incRactivity}}
 #' @export 
 incRscan <- function (data, 
-                       lower.time=22,
-                       upper.time=3,
-                       maxinc.Temp=38,
+                       lower.time,
+                       upper.time,
                        sensitivity=0.15,
-                       time.dif=20,
+                       temp.diff=5,
                        maxNightVar_accepted=2,
                        env.data=FALSE,
                        env.temp=NULL) {
@@ -133,16 +132,16 @@ incRscan <- function (data,
       warning(base::paste("No night reference period for ",
                           base::as.character(unique(data.day$date)), 
                     " - day skipped"))
-      old.leaving.threshold <- NA
-      old.entering.threshold <- NA
-      final.leaving.threshold <- NA
-      final.entering.threshold <- NA
+      old.maxDrop <- NA
+      old.maxIncrease <- NA
+      final.maxDrop <- NA
+      final.maxIncrease <- NA
       night_day_varRatio <- NA
       threshold.list[[d]] <- c(as.character(unique (data.day$date)), 
-                               old.entering.threshold, 
-                               final.entering.threshold,
-                               old.leaving.threshold, 
-                               final.leaving.threshold, 
+                               old.maxIncrease, 
+                               final.maxIncrease,
+                               old.maxDrop, 
+                               final.maxDrop, 
                                night_day_varRatio)
       next()
     }
@@ -163,60 +162,60 @@ incRscan <- function (data,
           base::as.character(base::unique(subset.night$date)[1]),
           base::as.character(base::unique(subset.night$date)[2]), sep="/"),
           " and no previous night as reference. Day not analysed."))
-        old.entering.threshold <- NA
-        old.leaving.threshold <- NA
-        final.entering.threshold <- NA
-        final.leaving.threshold <- NA 
+        old.maxIncrease <- NA
+        old.maxDrop <- NA
+        final.maxIncrease <- NA
+        final.maxDrop <- NA 
         night_day_varRatio <-  NA
         threshold.list[[d]] <- c(base::as.character(base::unique (data.day$date)), 
-                                 old.entering.threshold, 
-                                 final.entering.threshold,
-                                 old.leaving.threshold, 
-                                 final.leaving.threshold, 
+                                 old.maxIncrease, 
+                                 final.maxIncrease,
+                                 old.maxDrop, 
+                                 final.maxDrop, 
                                  night_day_varRatio)
         next()
       } else {
-        old.entering.threshold <- base::max (subset.night$temp1, na.rm=TRUE)
-        old.leaving.threshold <- base::min (subset.night$temp1, na.rm=TRUE)
+        old.maxIncrease <- base::max (subset.night$temp1, na.rm=TRUE)
+        old.maxDrop <- base::min (subset.night$temp1, na.rm=TRUE)
         if (base::is.na(threshold.list[[d-1]][3]) || base::is.na(threshold.list[[d-1]][5])){
           warning (base::paste ("Night drop limit exit on ", base::paste(
             base::as.character(base::unique(subset.night$date)[1]),
             base::as.character(base::unique(subset.night$date)[2]), sep="/"),
             " and no previous night as reference. Day not analysed."))
-          final.entering.threshold <- NA
-          final.leaving.threshold <- NA 
+          final.maxIncrease <- NA
+          final.maxDrop <- NA 
           night_day_varRatio <-  stats::var (subset.night$temp1, na.rm=TRUE) / 
             stats::var(data.day$temp1[data.day$dec.time>11 & data.day$dec.time<15], na.rm=TRUE)
           threshold.list[[d]] <- base::c(base::as.character(base::unique (data.day$date)), 
-                                   old.entering.threshold, 
-                                   final.entering.threshold,
-                                   old.leaving.threshold, 
-                                   final.leaving.threshold, 
+                                   old.maxIncrease, 
+                                   final.maxIncrease,
+                                   old.maxDrop, 
+                                   final.maxDrop, 
                                    night_day_varRatio)
           next()
         } else {
-          final.entering.threshold <- base::as.numeric(threshold.list[[d-1]][3])
-          final.leaving.threshold <- base::as.numeric(threshold.list[[d-1]][5])
+          final.maxIncrease <- base::as.numeric(threshold.list[[d-1]][3])
+          final.maxDrop <- base::as.numeric(threshold.list[[d-1]][5])
           night_day_varRatio <-  stats::var (subset.night$temp1, na.rm=TRUE) / 
             stats::var(data.day$temp1[data.day$dec.time>11 & data.day$dec.time<15], na.rm=TRUE)
         }
       }
     } else {
       # maximum/minimum change in temperature at "night"
-      old.entering.threshold <- NA
-      old.leaving.threshold <- NA
-      final.entering.threshold <- base::max (subset.night$temp1, na.rm=TRUE)
-      final.leaving.threshold <- base::min (subset.night$temp1, na.rm=TRUE)
+      old.maxIncrease <- NA
+      old.maxDrop <- NA
+      final.maxIncrease <- base::max (subset.night$temp1, na.rm=TRUE)
+      final.maxDrop <- base::min (subset.night$temp1, na.rm=TRUE)
       night_day_varRatio <-  stats::var (subset.night$temp1, na.rm=TRUE) / 
         stats::var(data.day$temp1[data.day$dec.time>11 & data.day$dec.time<15], na.rm=TRUE)
     }
     
     # storing data
     threshold.list[[d]] <- base::c(base::as.character(base::unique (data.day$date)), 
-                             old.entering.threshold, 
-                             final.entering.threshold,
-                             old.leaving.threshold, 
-                             final.leaving.threshold, 
+                             old.maxIncrease, 
+                             final.maxIncrease,
+                             old.maxDrop, 
+                             final.maxDrop, 
                              night_day_varRatio)
     
     # assessment of differential temperature
@@ -227,16 +226,10 @@ incRscan <- function (data,
       # distance from nest temperature to env.temperature
       if (base::is.na(data.day$valueT[i])) {next()}
       # is there environmental data?
-      if (env.data==TRUE) {
-        if (env.temp==NULL){stop("Provide the name of the column with environmental temperatures")}
-        statement <-  (data.day$valueT[i] - data.day[[env.temp]][i]) < time.dif
-      } else {
-        if (base::is.null(maxinc.Temp)) {stop ("No maximum temperature assigned")
-        } else {
-          statement <-  (maxinc.Temp - data.day$valueT[i]) > time.dif
-        }
+      if (is.null(env.temp)){
+        stop("Provide the name of the column with environmental temperatures")
       }
-      # now the evaluation of statement
+      statement <-  base::abs((data.day$valueT[i] - data.day[[env.temp]][i])) < temp.diff
       if (statement) {
         correction.min <- sensitivity
         correction.max <- 1
@@ -244,17 +237,17 @@ incRscan <- function (data,
         correction.min <- 1
         correction.max <- 0
       }
-      
+
       # sorting of off-bouts
       if (base::is.na(data.day$temp1[i])) {next()}
-      if (data.day$temp1[i] < final.leaving.threshold*correction.min) {
+      if (data.day$temp1[i] < final.maxDrop*correction.min) {
         data.day$leaving[i] <- 1
       } else {
         data.day$leaving[i] <- 0
       }
       
       # sorting of on-bouts
-      if (data.day$temp1[i] > (final.entering.threshold*correction.max)) {
+      if (data.day$temp1[i] > (final.maxIncrease*correction.max)) {
         data.day$entering[i] <- 1
       } else {
         data.day$entering[i] <- 0
@@ -338,9 +331,9 @@ incRscan <- function (data,
   
   final.threshold <- base::as.data.frame(base::do.call("rbind",threshold.list))
   base::names(final.threshold) <- c("date", 
-                              "old.entering.threshold", 
-                              "final.entering.threshold",
-                              "old.leaving.threshold", "final.leaving.threshold", 
+                              "old.maxIncrease", 
+                              "final.maxIncrease",
+                              "old.maxDrop", "final.maxDrop", 
                               "night_day_varRatio")
   incubation.final[[2]] <- final.threshold[stats::complete.cases(final.threshold$date),]
   incubation.final[[2]]$year <- base::unique (data[["year"]])
