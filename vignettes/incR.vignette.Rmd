@@ -366,7 +366,7 @@ cannot be made.
 # 3 - Final notes
 
 At the beginning of a study it is highly recommended to have incubation validated data 
-(using, for instance, video-recorings). With few days of video and temperature recordings one
+(using, for instance, video-recordings). With few days of video and temperature recordings one
 can calculate the optimal values for `incRscan` and automate the analyses of full data sets with
 little extra effort.
 
