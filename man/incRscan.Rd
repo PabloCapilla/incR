@@ -4,7 +4,7 @@
 \alias{incRscan}
 \title{Calculation of incubation behaviour}
 \usage{
-incRscan(data, lower.time, upper.time, sensitivity = 0.15, temp.diff = 5,
+incRscan(data, lower.time, upper.time, sensitivity = 0.15, temp.diff = 8,
   maxNightVar_accepted = 2, env.temp)
 }
 \arguments{

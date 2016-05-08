@@ -76,7 +76,7 @@ incRscan <- function (data,
                        lower.time,
                        upper.time,
                        sensitivity=0.15,
-                       temp.diff=5,
+                       temp.diff=8,
                        maxNightVar_accepted=2,
                        env.temp) {
   ##### CHECKING THE PRESENCE OF APPROPRIATE COLUMN NAMES #####
