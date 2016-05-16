@@ -6,3 +6,6 @@ currently being actively updated. The need for a package like this was first con
 
 Please, if you have a look at the code or use the package and you find any bug (you will!), or think of any improvement, get in 
 contact to implement your recommendations. I am keen to collaborate, so don't hesitate to get in touch.
+
+# Updates:
+- Version 0.1.3. (2016-05-16) New function 'incRenv' has been included to help the combination of environmental and nest temperatures in one unique data frame.
