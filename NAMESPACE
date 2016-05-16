@@ -3,6 +3,7 @@
 export(incRactivity)
 export(incRbouts)
 export(incRconstancy)
+export(incRenv)
 export(incRprep)
 export(incRscan)
 export(incRt)

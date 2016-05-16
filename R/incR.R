@@ -21,10 +21,10 @@
 #' }
 #' 
 #' @section incR functions:
-#' The current version of incR contains the following functions (plus two example data sets):
+#' The current version of incR contains the following functions (plus three example data sets):
 #' \code{\link{incRprep}}, \code{\link{incRscan}},
 #' \code{\link{incRactivity}}, \code{\link{incRconstancy}}
-#' \code{\link{incRbouts}}, \code{\link{incRt}}
+#' \code{\link{incRbouts}}, \code{\link{incRt}} \code{\link{incRenv}}
 #' 
 #' @docType package
 #' @name incR  

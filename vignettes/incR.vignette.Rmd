@@ -370,6 +370,11 @@ At the beginning of a study it is highly recommended to have incubation validate
 can calculate the optimal values for `incRscan` and automate the analyses of full data sets with
 little extra effort.
 
+The current version of the package is expected to be further polished. Please, if you
+spot any error, bug or spelling problem in the documentation, send me an e-mail to correct it.
+The code of the package is publicly available, so if you think you can improve it, I would
+be delighted to get your feedback.
+
 # 4- References
  
 * Cooper CB, Mills H. 2005. New software for quantifying incubation behavior from 
