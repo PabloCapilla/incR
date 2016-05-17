@@ -319,8 +319,8 @@ incRscan <- function (data,
     #filling night windows unless night var exit
     if (night.drop > -maxNightVar_accepted ||
         night.raise < +maxNightVar_accepted) {
-      data.day$inc.vector[data.day$dec.time > upper.time] <- 1
-      data.day$inc.vector[data.day$dec.time < lower.time] <- 1
+      data.day$inc.vector[data.day$dec.time < upper.time] <- 1
+      data.day$inc.vector[data.day$dec.time > lower.time] <- 1
     } 
     
     # compiling list
