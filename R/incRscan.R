@@ -33,8 +33,7 @@
 #' @param maxNightVar_accepted maximum temperature variation between two consecutive points
 #' within the calibrating window that is accepted. If this variation value is surpassed, 
 #' calibratinng window is discarded and a previous one is used for calibration.
-#' @param env.temp \emph{env.data} = \emph{TRUE}, name of column with environmental 
-#' temperatures.
+#' @param env.temp name of column for environmental temperatures.
 #' @return 
 #' The function returns a list with two objects. The first object is the original
 #' data frame with an extra column named 'inc.vector'. This vector is formed by 1s and 0s,
@@ -316,6 +315,13 @@ incRscan <- function (data,
         }
       }
     }
+    
+    #filling night windows unless night var exit
+    if (night.drop > -maxNightVar_accepted ||
+        night.raise < +maxNightVar_accepted) {
+      data.day$inc.vector[data.day$dec.time > upper.time] <- 1
+      data.day$inc.vector[data.day$dec.time < lower.time] <- 1
+    } 
     
     # compiling list
     incubation.list[[d]] <- data.day

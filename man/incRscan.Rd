@@ -32,8 +32,7 @@ triggers the sensitivity parameter.}
 within the calibrating window that is accepted. If this variation value is surpassed, 
 calibratinng window is discarded and a previous one is used for calibration.}
 
-\item{env.temp}{\emph{env.data} = \emph{TRUE}, name of column with environmental 
-temperatures.}
+\item{env.temp}{name of column for environmental temperatures.}
 }
 \value{
 The function returns a list with two objects. The first object is the original
