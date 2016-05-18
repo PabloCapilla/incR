@@ -37,7 +37,7 @@ incRbouts <- function (data, vector.incubation, sampling.rate) {
   df01 <- base::split (data, data$date)
   
   # defining table to write results in
-  data.final <- base::data.frame (date=unique(data$date),
+  data.final <- base::data.frame (date=rep(NA, length=base::length(df01)),
                                   number.on.bouts=rep(NA, length=base::length(df01)),
                                   number.off.bouts=rep(NA, length=base::length(df01)),
                                   mean.time.on.bout=rep(NA, length=base::length(df01)),
