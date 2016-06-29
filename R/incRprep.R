@@ -41,8 +41,9 @@
 #' head (new.data, 3)
 #' @export 
 incRprep <- function (data, date.name,
-                       date.format, timezone,
-                       temperature.name) {
+                      date.format, 
+                      timezone,
+                      temperature.name) {
   # checking for correct column names
   ## date name
   if (date.name=="date"){
@@ -50,7 +51,7 @@ incRprep <- function (data, date.name,
   }
   ### re-formating date and time and generating new time columns
   # index for each row
-  data$index <- base::seq(1, to=base::length(data$valueT), by=1)
+  data$index <- base::seq(1, to=base::length(data[[temperature.name]]), by=1)
   # converting time and date in different formats
   dt <- base::strptime(data[[date.name]], format=date.format, tz=timezone)
   data$time <- strftime (dt, format= "%H:%M")
@@ -61,10 +62,10 @@ incRprep <- function (data, date.name,
   data$date <- base::as.Date(base::format(dt,"%Y-%m-%d"))
   # time in min decimals
   data$dec.time <- base::sapply(base::strsplit(data$time,":"),
-                          function(x) {
-                            x <- base::as.numeric(x)
-                            x[1]+x[2]/60
-                          })
+                                function(x) {
+                                  x <- base::as.numeric(x)
+                                  x[1]+x[2]/60
+                                })
   # diferential temperatures
   # loop to calculate t - (t-1) and -(t-2)
   # t - t-1
@@ -75,6 +76,6 @@ incRprep <- function (data, date.name,
     data$temp1[1] <- NA
     data$temp1[i] <- temperature.original[i]-temperature.original[i-1]
   }
-
+  
   return (data)
 }
