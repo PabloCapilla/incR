@@ -10,6 +10,8 @@
 #' under the name of "inc.vector", is provided by \code{\link{incRscan}} in the 
 #' first object of the returned list. A column named "date" is needed to refer to daily
 #' calculations.
+#' @param temp.name (character object) name of the column containing temperature data 
+#' in the data table. 
 #' @param limits vector of length = 2 giving the time limits for calculations. For example,
 #' 'c(6,20)' would calculate temperature averages and variance for two time periods, from 6 to 20
 #' and from 20 to 6 of the next day. 'civil.twilight' and 'activiy.times' must be
@@ -33,6 +35,7 @@
 #' 
 #' # calculation based on chosen times from 6am to 7pm and 7pm to 6am
 #' incRt (data=incRincubationExample, 
+#'         temp.name="valueT",
 #'         limits=c(6,19), 
 #'         coor=NULL, 
 #'         civil.twilight=FALSE, 
@@ -40,7 +43,8 @@
 #'         time.zone=NULL)
 #'         
 #' # calculation based on activity times
-#' incRt (data=incRincubationExample, 
+#' incRt (data=incRincubationExample,
+#'         temp.name="valueT", 
 #'         limits=NULL, 
 #'         coor=NULL, 
 #'         civil.twilight=FALSE, 
@@ -49,6 +53,7 @@
 #'         
 #' # calculation based on civil twilight
 #' incRt (data=incRincubationExample, 
+#'         temp.name="valueT",
 #'         limits=NULL, 
 #'         coor=c(42,0.89), 
 #'         civil.twilight=TRUE, 
@@ -59,11 +64,12 @@
 #' @export 
 
 incRt <- function (data, 
-                    limits=NULL, 
-                    coor=NULL, 
-                    activity.times=FALSE, 
-                    civil.twilight=FALSE, 
-                    time.zone=NULL) {
+                   temp.name,
+                   limits=NULL, 
+                   coor=NULL, 
+                   activity.times=FALSE, 
+                   civil.twilight=FALSE, 
+                   time.zone=NULL) {
   # checking whether there is a date column
   if (base::is.null(data$date)) {
     stop("No column with name 'date' found")
@@ -92,7 +98,7 @@ incRt <- function (data,
   if (activity.times==TRUE) {
     # calculates onset and offset activity times
     act.times <- incRactivity (data= data.onoff.act, 
-                                vector.incubation="inc.vector")
+                               vector.incubation="inc.vector")
     if (base::is.null(data.onoff.act$inc.vector)) {
       stop ("Your incubation.vector for incRactivity is not named 'inc.vector',
               please, change its name to 'inc.vector' or specify it in
@@ -112,29 +118,29 @@ incRt <- function (data,
                                                   solarDep=6, direction="dawn", POSIXct.out=TRUE))
       dawn$day_frac <- NULL
       dawn$dusk <-  stats::na.omit(maptools::crepuscule(base::matrix(c(coor[1], coor[2]), nrow=1), 
-                                              base::as.POSIXct (base::as.character(base::unique (data$date)), 
-                                                                tz=time.zone),
-                                              solarDep=6, direction="dusk", POSIXct.out=TRUE))[,2]
+                                                        base::as.POSIXct (base::as.character(base::unique (data$date)), 
+                                                                          tz=time.zone),
+                                                        solarDep=6, direction="dusk", POSIXct.out=TRUE))[,2]
       names(dawn) <- c("dawn.time", "dusk.time")
       
       
       # re-calculating decimal hours
       dawn$onset <- base::sapply(base::strsplit(base::strftime (dawn$dawn.time, 
-                                                              format= "%H:%M", 
-                                                              tz=time.zone),":"),
-                               function(x) {
-                                 x <- base::as.numeric(x)
-                                 x[1]+x[2]/60
-                               })
+                                                                format= "%H:%M", 
+                                                                tz=time.zone),":"),
+                                 function(x) {
+                                   x <- base::as.numeric(x)
+                                   x[1]+x[2]/60
+                                 })
       dawn$offset <- base::sapply(base::strsplit(base::strftime (dawn$dusk.time, 
-                                                              format= "%H:%M", 
-                                                              tz=time.zone),":"),
-                               function(x) {
-                                 x <- base::as.numeric(x)
-                                 x[1]+x[2]/60
-                               })
+                                                                 format= "%H:%M", 
+                                                                 tz=time.zone),":"),
+                                  function(x) {
+                                    x <- base::as.numeric(x)
+                                    x[1]+x[2]/60
+                                  })
       dawn$date <- base::as.character(as.POSIXlt(base::as.character(dawn$dawn.time), 
-                                   tz = time.zone, format= "%Y-%m-%d"))
+                                                 tz = time.zone, format= "%Y-%m-%d"))
       act.times <- dawn
       act.times$index <- base::seq (1,to=base::nrow(act.times), by=1)
       
@@ -146,56 +152,56 @@ incRt <- function (data,
       
       base::names(act.times)<- c("date", "onset", "offset")
       act.times$index <- base::seq (1,to=base::nrow(act.times), by=1)
-        
+      
     }
   }
-    
-    # loop to fill table of results
+  
+  # loop to fill table of results
   for (k in 1:(base::length(df01))) {
     
     # each day one by one
     df00 <- df01[[k]]     
     data.final$date[k] <- base::as.character(base::unique(df00$date))
     
-      # based on the calculations above, day and night mean and var in temperature are
-      # calculated. Time limits for the calculations are needed
-      index <- act.times [act.times$date==base::as.character(base::unique (df00$date)), c("index")]
-      day.morning <- act.times [act.times$date==base::as.character(base::unique (df00$date)), c("onset")]
-      day.evening <- act.times [act.times$date==base::as.character(base::unique (df00$date)), c("offset")]
-      night.evening <- act.times [act.times$date==base::as.character(base::unique (df00$date)), c("offset")]
-      night.morning <- act.times [act.times$index==index+1, c("onset")]
-      
-      # once the limits are set, the correct time points need to be selected 
-      # 
-      # DAY CALCULATIONS
-      #
-      day.data <- df00[df00$dec.time > day.morning & df00$dec.time < day.evening, ]
-      data.final$day.mean[k] <- base::mean (day.data$valueT, na.rm=TRUE)
-      data.final$day.var[k] <- stats::var (day.data$valueT, na.rm=TRUE)
-      # 
-      # NIGHT CALCULATIONS
-      #
-      # selecting time
-      # computing number after sorting the data by time limits
-      if (base::length(night.morning) > 0) { # is there one day ahead for calculations?
-        # selecting night window
-        if (night.evening < 24 && night.evening < night.morning) {
-          subset.data <- df00 [df00$dec.time > night.evening & df00$dec.time < night.morning, ]
-        } else {
-          if (night.evening < 24 && night.evening > night.morning) {
-            subset.nightBefore <- df00 [df00$dec.time > night.evening & df00$dec.time < 24, ]
-            date.after <- base::unique (df00$date)+1
-            day.after <- df01[[base::as.character(date.after)]] 
-            subset.morning <- day.after [day.after$dec.time > 0 & day.after$dec.time < night.morning, ]
-            subset.data <- base::rbind(subset.nightBefore, subset.morning)
-          } 
-        }
-        data.final$night.mean[k] <- base::mean( subset.data$valueT, na.rm=TRUE)
-        data.final$night.var[k] <- stats::var( subset.data$valueT, na.rm=TRUE)
-        } else {
-        data.final$night.mean[k] <- NA
-        data.final$night.var[k] <- NA
+    # based on the calculations above, day and night mean and var in temperature are
+    # calculated. Time limits for the calculations are needed
+    index <- act.times [act.times$date==base::as.character(base::unique (df00$date)), c("index")]
+    day.morning <- act.times [act.times$date==base::as.character(base::unique (df00$date)), c("onset")]
+    day.evening <- act.times [act.times$date==base::as.character(base::unique (df00$date)), c("offset")]
+    night.evening <- act.times [act.times$date==base::as.character(base::unique (df00$date)), c("offset")]
+    night.morning <- act.times [act.times$index==index+1, c("onset")]
+    
+    # once the limits are set, the correct time points need to be selected 
+    # 
+    # DAY CALCULATIONS
+    #
+    day.data <- df00[df00$dec.time > day.morning & df00$dec.time < day.evening, ]
+    data.final$day.mean[k] <- base::mean (day.data[[temp.name]], na.rm=TRUE)
+    data.final$day.var[k] <- stats::var (day.data[[temp.name]], na.rm=TRUE)
+    # 
+    # NIGHT CALCULATIONS
+    #
+    # selecting time
+    # computing number after sorting the data by time limits
+    if (base::length(night.morning) > 0) { # is there one day ahead for calculations?
+      # selecting night window
+      if (night.evening < 24 && night.evening < night.morning) {
+        subset.data <- df00 [df00$dec.time > night.evening & df00$dec.time < night.morning, ]
+      } else {
+        if (night.evening < 24 && night.evening > night.morning) {
+          subset.nightBefore <- df00 [df00$dec.time > night.evening & df00$dec.time < 24, ]
+          date.after <- base::unique (df00$date)+1
+          day.after <- df01[[base::as.character(date.after)]] 
+          subset.morning <- day.after [day.after$dec.time > 0 & day.after$dec.time < night.morning, ]
+          subset.data <- base::rbind(subset.nightBefore, subset.morning)
+        } 
       }
+      data.final$night.mean[k] <- base::mean( subset.data[[temp.name]], na.rm=TRUE)
+      data.final$night.var[k] <- stats::var( subset.data[[temp.name]], na.rm=TRUE)
+    } else {
+      data.final$night.mean[k] <- NA
+      data.final$night.var[k] <- NA
+    }
   }
   return (data.final)
   
