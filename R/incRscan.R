@@ -23,6 +23,8 @@
 #' this variables and the correct names, ready to be passed through \emph{incRscan}.
 #' @param lower.time lower limit of time window for calibration (numeric).
 #' @param upper.time upper limit of time window for calibration (numeric).
+#' @param temp.name (character object) name of the column containing temperature data 
+#' in the data table. 
 #' @param sensitivity ratio of reduction in temperature threshold. When nest temperature
 #' does not drop close to environmental temperatures, this value can be kept to 1. If 
 #' nest temperature follows environmental temperature at any point, 
@@ -61,6 +63,7 @@
 #'                        temperature.name="valueT")
 #' # then the data frame is ready for incRscan                      
 #' incubation.analysis <- incRscan (data=new.data, 
+#'                                   temp.name="valueT",
 #'                                   lower.time=22,
 #'                                   upper.time=3,
 #'                                   sensitivity=0.15,
@@ -72,12 +75,13 @@
 #' @seealso \code{\link{incRprep}} \code{\link{incRconstancy}} \code{\link{incRactivity}}
 #' @export 
 incRscan <- function (data, 
-                       lower.time,
-                       upper.time,
-                       sensitivity=0.15,
-                       temp.diff=8,
-                       maxNightVar_accepted=2,
-                       env.temp) {
+                      temp.name,
+                      lower.time,
+                      upper.time,
+                      sensitivity,
+                      temp.diff,
+                      maxNightVar_accepted,
+                      env.temp) {
   ##### CHECKING THE PRESENCE OF APPROPRIATE COLUMN NAMES #####
   if (base::is.null(data$date) || base::is.null(data$dec.time) || base::is.null(data$temp1) || base::is.null(data$index)){
     stop("Please, check that the columns 'date', 'dec.time', 'temp1' and 'index' exist in your data frame")
@@ -123,12 +127,12 @@ incRscan <- function (data,
     # if there is no night ref for any day, then warning message and jump
     # to next day
     if (base::sort(base::names (subset.list)==base::as.character(base::unique(data.day$date)),
-             decreasing=TRUE)[1]==TRUE) {
+                   decreasing=TRUE)[1]==TRUE) {
       subset.night <-  subset.list[[base::as.character(base::unique(data.day$date))]]
     } else {
       warning(base::paste("No night reference period for ",
                           base::as.character(unique(data.day$date)), 
-                    " - day skipped"))
+                          " - day skipped"))
       old.maxDrop <- NA
       old.maxIncrease <- NA
       final.maxDrop <- NA
@@ -184,11 +188,11 @@ incRscan <- function (data,
           night_day_varRatio <-  stats::var (subset.night$temp1, na.rm=TRUE) / 
             stats::var(data.day$temp1[data.day$dec.time>11 & data.day$dec.time<15], na.rm=TRUE)
           threshold.list[[d]] <- base::c(base::as.character(base::unique (data.day$date)), 
-                                   old.maxIncrease, 
-                                   final.maxIncrease,
-                                   old.maxDrop, 
-                                   final.maxDrop, 
-                                   night_day_varRatio)
+                                         old.maxIncrease, 
+                                         final.maxIncrease,
+                                         old.maxDrop, 
+                                         final.maxDrop, 
+                                         night_day_varRatio)
           next()
         } else {
           final.maxIncrease <- base::as.numeric(threshold.list[[d-1]][3])
@@ -209,11 +213,11 @@ incRscan <- function (data,
     
     # storing data
     threshold.list[[d]] <- base::c(base::as.character(base::unique (data.day$date)), 
-                             old.maxIncrease, 
-                             final.maxIncrease,
-                             old.maxDrop, 
-                             final.maxDrop, 
-                             night_day_varRatio)
+                                   old.maxIncrease, 
+                                   final.maxIncrease,
+                                   old.maxDrop, 
+                                   final.maxDrop, 
+                                   night_day_varRatio)
     
     # assessment of differential temperature
     for (i in 2:base::length(data.day$temp1)) {
@@ -221,12 +225,12 @@ incRscan <- function (data,
       data.day$entering[1] <- 1 # initial state
       
       # distance from nest temperature to env.temperature
-      if (base::is.na(data.day$valueT[i])) {next()}
+      if (base::is.na(data.day[[temp.name]][i])) {next()}
       # is there environmental data?
       if (is.null(env.temp)){
         stop("Provide the name of the column with environmental temperatures")
       }
-      statement <-  base::abs((data.day$valueT[i] - data.day[[env.temp]][i])) < temp.diff
+      statement <-  base::abs((data.day[[temp.name]][i] - data.day[[env.temp]][i])) < temp.diff
       if (statement) {
         correction.min <- sensitivity
         correction.max <- 1
@@ -234,7 +238,7 @@ incRscan <- function (data,
         correction.min <- 1
         correction.max <- 0
       }
-
+      
       # sorting of off-bouts
       if (base::is.na(data.day$temp1[i])) {next()}
       if (data.day$temp1[i] < final.maxDrop*correction.min) {
@@ -335,10 +339,10 @@ incRscan <- function (data,
   
   final.threshold <- base::as.data.frame(base::do.call("rbind",threshold.list))
   base::names(final.threshold) <- c("date", 
-                              "old.maxIncrease", 
-                              "final.maxIncrease",
-                              "old.maxDrop", "final.maxDrop", 
-                              "night_day_varRatio")
+                                    "old.maxIncrease", 
+                                    "final.maxIncrease",
+                                    "old.maxDrop", "final.maxDrop", 
+                                    "night_day_varRatio")
   incubation.final[[2]] <- final.threshold[stats::complete.cases(final.threshold$date),]
   incubation.final[[2]]$year <- base::unique (data[["year"]])
   

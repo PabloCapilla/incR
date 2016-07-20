@@ -4,8 +4,8 @@
 \alias{incRscan}
 \title{Calculation of incubation behaviour}
 \usage{
-incRscan(data, lower.time, upper.time, sensitivity = 0.15, temp.diff = 8,
-  maxNightVar_accepted = 2, env.temp)
+incRscan(data, temp.name, lower.time, upper.time, sensitivity, temp.diff,
+  maxNightVar_accepted, env.temp)
 }
 \arguments{
 \item{data}{data frame for analysis. It must contained four columns named as follow:
@@ -14,6 +14,9 @@ the \emph{ith} and  \emph{ith-1} temperature recordings; 'dec.time' is time in
 decimal hours; and index is a running number from 1 to \emph{N}, N being the 
 total number of observations. \code{\link{incRprep}} returns a data frame with
 this variables and the correct names, ready to be passed through \emph{incRscan}.}
+
+\item{temp.name}{(character object) name of the column containing temperature data 
+in the data table.}
 
 \item{lower.time}{lower limit of time window for calibration (numeric).}
 
@@ -80,6 +83,7 @@ new.data <- incRprep (data=incRdataExample,
                        temperature.name="valueT")
 # then the data frame is ready for incRscan                      
 incubation.analysis <- incRscan (data=new.data, 
+                                  temp.name="valueT",
                                   lower.time=22,
                                   upper.time=3,
                                   sensitivity=0.15,

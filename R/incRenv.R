@@ -57,12 +57,12 @@ incRenv <- function (data.nest,
   
   # data reading and creating variables
   data.env$t <- base::strptime(data.env[[env.date.name]], 
-                         format=env.date.format, 
-                         tz=env.timezone)
+                               format=env.date.format, 
+                               tz=env.timezone)
   data.env$time <-  base::strftime (data.env$t, format= "%H:%M")
   data.env$date <-  base::as.Date( base::format(data.env$t,"%Y-%m-%d"))
   data.env$index <-  base::seq(1, to= base::nrow(data.env), by=1)
-  data.env$hour <-  base::as.numeric( base::format (data.env$t, "%H"))
+  data.env$hour <-  base::as.numeric(base::format (data.env$t, "%H"))
   # necessary list
   time.temp.list <- list(NA)
   
@@ -70,14 +70,12 @@ incRenv <- function (data.nest,
   for (d in 1: base::length( base::split(data.env, data.env$date))) {
     df00 <-  base::split(data.env, data.env$date)[[d]]
     temp <-  base::as.numeric( base::tapply(df00[[env.temperature.name]], 
-                              df00$hour, 
-                              base::mean, 
-                              rm.na=TRUE))
+                                            df00$hour, 
+                                            base::mean, 
+                                            rm.na=TRUE))
     hour <-  base::as.numeric( base::unique(df00$hour))
-    date <-  base::rep( base::unique( base::as.Date( base::strptime(df00$DATE, 
-                                        format=env.date.format, 
-                                        tz=env.timezone),"%Y-%m-%d"),
-                       length= base::length(hour)))
+    date <-  base::rep(base::unique(base::as.Date(df00$date)), 
+                       length= base::length(hour))
     time.temp.list[[d]] <-  base::data.frame(date=date, hour=hour, temp=temp)
   }
   
@@ -115,5 +113,5 @@ incRenv <- function (data.nest,
     } 
   }
   return(data.nest)
-}
+  }
 
