@@ -27,4 +27,3 @@ use this data set to try out \code{link{incRenv}} after the very first
 application of \code{\link{incRprep}}.
 }
 \keyword{datasets}
-

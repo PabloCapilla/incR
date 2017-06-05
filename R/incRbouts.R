@@ -1,7 +1,7 @@
 #' @title Calculation of the number of daily on- and off-bouts
 #' @description Calculation of number and duration of incubation
 #'  on- and off-bouts.
-#' @param data data frame containing a time-series vector of 1 and 0, where "1"
+#' @param data data frame containing a time-series vector of 1's and 0's, where "1"
 #' means "incubating individual inside nest" and "0" means "incubating individual
 #' outside nest". This vector, 
 #' under the name of "inc.vector", is provided by \code{\link{incRscan}} in the 
@@ -18,7 +18,7 @@
 #' mean time duration of on- and off-bouts are displayed in the 5 columns 
 #' respectively. Mean times are shown in those time units you specify the argument
 #' \emph{sampling.rate}.
-#' @author Pablo Capilla
+#' @author Pablo Capilla-Lasheras
 #' @examples
 #' #' # loading example data
 #' data(incRincubationExample)

@@ -5,15 +5,15 @@
 \title{Calculation of incubation behaviour}
 \usage{
 incRscan(data, temp.name, lower.time, upper.time, sensitivity, temp.diff,
-  maxNightVar_accepted, env.temp)
+  maxNightVariation, env.temp)
 }
 \arguments{
 \item{data}{data frame for analysis. It must contained four columns named as follow:
 'date', 'temp1', 'dec.time' and 'index', where 'temp1' is the difference between
 the \emph{ith} and  \emph{ith-1} temperature recordings; 'dec.time' is time in
-decimal hours; and index is a running number from 1 to \emph{N}, N being the 
+decimal hours; and index is a running number from 1 to \emph{N}, \emph{N} being the 
 total number of observations. \code{\link{incRprep}} returns a data frame with
-this variables and the correct names, ready to be passed through \emph{incRscan}.}
+these variables and the correct names, ready to be passed through \emph{incRscan}.}
 
 \item{temp.name}{(character object) name of the column containing temperature data 
 in the data table.}
@@ -29,49 +29,45 @@ then adjustment of this value may
 be required to detect short on/off-bouts at lower nest temperatures (see details).}
 
 \item{temp.diff}{temperature difference between \emph{maxinc.Temp} and an observation which
-triggers the sensitivity parameter.}
+triggers the sensitivity parameter to act.}
 
-\item{maxNightVar_accepted}{maximum temperature variation between two consecutive points
-within the calibrating window that is accepted. If this variation value is surpassed, 
+\item{maxNightVariation}{maximum temperature variation between two consecutive points
+within the calibrating window that is considered normal of this period. 
+If this variation value is surpassed, 
 calibratinng window is discarded and a previous one is used for calibration.}
 
 \item{env.temp}{name of column for environmental temperatures.}
 }
 \value{
-The function returns a list with two objects. The first object is the original
-data frame with an extra column named 'inc.vector'. This vector is formed by 1s and 0s,
-representing whether the incubating individual is (1) or outside the nest (0).
+The function returns a list with two objects. The first object, named \emph{new_data}, is the original
+data frame with an extra column named 'inc.vector'. This vector is formed by 1's and 0's,
+representing whether the incubating individual is inside (1) or outside the nest (0).
 
-The second object is a data frame with one day per row. Four columns tell the user
-the thresholds employed to estimate incubating individual behaviour. A fifth column accounts
+The second object, named \emph{calibrating_params}, is a data frame with one day per row. Four columns tell the user
+the thresholds employed to calculate the 'inc.vector' column. A fifth column accounts
 for the ratio between the calibrating window temperature variation and the variation in temperature 
-between 11am and 3pm. The lower this value the more clear the pattern between night and day
+between 11am and 3pm in the morning. The lower this value the more clear the pattern between night and day
 variation. It may serve the user as an indication of the signal / noise ratio in the analysed
 data set.
 }
 \description{
-This is the core algorithm of \code{incR} and classifies time points as 1s or 0s depending on
-whether or not the incubating individual is estimated to be on the eggs. 
+This is the core algorithm of \code{incR} and classifies time points as 1's or 0's depending on
+whether or not the incubating individual is considered to be on the eggs. 
 The algorithm
 uses night variation to daily-calibrate itself to temperature variation when the incubating
 individual is (assumed to be) on the eggs. 
-Therefore, a major assumption of this algorithm is that
+A major assumption of this algorithm is that
 there is a period of time in which temperature can be assumed to be constant or
 representative of time windows of effective incubation. This time window is defined by
 two arguments: lower.time and upper.time. The function is optimised to work using
 a data frame produced by \code{\link{incRprep}}.
-
-In the near future, extended functionality will be included, especially including
-environmental temperature information into analysis. The
-performance of this function has been evaluated in several bird species and geographic areas, 
-but calibration using pilot data is always recommended.
 }
 \section{Details}{
 
 Details of the algorithmic calculation 
-See package vignette for a description of how this function works. This
-section will be updated soon.
+See package vignette for a description of how this function works.
 }
+
 \examples{
 #' # loading example data
 data(incRdataExample)
@@ -88,15 +84,14 @@ incubation.analysis <- incRscan (data=new.data,
                                   upper.time=3,
                                   sensitivity=0.15,
                                   temp.diff=5,
-                                  maxNightVar_accepted=2,
+                                  maxNightVariation=2,
                                   env.temp="env.temp")
 inc.data <- incubation.analysis[[1]]
 inc.thresholds <- incubation.analysis[[2]]
 }
-\author{
-Pablo Capilla
-}
 \seealso{
 \code{\link{incRprep}} \code{\link{incRconstancy}} \code{\link{incRactivity}}
 }
-
+\author{
+Pablo Capill-Lasheras
+}

@@ -1,10 +1,10 @@
 #' @title incRenv
-#' @description Matching environmental and nest temperatures per hour of observation.
-#' This function takes a data frame with recordings of environmental temperature and another one
-#' with nest temperatures and merges both per hour. The user can do this work manually, however, 
-#' \code{\link{incRenv}}is thought to
-#' automate data preparation (in combination with \code{\link{incRprep}}) for the latter use of 
-#' \code{\link{incRscan}}.
+#' @description Matching environmental and nest temperatures.
+#' This function takes a data frame with recordings of environmental temperature and another
+#' with nest temperatures and merges both per unit of time. The user can do this work manually, however, 
+#' \code{\link{incRenv}} is thought to
+#' automate data preparation (in combination with \code{\link{incRprep}}) to use 
+#' \code{\link{incRscan}} after.
 #' @param data.nest data frame containing nest temperature recordings. It must have two compulsory
 #' columns 'date' and 'hour' displaying dates and the hour of each observation. These two columns
 #' are provided if the user uses \code{\link{incRprep}} before. 
@@ -18,11 +18,11 @@
 #' @param env.date.format format of \emph{env.date.name}. Similar to \code{\link{incRprep}}.
 #' @param env.timezone time zone of the environmental recordings. Similar to \code{\link{incRprep}}.
 #' @return The original \emph{data.nest} with an additional colunm for hour-averaged environmental
-#' temperature. This new variable is especially thought to serve as \emph{env.temp} in
+#' temperature. This new variable is thought to serve as \emph{env.temp} in
 #' \code{\link{incRscan}}.
 #' @details This function is thought to be used after \code{\link{incRprep}} as it uses some of the
 #' additional variables created by \code{\link{incRprep}}.
-#' @author Pablo Capilla
+#' @author Pablo Capilla-Lasheras
 #' @examples
 #' data(incRenvironmentalData)  # environmental data
 #' head (incRenvironmentalData)
@@ -67,7 +67,7 @@ incRenv <- function (data.nest,
   time.temp.list <- list(NA)
   
   # average temperatures per hour
-  for (d in 1: base::length( base::split(data.env, data.env$date))) {
+  for (d in 1: base::length(base::split(data.env, data.env$date))) {
     df00 <-  base::split(data.env, data.env$date)[[d]]
     temp <-  base::as.numeric( base::tapply(df00[[env.temperature.name]], 
                                             df00$hour, 
@@ -98,7 +98,7 @@ incRenv <- function (data.nest,
   
   # actual calculation
   data.nest[["env.temp"]] <- NA
-  for (p in 1: base::length( base::split(data.nest, data.nest[["date"]]))){
+  for (p in 1: base::length(base::split(data.nest, data.nest[["date"]]))){
     df.nest <-  base::split(data.nest, data.nest[["date"]])[[p]]
     df.env <- time.temp[time.temp$date== base::unique(df.nest$date),]
     

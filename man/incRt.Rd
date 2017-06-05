@@ -5,19 +5,22 @@
 \title{Calculation of temperature average and variance for customised
 time windows}
 \usage{
-incRt(data, limits = NULL, coor = NULL, activity.times = FALSE,
+incRt(data, temp.name, limits = NULL, coor = NULL, activity.times = FALSE,
   civil.twilight = FALSE, time.zone = NULL)
 }
 \arguments{
-\item{data}{data frame containing a time-series vector of 1s and 0s, where "1"
+\item{data}{data frame containing a time-series vector of 1's and 0's, where "1"
 means "incubating individual inside nest" and "0" means "incubating individual 
 outside the nests". This vector, 
 under the name of "inc.vector", is provided by \code{\link{incRscan}} in the 
 first object of the returned list. A column named "date" is needed to refer to daily
 calculations.}
 
+\item{temp.name}{(character object) name of the column containing temperature data 
+in data.}
+
 \item{limits}{vector of length = 2 giving the time limits for calculations. For example,
-'c(6,20)' would calculate temperature averages and variance for two time periods, from 6 to 20
+'c(6,20)' would calculate temperature averages and variances for two time periods, from 6 to 20
 and from 20 to 6 of the next day. 'civil.twilight' and 'activiy.times' must be
 FALSE to allow the use of 'limits'.}
 
@@ -37,7 +40,8 @@ If civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.}
 \item{time.zone}{time zone for \emph{crepuscule{maptools}} dawn and dusk calculations.}
 }
 \value{
-a data frame containing onset and end of activity times for each day in \emph{data}.
+a data frame containing temperature means and variance for the defined time 
+window.
 }
 \description{
 Calculation of temperature average and variation between two customised
@@ -51,6 +55,7 @@ data(incRincubationExample)
 
 # calculation based on chosen times from 6am to 7pm and 7pm to 6am
 incRt (data=incRincubationExample, 
+        temp.name="valueT",
         limits=c(6,19), 
         coor=NULL, 
         civil.twilight=FALSE, 
@@ -58,7 +63,8 @@ incRt (data=incRincubationExample,
         time.zone=NULL)
         
 # calculation based on activity times
-incRt (data=incRincubationExample, 
+incRt (data=incRincubationExample,
+        temp.name="valueT", 
         limits=NULL, 
         coor=NULL, 
         civil.twilight=FALSE, 
@@ -67,17 +73,17 @@ incRt (data=incRincubationExample,
         
 # calculation based on civil twilight
 incRt (data=incRincubationExample, 
+        temp.name="valueT",
         limits=NULL, 
         coor=c(42,0.89), 
         civil.twilight=TRUE, 
         activity.times=FALSE,
         time.zone="GMT")
 }
-\author{
-Pablo Capilla
-}
 \seealso{
 \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
 \code{\link{crepuscule}}
 }
-
+\author{
+Pablo Capilla-Lasheras
+}

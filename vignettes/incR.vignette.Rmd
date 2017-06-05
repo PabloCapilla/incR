@@ -190,6 +190,7 @@ against video-calibrated data, yielding very high correspondence (>95%) between 
 observations.
 ```{r}
 inc.example <- incRscan (data=df.prep,            # data frame
+                         temp.name = "valueT",
                          lower.time=22,           # beginning of calibrating window
                          upper.time=3,            # end of calibrating window
                          sensitivity=0.15,        # correction when nest Tª is 

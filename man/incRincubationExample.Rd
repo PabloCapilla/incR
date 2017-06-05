@@ -37,4 +37,3 @@ of incubation behaviour
 see \code{\link{incRprep}} for more details on the variables of this data set.
 }
 \keyword{datasets}
-

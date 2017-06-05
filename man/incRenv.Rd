@@ -28,16 +28,16 @@ for \code{\link{incRprep}}.}
 }
 \value{
 The original \emph{data.nest} with an additional colunm for hour-averaged environmental
-temperature. This new variable is especially thought to serve as \emph{env.temp} in
+temperature. This new variable is thought to serve as \emph{env.temp} in
 \code{\link{incRscan}}.
 }
 \description{
-Matching environmental and nest temperatures per hour of observation.
-This function takes a data frame with recordings of environmental temperature and another one
-with nest temperatures and merges both per hour. The user can do this work manually, however, 
-\code{\link{incRenv}}is thought to
-automate data preparation (in combination with \code{\link{incRprep}}) for the latter use of 
-\code{\link{incRscan}}.
+Matching environmental and nest temperatures.
+This function takes a data frame with recordings of environmental temperature and another
+with nest temperatures and merges both per unit of time. The user can do this work manually, however, 
+\code{\link{incRenv}} is thought to
+automate data preparation (in combination with \code{\link{incRprep}}) to use 
+\code{\link{incRscan}} after.
 }
 \details{
 This function is thought to be used after \code{\link{incRprep}} as it uses some of the
@@ -67,10 +67,9 @@ new.data2 <- incRenv (data.nest = new.data,
                      
 head (new.data2, 3)
 }
-\author{
-Pablo Capilla
-}
 \seealso{
 \code{\link{incRprep}} \code{\link{incRscan}}
 }
-
+\author{
+Pablo Capilla-Lasheras
+}

@@ -4,16 +4,16 @@
 #' time periods per day. Originally, this function was thought to calculate nest temperature
 #' between day and night. 'Day' and 'night' being defined either by the user, 
 #' by activity times or by civil twilight times.
-#' @param data data frame containing a time-series vector of 1s and 0s, where "1"
+#' @param data data frame containing a time-series vector of 1's and 0's, where "1"
 #' means "incubating individual inside nest" and "0" means "incubating individual 
 #' outside the nests". This vector, 
 #' under the name of "inc.vector", is provided by \code{\link{incRscan}} in the 
 #' first object of the returned list. A column named "date" is needed to refer to daily
 #' calculations.
 #' @param temp.name (character object) name of the column containing temperature data 
-#' in the data table. 
+#' in data. 
 #' @param limits vector of length = 2 giving the time limits for calculations. For example,
-#' 'c(6,20)' would calculate temperature averages and variance for two time periods, from 6 to 20
+#' 'c(6,20)' would calculate temperature averages and variances for two time periods, from 6 to 20
 #' and from 20 to 6 of the next day. 'civil.twilight' and 'activiy.times' must be
 #' FALSE to allow the use of 'limits'.
 #' @param coor coordinates for the location where temperature was recorded,
@@ -27,8 +27,9 @@
 #' are defined by \code{\link{incRactivity}}. Data must contain a column named 
 #' 'inc.vector' for the use of \code{\link{incRactivity}}.
 #' @param time.zone time zone for \emph{crepuscule{maptools}} dawn and dusk calculations.
-#' @return a data frame containing onset and end of activity times for each day in \emph{data}.
-#' @author Pablo Capilla
+#' @return a data frame containing temperature means and variance for the defined time 
+#' window.
+#' @author Pablo Capilla-Lasheras
 #' @examples
 #' # loading example data
 #' data(incRincubationExample)

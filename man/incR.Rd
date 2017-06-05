@@ -8,11 +8,8 @@
 \description{
 This packages is formed by a suite of R functions that help the user to get
 useful biological information from raw time-series data of 
-incubation temperatures. It is specially thought to be of interest for
-the study of uni-parental or intermittent incubating species when incubation temperature is
-higher than environmental temperature.
-The package is written in R language to allow the potential
-contribution of a wide R audience.
+incubation temperatures. It is thought to be of interest for
+the study of uni-parental or intermittent incubating species.
 }
 \section{Release notes and caveats}{
 
@@ -30,7 +27,7 @@ data, giving temperature drop, duration and time per individual off-bout.
 
 \section{incR functions}{
 
-The current version of incR contains the following functions (plus three example data sets):
+The current version of incR contains the following functions and three example data sets:
 \code{\link{incRprep}}, \code{\link{incRscan}},
 \code{\link{incRactivity}}, \code{\link{incRconstancy}}
 \code{\link{incRbouts}}, \code{\link{incRt}} \code{\link{incRenv}}

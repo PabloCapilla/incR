@@ -7,7 +7,7 @@
 incRbouts(data, vector.incubation, sampling.rate)
 }
 \arguments{
-\item{data}{data frame containing a time-series vector of 1 and 0, where "1"
+\item{data}{data frame containing a time-series vector of 1's and 0's, where "1"
 means "incubating individual inside nest" and "0" means "incubating individual
 outside nest". This vector, 
 under the name of "inc.vector", is provided by \code{\link{incRscan}} in the 
@@ -40,11 +40,10 @@ incRbouts (data=incRincubationExample,
             vector.incubation="inc.vector", 
             sampling.rate=240) # sampling rate in seconds.
 }
-\author{
-Pablo Capilla
-}
 \seealso{
 \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
 \code{\link{incRconstancy}}
 }
-
+\author{
+Pablo Capilla-Lasheras
+}

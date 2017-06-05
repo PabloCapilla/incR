@@ -2,16 +2,16 @@
 % Please edit documentation in R/incRactivity.R
 \name{incRactivity}
 \alias{incRactivity}
-\title{Calculation of onset and end of daily activity}
+\title{Calculation of first incubation off-bout and last incubation on-bout for every day under analysis}
 \usage{
 incRactivity(data, vector.incubation)
 }
 \arguments{
-\item{data}{data frame containing a time-series vector of 1s and 0s, where "1"
+\item{data}{data frame containing a time-series vector of 1's and 0's, where "1"
 means "incubating individual inside nest" and "0" means "incubating individual 
 outside the nests". This vector, 
 under the name of "inc.vector" is provided by \code{\link{incRscan}} in the 
-first object of the returned list. A column named "date" is needed to refer to daily
+first object (\emph{new_data}) of the returned list. A column named "date" is needed to refer to daily
 calculations.}
 
 \item{vector.incubation}{(character class) name of the vector containing information
@@ -34,10 +34,9 @@ data(incRincubationExample)
 incRactivity (data=incRincubationExample, 
                vector.incubation="inc.vector")
 }
-\author{
-Pablo Capilla
-}
 \seealso{
 \code{\link{incRprep}} \code{\link{incRscan}}
 }
-
+\author{
+Pablo Capilla-Lasheras
+}

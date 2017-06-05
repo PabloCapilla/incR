@@ -8,17 +8,17 @@ incRprep(data, date.name, date.format, timezone, temperature.name)
 }
 \arguments{
 \item{data}{raw data from incubation time series. It must contain a column 
-with date + time information for each observation. The function is written to
+with date and time information for each observation (e.g. "2017-05-01 21:01"). 
+The function is written to
 handle date and time concatenated in one unique column (see example below).}
 
-\item{date.name}{name of the date + time column}
+\item{date.name}{name of the date and time column}
 
-\item{date.format}{date and time format for date + time column. 
+\item{date.format}{format for date and time column. 
 It must be a character object as specified in the function \code{\link{strptime}}.   
-\code{\link{incRprep}} assumes the the date + time column contains date and time, 
-If date and time are in different columns, please concatenate them in one
-column before running the function.
-its format accordingly.}
+\code{\link{incRprep}} assumes that the date and time column contains date and time, 
+If date and time are in different columns, please, concatenate them in one
+column before running the function.}
 
 \item{timezone}{time zone for time calculations. See \code{\link{strptime}}.
 documentation for more details.}
@@ -26,10 +26,10 @@ documentation for more details.}
 \item{temperature.name}{name of the column storing temperature information.}
 }
 \value{
-The original data frame (data) with additional colunms for:
+The original data frame with additional colunms for:
 \enumerate{
 \item index: a running number identifying every row in the data set.
-\item dec.time: time in decimal hours. 
+\item dec.time: time in decimal hours (e.g. "22:30" becomes 22.5). 
 \item time: in  'H:M' format.
 \item hour: in 'H' format.
 \item year: in 'Y' format.
@@ -57,6 +57,5 @@ new.data <- incRprep (data=incRdataExample,
 head (new.data, 3)
 }
 \author{
-Pablo Capilla
+Pablo Capilla-Lasheras
 }
-

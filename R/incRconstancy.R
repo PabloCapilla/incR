@@ -1,8 +1,8 @@
 #' @title Calculation of the percentage of daily time spent in nest
 #' @description This function calculates % of day time spent inside nest
 #' based on the "inc.vector" variable produced by \code{\link{incRscan}} (or anyother method).
-#' Current versions do not discriminate day and night times.
-#' @param data data frame containing a time-series vector of 1 and 0, where "1"
+#' Current version do not discriminate day and night times.
+#' @param data data frame containing a time-series vector of 1´s and 0's, where "1"
 #' means "incubating individual inside nest" and "0" means "incubating individual
 #' outside nest". This vector, 
 #' under the name of "inc.vector" is provided by \code{\link{incRscan}} in the 
@@ -10,7 +10,7 @@
 #' calculations.
 #' @param vector.incubation name of the column (vector class) storing the
 #' information about the presence/absence of the incubating individual in the nest.
-#' @return Daily percentage (in 0 to 1 scale) of time in nest. Return in a 
+#' @return Daily percentage of time in nest, returned in a 
 #' data frame with one day per raw.
 #' @examples
 #' #' # loading example data
@@ -35,7 +35,7 @@ incRconstancy<- function (data, vector.incubation) {
     day.latency$date[d] <- base::as.character(base::unique(data.time[[d]]$date)) #date
     day.in <- base::sum(data.time[[d]][[vector.incubation]])                 # number of point inc.ind was in
     seg.day <- base::length(data.time[[d]][[vector.incubation]])             # total length of the inc.vector
-    day.latency$perc.in[d] <- (day.in/seg.day)                       # ratio
+    day.latency$perc.in[d] <- (day.in/seg.day) * 100                       # ratio
   }
   return (day.latency)
 }
