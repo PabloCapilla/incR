@@ -10,7 +10,7 @@ environmental temperature recordings at two different locations in one study sit
 \describe{
   \item{DATE}{a date + time column. Both elements are concatenated in one column.}
   \item{valueT}{environmental temperature recordings.}
-  \item{BOX}{location of the iButton® employed for recording. Two iButtons® in the 
+  \item{BOX}{location of the iButton employed for recording. Two iButtons in the 
   vicinity of two nest boxes are listed.}
   }}
 \usage{
@@ -20,7 +20,7 @@ incRenvironmentalData
 A dataset containing environmental temperatures for the study area
 where the data in \code{\link{incRdataExample}} were collected. 
 This raw data set 
-was produced by an iButton® device (Maxim).
+was produced by an iButton device (Maxim).
 }
 \details{
 use this data set to try out \code{link{incRenv}} after the very first

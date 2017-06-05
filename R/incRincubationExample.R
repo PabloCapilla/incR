@@ -5,7 +5,7 @@
 #' It also includes variables added by \code{\link{incRprep}} and the
 #' \emph{inc.vector} calculated by \code{\link{incRscan}}. 
 #' The raw data set \code{\link{incRdataExample}}
-#' was produced by an iButton® device (Maxim) and represents raw data to start the analysis
+#' was produced by an iButton device (Maxim) and represents raw data to start the analysis
 #' of incubation behaviour
 #' 
 #' @format A data frame with 954 rows and 10 variables, representing three days of nest

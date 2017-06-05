@@ -7,7 +7,7 @@
 incRconstancy(data, vector.incubation)
 }
 \arguments{
-\item{data}{data frame containing a time-series vector of 1´s and 0's, where "1"
+\item{data}{data frame containing a time-series vector of 1's and 0's, where "1"
 means "incubating individual inside nest" and "0" means "incubating individual
 outside nest". This vector, 
 under the name of "inc.vector" is provided by \code{\link{incRscan}} in the 
@@ -22,7 +22,7 @@ Daily percentage of time in nest, returned in a
 data frame with one day per raw.
 }
 \description{
-This function calculates % of day time spent inside nest
+This function calculates percentage of day time spent inside nest
 based on the "inc.vector" variable produced by \code{\link{incRscan}} (or anyother method).
 Current version do not discriminate day and night times.
 }

@@ -16,7 +16,7 @@ incRdataExample
 }
 \description{
 A dataset containing temperatures, time and date for a blue tit nest. This data set
-was produced by an iButton® device (Maxim) and represents raw data to start the analysis
+was produced by an iButton device (Maxim) and represents raw data to start the analysis
 of incubation behaviour. Environmental temperature has been added as average per hour.
 }
 \keyword{datasets}
