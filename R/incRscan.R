@@ -92,8 +92,7 @@ incRscan <- function (data,
   list.day <- base::split (data, data$date)
   
   # final list to return
-  incubation.final <- base::as.list(new_data =NA,
-                                    calibrating_params = NA)
+  incubation.final <- base::as.list(NA)
   ##### SELECTING NIGHT TIME WINDOW #####
   # selects the defined night time window
   if (lower.time < 24 && lower.time < upper.time) {
@@ -342,5 +341,6 @@ incRscan <- function (data,
   incubation.final[[2]] <- final.threshold[stats::complete.cases(final.threshold$date),]
   incubation.final[[2]]$year <- base::unique (data[["year"]])
   
+  names(incubation.final) <- c("new_data", "calibrating_params")
   return(incubation.final)
 }
