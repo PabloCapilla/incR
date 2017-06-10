@@ -12,4 +12,4 @@ No downstream dependencies
 
 
 ## Further comments
-	- This is the first submission of this package
+This is the first submission of this package

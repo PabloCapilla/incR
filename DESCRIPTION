@@ -1,14 +1,14 @@
 Package: incR
 Type: Package
-Title: Analysis of incubation data in R
+Title: Analysis of Incubation Data in R
 Version: 0.2.1.9000
 Date: 2017-06-05
 Author: person ("Pablo", "Capilla-Lasheras", email="pacapilla@gmail.com", role=c("aut",
     "cre"))
 Maintainer: Pablo Capilla-Lasheras <pacapilla@gmail.com>
-Description: incR contains a suite of functions for the analysis of animal incubation
+Description: This package contains a suite of functions for the analysis of animal incubation
     in the form of temperature time-series. At the core
-    of IncR lays an algorithm that allows for the classification of
+    of incR lays an algorithm that allows for the classification of
     incubation behaviour. Then, some additional functions 
     extract several biologically relevant metrics. 
 License: GPL-3

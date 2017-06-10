@@ -1,16 +1,7 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
-)
-```
+[![Travis-CI Build Status](https://travis-ci.org/PabloCapilla/incR.svg?branch=master)](https://travis-ci.org/PabloCapilla/incR)
 
 # incR: R package for the analysis of animal incubation
 
@@ -35,4 +26,6 @@ devtools::install_github("PabloCapilla/incR")
 
 Additionally, the package will be soon submitted to CRAN.
 
-[![Travis-CI Build Status](https://travis-ci.org/PabloCapilla/incR.svg?branch=master)](https://travis-ci.org/PabloCapilla/incR)
+## Vignettes
+- [Description of incR functionallity](vignettes/incR.vignette.Rmd)
+- Choosing parameters *incRscan*
