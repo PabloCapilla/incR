@@ -27,5 +27,5 @@ devtools::install_github("PabloCapilla/incR")
 Additionally, the package will be soon submitted to CRAN.
 
 ## Vignettes
-- [Description of incR functionallity](vignettes/incR.vignette.Rmd)
+- [Description of incR functionallity](https://github.com/PabloCapilla/incR/vignettes/incR.vignette.Rmd)
 - Choosing parameters *incRscan*
