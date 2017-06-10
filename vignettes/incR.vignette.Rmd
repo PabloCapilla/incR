@@ -3,8 +3,10 @@ title: "Analysis of incubation behaviour using incR"
 author: "Pablo Capilla-Lasheras (pacapilla@gmail.com)"
 date: '`r Sys.Date()`'
 output: rmarkdown::pdf_document
-vignette: |
-  %\VignetteIndexEntry{Workflow using the incR package} %\VignetteEngine{knitr::knitr} \usepackage[UTF-8]{inputenc}
+vignette: >
+  %\VignetteIndexEntry{incR Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 # 1 - Introduction

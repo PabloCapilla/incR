@@ -1,4 +1,4 @@
-# files to ignore in git commitments
+# files to ignore
 .Rproj.user
 .Rhistory
 .RData

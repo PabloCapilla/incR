@@ -9,3 +9,5 @@ contact to implement your recommendations. I am keen to collaborate, so don't he
 
 # Updates:
 - Version 0.2.0. (2017-06-05):Improvement of documentation.
+
+[![Travis-CI Build Status](https://travis-ci.org/PabloCapilla/incR.svg?branch=master)](https://travis-ci.org/PabloCapilla/incR)
