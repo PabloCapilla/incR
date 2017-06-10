@@ -1,5 +1,5 @@
 # files to ignore
-.Rproj.user
-.Rhistory
-.RData
-incR.Rproj
+^\.Rproj\.user
+^\.Rhistory
+^\.RData
+^\incR\.Rproj
