@@ -1,9 +1,9 @@
 # files to ignore
-^\.Rproj\.user
-^\.Rhistory
-^\.RData
-^\incR\.Rproj
-^\.Rproj.user
-.Rproj.user
+^\.Rproj\.user$
+^\.Rhistory$
+^\.RData$
+^\incR\.Rproj$
+^\.Rproj.user$
 ^\./Preparing_examples/$
-inst/doc
+
+.Rproj.user
