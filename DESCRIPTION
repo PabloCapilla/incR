@@ -7,8 +7,7 @@ Authors@R: person ("Pablo", "Capilla-Lasheras", email="pacapilla@gmail.com", rol
     "cre"))
 Author: Pablo Capilla-Lasheras [aut, cre]
 Maintainer: Pablo Capilla-Lasheras <pacapilla@gmail.com>
-Description: 
-    At the core of incR lays an algorithm that allows 
+Description: At the core of incR lays an algorithm that allows 
     for the scoring of incubation behaviour. Additionally, several functions 
     extract biologically relevant metrics of incubation such as off-bout number 
     and off-bout duration - for a review of avian incubation studies, 
