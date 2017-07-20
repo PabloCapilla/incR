@@ -27,4 +27,4 @@ githubinstall::githubinstall("incR")
 Additionally, the package will be soon submitted to CRAN.
 
 ## Vignettes
-- [incR workflow](https://github.com/PabloCapilla/incR/vignettes/incR.vignette.Rmd)
+- [incR workflow](https://github.com/PabloCapilla/incR/vignettes/incR_pipeline.Rmd)

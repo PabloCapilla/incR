@@ -14,12 +14,12 @@ Description: Analysis of incubation data in R.
     extract several biologically relevant metrics. 
 License: GPL-3
 Depends: R (>= 3.4.0), 
-    base,
-    maptools,
-    rgeos,
+    base, 
     stats
 Imports: dplyr,
+    maptools,
     lubridate,
+    rgeos,
     utils    
 Suggests: codetools,
     knitr,
