@@ -12,8 +12,9 @@ Description:
     for the scoring of incubation behaviour. Additionally, several functions 
     extract biologically relevant metrics of incubation such as off-bout number 
     and off-bout duration - for a review of avian incubation studies, 
-    see "Nest, Eggs and Incubation" (2015) edited by
-    D. Charles Deeming and S. James Reynols.
+    see "Nests, Eggs, and Incubation: New ideas about avian reproduction" (2015) 
+    edited by D. Charles Deeming and S. James Reynols 
+    <http://global.oup.com/booksites/content/9780198718666/>
 License: GPL-3
 Depends: R (>= 3.4.0), 
     base, 

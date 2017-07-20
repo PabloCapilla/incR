@@ -1,3 +1,13 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Removed "in R" from DESCRIPTION title
+* Removed "Analysis of incubation data in R." from DESCRIPTION description
+* Added clarity in the type of metrics that the package calculates and included a reference
+that widely discusses the type of data that the package handles. These changes have been done 
+in DESCRIPTION description.
+
+
 ## Test environments
 * local Windows 10 install, R 3.4.1
 * win-builder (devel)
