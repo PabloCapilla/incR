@@ -2,8 +2,8 @@
 ^\.Rproj\.user$
 ^\.Rhistory$
 ^\.RData$
-^\incR\.Rproj$
-^\.Rproj.user$
+^\.Rproj$
+^\.Rproj.user/$
 ^\./Preparing_examples/$
 
 .Rproj.user
