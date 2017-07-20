@@ -27,7 +27,7 @@ for \code{\link{incRprep}}.}
 \item{env.timezone}{time zone of the environmental recordings. Similar to \code{\link{incRprep}}.}
 }
 \value{
-The original \emph{data.nest} with an additional colunm for hour-averaged environmental
+The original \emph{data.nest} with an additional column for hour-averaged environmental
 temperature. This new variable is thought to serve as \emph{env_temp} in
 \code{\link{incRscan}}.
 }

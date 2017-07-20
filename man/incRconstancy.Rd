@@ -23,7 +23,7 @@ data frame with one day per raw.
 }
 \description{
 This function calculates percentage of day time spent inside nest
-based on the "inc.vector" variable produced by \code{\link{incRscan}} (or anyother method).
+based on the "inc.vector" variable produced by \code{\link{incRscan}} (or any other method).
 Current version do not discriminate day and night times.
 }
 \examples{

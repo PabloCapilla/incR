@@ -15,7 +15,7 @@
 #' in data. 
 #' @param limits vector of length 2 giving the time limits for calculations. For example,
 #' 'c(6,20)' would calculate temperature averages and variances for two time periods, from 6 to 20
-#' and from 20 to 6 of the next day. 'civil.twilight' and 'activiy.times' must be
+#' and from 20 to 6 of the next day. 'civil.twilight' and 'activity.times' must be
 #' FALSE to allow the use of 'limits'.
 #' @param coor coordinates for the location where temperature was recorded,
 #' formatted as decimal degrees N/S, decimal degress E/W.
@@ -28,7 +28,7 @@
 #' are defined by \code{\link{incRactivity}}. Data must contain a column named 
 #' 'incR_score' for the use of \code{\link{incRactivity}}.
 #' @param time.zone time zone for \code{\link{crepuscule}} dawn and dusk calculations.
-#' @param ... use parameters in \code{\link{incRactivity}} if \emph{acitivity.times} = TRUE.
+#' @param ... use parameters in \code{\link{incRactivity}} if \emph{activity.times} = TRUE.
 #' @return a data frame containing temperature means and variance for the defined time 
 #' window.
 #' @author Pablo Capilla-Lasheras

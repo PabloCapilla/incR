@@ -65,7 +65,7 @@ a data frame produced by \code{\link{incRprep}}.
 }
 \section{Details}{
 
-For futher details about the calculaton performed by \code{\link{incRscan}}, consult the package vignettes and
+For further details about the calculation performed by \code{\link{incRscan}}, consult the package vignettes and
 the associated publications.
 }
 
@@ -89,5 +89,5 @@ inc.thresholds <- incubation.analysis[[2]]
 \code{\link{incRprep}} \code{\link{incRenv}}
 }
 \author{
-Pablo Capill-Lasheras
+Pablo Capilla-Lasheras
 }

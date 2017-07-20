@@ -14,7 +14,7 @@ the study of uni-parental or intermittent incubating species.
 \section{Suggested workflow}{
 
 Check the package vignettes to find a suggested workflow
-and calibrate the main funcion in \code{incR}.
+and calibrate the main function in \code{incR}.
 }
 
 \section{incR functions}{

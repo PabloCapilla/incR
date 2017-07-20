@@ -26,7 +26,7 @@ documentation for more details.}
 \item{temperature.name}{name of the column storing temperature information.}
 }
 \value{
-The original data frame with additional colunms for:
+The original data frame with additional columns for:
 \enumerate{
 \item index: a running number identifying every row in the data set.
 \item dec_time: time in decimal hours (e.g. "22:30" becomes 22.5). 

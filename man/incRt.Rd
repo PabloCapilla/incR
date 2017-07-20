@@ -22,7 +22,7 @@ in data.}
 
 \item{limits}{vector of length 2 giving the time limits for calculations. For example,
 'c(6,20)' would calculate temperature averages and variances for two time periods, from 6 to 20
-and from 20 to 6 of the next day. 'civil.twilight' and 'activiy.times' must be
+and from 20 to 6 of the next day. 'civil.twilight' and 'activity.times' must be
 FALSE to allow the use of 'limits'.}
 
 \item{coor}{coordinates for the location where temperature was recorded,
@@ -40,7 +40,7 @@ If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.}
 
 \item{time.zone}{time zone for \code{\link{crepuscule}} dawn and dusk calculations.}
 
-\item{...}{use parameters in \code{\link{incRactivity}} if \emph{acitivity.times} = TRUE.}
+\item{...}{use parameters in \code{\link{incRactivity}} if \emph{activity.times} = TRUE.}
 }
 \value{
 a data frame containing temperature means and variance for the defined time 

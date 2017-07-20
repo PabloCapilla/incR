@@ -15,7 +15,7 @@ first object of the returned list. A column named "date" is needed to refer to d
 calculations.}
 
 \item{vector.incubation}{name of the column (vector class) storing the
-information about the presence/absence of the incubating indiviual in the nest.}
+information about the presence/absence of the incubating individual in the nest.}
 
 \item{dec_time}{(character class) name of the column with decimal time.}
 
@@ -23,7 +23,7 @@ information about the presence/absence of the incubating indiviual in the nest.}
 
 \item{sampling.rate}{time difference between two consecutive recording points.
 Effectively, the rate at which data points were recorded 
-(eg. 1 data point per 50sec).
+(e.g. 1 data point per 50sec).
 The time units of the returned object will depend on the units of this argument.}
 }
 \value{
