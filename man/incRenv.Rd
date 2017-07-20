@@ -2,7 +2,7 @@
 % Please edit documentation in R/incRenv.R
 \name{incRenv}
 \alias{incRenv}
-\title{incRenv}
+\title{Matching environmental and nest temperatures}
 \usage{
 incRenv(data.nest, data.env, env.temperature.name, env.date.name,
   env.date.format, env.timezone)
@@ -28,11 +28,10 @@ for \code{\link{incRprep}}.}
 }
 \value{
 The original \emph{data.nest} with an additional colunm for hour-averaged environmental
-temperature. This new variable is thought to serve as \emph{env.temp} in
+temperature. This new variable is thought to serve as \emph{env_temp} in
 \code{\link{incRscan}}.
 }
 \description{
-Matching environmental and nest temperatures.
 This function takes a data frame with recordings of environmental temperature and another
 with nest temperatures and merges both per unit of time. The user can do this work manually, however, 
 \code{\link{incRenv}} is thought to
@@ -44,23 +43,23 @@ This function is thought to be used after \code{\link{incRprep}} as it uses some
 additional variables created by \code{\link{incRprep}}.
 }
 \examples{
-data(incRenvironmentalData)  # environmental data
-head (incRenvironmentalData)
+data(incR_envdata)  # environmental data
+head (incR_envdata)
 
-data(incRincubationExample)  # nest data
-head (incRincubationExample)
+data(incR_rawdata)  # loading nest data
+head (incR_rawdata)
 
 # the first step in to format the raw data using incRprep
-new.data <- incRprep (data=incRdataExample,
+new.data <- incRprep (data=incR_rawdata,
                       date.name= "DATE",
                       date.format= "\%d/\%m/\%Y \%H:\%M",
                       timezone="GMT",
-                      temperature.name="valueT")
+                      temperature.name="temperature")
                       
 # then use incRenv to merge environmental data
 new.data2 <- incRenv (data.nest = new.data,
-                      data.env = incRenvironmentalData, 
-                      env.temperature.name = "valueT", 
+                      data.env = incR_envdata, 
+                      env.temperature.name = "env_temperature", 
                       env.date.name = "DATE", 
                       env.date.format = "\%d/\%m/\%Y \%H:\%M", 
                       env.timezone = "GMT")

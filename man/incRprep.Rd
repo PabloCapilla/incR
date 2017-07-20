@@ -29,17 +29,16 @@ documentation for more details.}
 The original data frame with additional colunms for:
 \enumerate{
 \item index: a running number identifying every row in the data set.
-\item dec.time: time in decimal hours (e.g. "22:30" becomes 22.5). 
+\item dec_time: time in decimal hours (e.g. "22:30" becomes 22.5). 
 \item time: in  'H:M' format.
 \item hour: in 'H' format.
-\item year: in 'Y' format.
+\item minute: in 'M' format.
 \item date: in  'Y-m-d' format.
-\item temp1: difference between the ith temperature value (Ti) and the previous one (Ti-1).
+\item temp1: difference between the \emph{i}th temperature value and the \emph{i-1} one.
 }
 }
 \description{
-Preparing incubation time series for further analysis
-Initial data manipulation
+Preparing incubation time series for further analysis.
 This function takes a data file containing a temporal series of temperature recordings
 and adds some the extra variables needed to use
 further functions embedded in the incR package. 
@@ -48,12 +47,12 @@ automatically.
 }
 \examples{
 # loading example data
-data(incRdataExample)
-new.data <- incRprep (data=incRdataExample,
+data(incubation_rawdata)
+new.data <- incRprep (data=incR_rawdata,
                        date.name= "DATE",
                        date.format= "\%d/\%m/\%Y \%H:\%M",
                        timezone="GMT",
-                       temperature.name="valueT")
+                       temperature.name="temperature")
 head (new.data, 3)
 }
 \author{

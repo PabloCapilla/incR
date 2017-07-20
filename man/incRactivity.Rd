@@ -2,27 +2,29 @@
 % Please edit documentation in R/incRactivity.R
 \name{incRactivity}
 \alias{incRactivity}
-\title{Calculation of first incubation off-bout and last incubation on-bout for every day under analysis}
+\title{Calculation of daily first incubation off-bout and last incubation on-bout}
 \usage{
-incRactivity(data, vector.incubation)
+incRactivity(data, time_column, vector.incubation)
 }
 \arguments{
-\item{data}{data frame containing a time-series vector of 1's and 0's, where "1"
+\item{data}{data frame containing a numeric vector of 1's and 0's (incubation scores), where "1"
 means "incubating individual inside nest" and "0" means "incubating individual 
 outside the nests". This vector, 
-under the name of "inc.vector" is provided by \code{\link{incRscan}} in the 
-first object (\emph{new_data}) of the returned list. A column named "date" is needed to refer to daily
+under the name of \code{incR_score} is provided by \code{\link{incRscan}} in the 
+first object (\emph{incRscan_data}) of the returned list. A column named "date" is needed to refer to daily
 calculations.}
 
-\item{vector.incubation}{(character class) name of the vector containing information
-for incubating individual presence/absence of nests. \code{\link{incRscan}} produces
-this vector named "inc.vector".}
+\item{time_column}{(character class) name of the column containing times.}
+
+\item{vector.incubation}{(character class) name of the vector containing 
+incubation scores. \code{\link{incRscan}} produces
+this vector named "incR_score".}
 }
 \value{
-a data frame containing onset and end of activity times for each day in \emph{data}.
+a data frame containing fist off-bout and last on-bout per day in \emph{data}.
 }
 \description{
-Using a vector of incubating individual presence in nest, 
+Using a vector of incubation scores, 
 \emph{incRactivity}
 calculates onset of activity (first off-bout in the morning),
 and end of daily activity (last on-bout in the evening) per day. A column for dates, named "date"
@@ -30,9 +32,10 @@ is needed in the data argument.
 }
 \examples{
 #' # loading example data
-data(incRincubationExample)
-incRactivity (data=incRincubationExample, 
-               vector.incubation="inc.vector")
+data(incR_procdata)
+incRactivity (data=incR_procdata, 
+              time_column="time",
+              vector.incubation="incR_score")
 }
 \seealso{
 \code{\link{incRprep}} \code{\link{incRscan}}

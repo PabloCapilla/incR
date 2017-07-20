@@ -1,27 +1,29 @@
 Package: incR
 Type: Package
 Title: Analysis of Incubation Data in R
-Version: 0.2.1.9000
-Date: 2017-06-10
+Version: 0.3.1
+Date: 2017-07-20
 Authors@R: person ("Pablo", "Capilla-Lasheras", email="pacapilla@gmail.com", role=c("aut",
     "cre"))
+Author: Pablo Capilla-Lasheras [aut, cre]
 Maintainer: Pablo Capilla-Lasheras <pacapilla@gmail.com>
-Description: This package contains a suite of functions for the analysis of animal incubation.
-    At the core
-    of incR lays an algorithm that allows for the scoring of
-    incubation behaviour. Then, some additional functions 
+Description: Analysis of incubation data in R.
+    At the core of incR lays an algorithm that allows 
+    for the scoring of incubation behaviour. 
+    Some additional functions 
     extract several biologically relevant metrics. 
 License: GPL-3
-Depends: R (>= 3.1.0)
-Imports:
-    base,    
+Depends: R (>= 3.4.1), 
+    base,
     maptools,
-    stats,
-    utils,
-    dplyr
-Suggests: 
-    codetools,
-    knitr, 
+    rgeos,
+    stats
+Imports: dplyr,
+    lubridate,
+    utils    
+Suggests: codetools,
+    knitr,
+    rmarkdown
 VignetteBuilder:
     knitr
 LazyData: true

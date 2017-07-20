@@ -14,16 +14,16 @@
 #' data frame with one day per raw.
 #' @examples
 #' #' # loading example data
-#' data(incRincubationExample)
-#' incRconstancy (data=incRincubationExample, 
-#'                vector.incubation="inc.vector")
+#' data(incR_procdata)
+#' incRconstancy (data=incR_procdata, 
+#'                vector.incubation="incR_score")
 #' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
 #' @export 
 
 incRconstancy<- function (data, vector.incubation) {
   ##### CHECKING FOR COLUMN NAMES #####
   if (base::is.null (data$date)){
-    stop("No column for 'date")
+    stop("No column for date named 'date'")
   }
   # split data set by day
   data.time <- base::split (data, data$date)
@@ -35,7 +35,7 @@ incRconstancy<- function (data, vector.incubation) {
     day.latency$date[d] <- base::as.character(base::unique(data.time[[d]]$date)) #date
     day.in <- base::sum(data.time[[d]][[vector.incubation]])                 # number of point inc.ind was in
     seg.day <- base::length(data.time[[d]][[vector.incubation]])             # total length of the inc.vector
-    day.latency$perc.in[d] <- (day.in/seg.day) * 100                       # ratio
+    day.latency$percentage_in[d] <- (day.in/seg.day) * 100                       # ratio
   }
   return (day.latency)
 }

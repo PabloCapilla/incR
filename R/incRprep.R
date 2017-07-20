@@ -1,6 +1,5 @@
 #' @title Data preparation for incubation analysis in incR
-#' @description Preparing incubation time series for further analysis
-#' Initial data manipulation
+#' @description Preparing incubation time series for further analysis.
 #' This function takes a data file containing a temporal series of temperature recordings
 #' and adds some the extra variables needed to use
 #' further functions embedded in the incR package. 
@@ -22,22 +21,22 @@
 #' @return The original data frame with additional colunms for:
 #' \enumerate{
 #' \item index: a running number identifying every row in the data set.
-#' \item dec.time: time in decimal hours (e.g. "22:30" becomes 22.5). 
+#' \item dec_time: time in decimal hours (e.g. "22:30" becomes 22.5). 
 #' \item time: in  'H:M' format.
 #' \item hour: in 'H' format.
-#' \item year: in 'Y' format.
+#' \item minute: in 'M' format.
 #' \item date: in  'Y-m-d' format.
-#' \item temp1: difference between the ith temperature value (Ti) and the previous one (Ti-1).
+#' \item temp1: difference between the \emph{i}th temperature value and the \emph{i-1} one.
 #' }
 #' @author Pablo Capilla-Lasheras
 #' @examples
 #' # loading example data
-#' data(incRdataExample)
-#' new.data <- incRprep (data=incRdataExample,
+#' data(incubation_rawdata)
+#' new.data <- incRprep (data=incR_rawdata,
 #'                        date.name= "DATE",
 #'                        date.format= "%d/%m/%Y %H:%M",
 #'                        timezone="GMT",
-#'                        temperature.name="valueT")
+#'                        temperature.name="temperature")
 #' head (new.data, 3)
 #' @export 
 incRprep <- function (data, 
@@ -58,24 +57,23 @@ incRprep <- function (data,
   data$time <- strftime (dt, format= "%H:%M")
   # variables for hour and year
   data$hour <- base::as.numeric(base::format (dt, "%H"))
-  data$year <- base::as.numeric(base::format(dt, "%Y")) 
+  data$minute <- base::as.numeric(base::format (dt, "%M"))
+
   # date
   data$date <- base::as.Date(base::format(dt,"%Y-%m-%d"))
   # time in min decimals
-  data$dec.time <- base::sapply(base::strsplit(data$time,":"),
+  data$dec_time <- base::sapply(base::strsplit(data$time,":"),
                                 function(x) {
                                   x <- base::as.numeric(x)
                                   x[1]+x[2]/60
                                 })
   # diferential temperatures
-  # loop to calculate t - (t-1) and -(t-2)
+  # loop to calculate t - (t-1)
   # t - t-1
-  loop1 <- base::length(data[[temperature.name]])
-  temperature.original <- data[[temperature.name]]
   data[["temp1"]] <- NA
-  for (i in 2:loop1) {
+  for (i in 2:length(data[[temperature.name]])) {
     data$temp1[1] <- NA
-    data$temp1[i] <- temperature.original[i]-temperature.original[i-1]
+    data$temp1[i] <- data[[temperature.name]][i] - data[[temperature.name]][i-1]
   }
   
   return (data)

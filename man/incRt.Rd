@@ -6,20 +6,21 @@
 time windows}
 \usage{
 incRt(data, temp.name, limits = NULL, coor = NULL, activity.times = FALSE,
-  civil.twilight = FALSE, time.zone = NULL)
+  civil.twilight = FALSE, time.zone = NULL, ...)
 }
 \arguments{
-\item{data}{data frame containing a time-series vector of 1's and 0's, where "1"
+\item{data}{data frame containing a time-series vector of 1's and 0's (incubation scores), 
+where "1"
 means "incubating individual inside nest" and "0" means "incubating individual 
 outside the nests". This vector, 
-under the name of "inc.vector", is provided by \code{\link{incRscan}} in the 
+under the name of \code{incR_score}, is provided by \code{\link{incRscan}} in the 
 first object of the returned list. A column named "date" is needed to refer to daily
 calculations.}
 
 \item{temp.name}{(character object) name of the column containing temperature data 
 in data.}
 
-\item{limits}{vector of length = 2 giving the time limits for calculations. For example,
+\item{limits}{vector of length 2 giving the time limits for calculations. For example,
 'c(6,20)' would calculate temperature averages and variances for two time periods, from 6 to 20
 and from 20 to 6 of the next day. 'civil.twilight' and 'activiy.times' must be
 FALSE to allow the use of 'limits'.}
@@ -27,17 +28,19 @@ FALSE to allow the use of 'limits'.}
 \item{coor}{coordinates for the location where temperature was recorded,
 formatted as decimal degrees N/S, decimal degress E/W.
 When 'civil.twilight' is TRUE, 'coor' allows the user to define sunrise and sunset times
-based on the \code{\link{crepuscule}} function (in 'maptools' package).}
+based on the \code{\link{crepuscule}} function (in \code{maptools} package).}
 
 \item{activity.times}{TRUE or FALSE. Set as TRUE when time periods for calculation
 are defined by \code{\link{incRactivity}}. Data must contain a column named 
-'inc.vector' for the use of \code{\link{incRactivity}}.}
+'incR_score' for the use of \code{\link{incRactivity}}.}
 
 \item{civil.twilight}{TRUE or FALSE. Set as TRUE when time periods for calculation
-are to be defined by civil twilight times - calculated using \emph{crepuscule{maptools}}. 
-If civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.}
+are to be defined by civil twilight times - calculated using \code{\link{crepuscule}}. 
+If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.}
 
-\item{time.zone}{time zone for \emph{crepuscule{maptools}} dawn and dusk calculations.}
+\item{time.zone}{time zone for \code{\link{crepuscule}} dawn and dusk calculations.}
+
+\item{...}{use parameters in \code{\link{incRactivity}} if \emph{acitivity.times} = TRUE.}
 }
 \value{
 a data frame containing temperature means and variance for the defined time 
@@ -51,11 +54,11 @@ by activity times or by civil twilight times.
 }
 \examples{
 # loading example data
-data(incRincubationExample)
+data(incR_procdata)
 
 # calculation based on chosen times from 6am to 7pm and 7pm to 6am
-incRt (data=incRincubationExample, 
-        temp.name="valueT",
+incRt (data=incR_procdata, 
+        temp.name="temperature",
         limits=c(6,19), 
         coor=NULL, 
         civil.twilight=FALSE, 
@@ -63,17 +66,19 @@ incRt (data=incRincubationExample,
         time.zone=NULL)
         
 # calculation based on activity times
-incRt (data=incRincubationExample,
-        temp.name="valueT", 
+incRt (data=incR_procdata, 
+        temp.name="temperature", 
         limits=NULL, 
         coor=NULL, 
         civil.twilight=FALSE, 
         activity.times=TRUE,
-        time.zone=NULL)
+        time.zone=NULL,
+        time_column="time",             # extra argument needed for incRactivity
+        vector.incubation="incR_score") # extra argument needed for incRactivity
         
 # calculation based on civil twilight
-incRt (data=incRincubationExample, 
-        temp.name="valueT",
+incRt (data=incR_procdata, 
+        temp.name="temperature",
         limits=NULL, 
         coor=c(42,0.89), 
         civil.twilight=TRUE, 

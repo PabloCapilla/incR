@@ -4,7 +4,7 @@
 \alias{incRbouts}
 \title{Calculation of the number of daily on- and off-bouts}
 \usage{
-incRbouts(data, vector.incubation, sampling.rate)
+incRbouts(data, vector.incubation, dec_time, temp, sampling.rate)
 }
 \arguments{
 \item{data}{data frame containing a time-series vector of 1's and 0's, where "1"
@@ -16,6 +16,10 @@ calculations.}
 
 \item{vector.incubation}{name of the column (vector class) storing the
 information about the presence/absence of the incubating indiviual in the nest.}
+
+\item{dec_time}{(character class) name of the column with decimal time.}
+
+\item{temp}{(character class) name of the column with incubation temperatures.}
 
 \item{sampling.rate}{time difference between two consecutive recording points.
 Effectively, the rate at which data points were recorded 
@@ -35,10 +39,12 @@ Calculation of number and duration of incubation
 }
 \examples{
 #' # loading example data
-data(incRincubationExample)
-incRbouts (data=incRincubationExample, 
-            vector.incubation="inc.vector", 
-            sampling.rate=240) # sampling rate in seconds.
+data(incR_procdata)
+incRbouts (data=incR_procdata, 
+           vector.incubation="incR_score", 
+           dec_time="dec_time",
+           temp="temperature",
+           sampling.rate=240) # sampling rate in seconds.
 }
 \seealso{
 \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}

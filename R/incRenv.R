@@ -1,5 +1,5 @@
-#' @title incRenv
-#' @description Matching environmental and nest temperatures.
+#' @title Matching environmental and nest temperatures
+#' @description
 #' This function takes a data frame with recordings of environmental temperature and another
 #' with nest temperatures and merges both per unit of time. The user can do this work manually, however, 
 #' \code{\link{incRenv}} is thought to
@@ -18,29 +18,29 @@
 #' @param env.date.format format of \emph{env.date.name}. Similar to \code{\link{incRprep}}.
 #' @param env.timezone time zone of the environmental recordings. Similar to \code{\link{incRprep}}.
 #' @return The original \emph{data.nest} with an additional colunm for hour-averaged environmental
-#' temperature. This new variable is thought to serve as \emph{env.temp} in
+#' temperature. This new variable is thought to serve as \emph{env_temp} in
 #' \code{\link{incRscan}}.
 #' @details This function is thought to be used after \code{\link{incRprep}} as it uses some of the
 #' additional variables created by \code{\link{incRprep}}.
 #' @author Pablo Capilla-Lasheras
 #' @examples
-#' data(incRenvironmentalData)  # environmental data
-#' head (incRenvironmentalData)
+#' data(incR_envdata)  # environmental data
+#' head (incR_envdata)
 #' 
-#' data(incRincubationExample)  # nest data
-#' head (incRincubationExample)
+#' data(incR_rawdata)  # loading nest data
+#' head (incR_rawdata)
 #' 
 #' # the first step in to format the raw data using incRprep
-#' new.data <- incRprep (data=incRdataExample,
+#' new.data <- incRprep (data=incR_rawdata,
 #'                       date.name= "DATE",
 #'                       date.format= "%d/%m/%Y %H:%M",
 #'                       timezone="GMT",
-#'                       temperature.name="valueT")
+#'                       temperature.name="temperature")
 #'                       
 #' # then use incRenv to merge environmental data
 #' new.data2 <- incRenv (data.nest = new.data,
-#'                       data.env = incRenvironmentalData, 
-#'                       env.temperature.name = "valueT", 
+#'                       data.env = incR_envdata, 
+#'                       env.temperature.name = "env_temperature", 
 #'                       env.date.name = "DATE", 
 #'                       env.date.format = "%d/%m/%Y %H:%M", 
 #'                       env.timezone = "GMT")
@@ -97,7 +97,7 @@ incRenv <- function (data.nest,
   }
   
   # actual calculation
-  data.nest[["env.temp"]] <- NA
+  data.nest[["env_temp"]] <- NA
   for (p in 1: base::length(base::split(data.nest, data.nest[["date"]]))){
     df.nest <-  base::split(data.nest, data.nest[["date"]])[[p]]
     df.env <- time.temp[time.temp$date== base::unique(df.nest$date),]
@@ -106,7 +106,7 @@ incRenv <- function (data.nest,
       hour.match <- data.nest[["hour"]][h]
       index <- data.nest$index[data.nest$date== base::unique(df.nest$date) & 
                                  data.nest$hour==hour.match]      
-      data.nest$env.temp[data.nest$date== base::unique(df.nest$date) & 
+      data.nest$env_temp[data.nest$date== base::unique(df.nest$date) & 
                            data.nest$hour==hour.match] <- 
         base::rep(df.env$temp[df.env$hour==hour.match], length= base::length(index))
       

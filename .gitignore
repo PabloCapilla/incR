@@ -3,4 +3,7 @@
 ^\.Rhistory
 ^\.RData
 ^\incR\.Rproj
+^\.Rproj.user
 .Rproj.user
+^\./Preparing_examples/$
+inst/doc

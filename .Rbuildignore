@@ -5,3 +5,5 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^NEWS\.md$
+^cran-comments\.md$
+^\./Preparing_examples/$

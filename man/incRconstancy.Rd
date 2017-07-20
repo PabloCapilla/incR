@@ -28,9 +28,9 @@ Current version do not discriminate day and night times.
 }
 \examples{
 #' # loading example data
-data(incRincubationExample)
-incRconstancy (data=incRincubationExample, 
-               vector.incubation="inc.vector")
+data(incR_procdata)
+incRconstancy (data=incR_procdata, 
+               vector.incubation="incR_score")
 }
 \seealso{
 \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}

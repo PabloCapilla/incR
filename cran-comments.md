@@ -2,14 +2,16 @@
 * local Windows 10 install, R 3.4.0
 * ubuntu 12.04.5 (on travis-ci), R 3.4.0
 
-
 ## R CMD check results
-There were no ERRORs, NOTEs or WARNINGs. 
 
+local Windows install: 0 errors | 0 warnings | 0 note
+ubuntu 12.04.5 (on travis-ci): 0 errors | 0 warnings | 0 note
 
-## Downstream dependencies
-No downstream dependencies
+* This is a new release.
 
+## Reverse dependencies
 
-## Further comments
-This is the first submission of this package
+This is a new release, so there are no reverse dependencies.
+
+---
+
