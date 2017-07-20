@@ -24,7 +24,7 @@ You can install incR from github with:
 githubinstall::githubinstall("incR")
 ```
 
-Additionally, the package will be soon submitted to CRAN.
-
-## Vignettes
-- [incR workflow](https://github.com/PabloCapilla/incR/vignettes/incR_pipeline.Rmd)
+Read the package's vignettes to find out how it work!
+```{r eval = FALSE}
+browseVignettes("incR")
+``` 
