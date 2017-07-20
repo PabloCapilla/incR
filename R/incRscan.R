@@ -45,9 +45,9 @@
 #' This value may serve the user as an indication of the signal / noise ratio in the analysed
 #' data set.
 #' @section Details:
-#' For futher details about the calculaton performed by \code{\link{incRscan}}, consult the package vignettes and
+#' For further details about the calculation performed by \code{\link{incRscan}}, consult the package vignettes and
 #' the associated publications.
-#' @author Pablo Capill-Lasheras
+#' @author Pablo Capilla-Lasheras
 #' @examples
 #' # incR_procdata is a dataframe processed by incRprep and incRscan and
 #' # contains suitable information to run incRscan

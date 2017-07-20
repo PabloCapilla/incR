@@ -21,7 +21,7 @@
 #'   \item{dec_time}{time in decimal hours.}
 #'   \item{temp1}{difference between the \emph{ith} and the \emph{ith-1} 
 #'   nest temperature recording.}
-#'   \item{env_temp}{environmetal temperature, calculated per as hour average using
+#'   \item{env_temp}{environmental temperature, calculated per as hour average using
 #'   \code{\link{incRenv}}.}
 #'   \item{incR_score}{Incubation scores (0/1) as calculated by \code{\link{incRscan}} }
 

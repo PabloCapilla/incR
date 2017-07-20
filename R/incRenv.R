@@ -17,7 +17,7 @@
 #' \emph{data.env} data frame.
 #' @param env.date.format format of \emph{env.date.name}. Similar to \code{\link{incRprep}}.
 #' @param env.timezone time zone of the environmental recordings. Similar to \code{\link{incRprep}}.
-#' @return The original \emph{data.nest} with an additional colunm for hour-averaged environmental
+#' @return The original \emph{data.nest} with an additional column for hour-averaged environmental
 #' temperature. This new variable is thought to serve as \emph{env_temp} in
 #' \code{\link{incRscan}}.
 #' @details This function is thought to be used after \code{\link{incRprep}} as it uses some of the

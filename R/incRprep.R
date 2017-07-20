@@ -18,7 +18,7 @@
 #' @param timezone time zone for time calculations. See \code{\link{strptime}}.
 #' documentation for more details.
 #' @param  temperature.name name of the column storing temperature information.
-#' @return The original data frame with additional colunms for:
+#' @return The original data frame with additional columns for:
 #' \enumerate{
 #' \item index: a running number identifying every row in the data set.
 #' \item dec_time: time in decimal hours (e.g. "22:30" becomes 22.5). 
