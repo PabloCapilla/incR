@@ -46,12 +46,6 @@ incRbouts <- function (data, vector.incubation, dec_time, temp, sampling.rate) {
                                  number.off.bouts=base::rep(NA, length=base::length(df01)),
                                  mean.time.on.bout=base::rep(NA, length=base::length(df01)),
                                  mean.time.off.bout=base::rep(NA, length=base::length(df01)))
-  # defining table to write results in
-  data.bouts <- base::data.frame (date=base::rep(NA, length=base::length(df01)),
-                                 number.on.bouts=base::rep(NA, length=base::length(df01)),
-                                 number.off.bouts=base::rep(NA, length=base::length(df01)),
-                                 mean.time.on.bout=base::rep(NA, length=base::length(df01)),
-                                 mean.time.off.bout=base::rep(NA, length=base::length(df01)))
   
   # loop to fill table of results
   ## if only 2 days
@@ -107,10 +101,9 @@ incRbouts <- function (data, vector.incubation, dec_time, temp, sampling.rate) {
   for (k in 1:final.loop) {
     # selecting working day
     df00 <- df01[[k]] 
-    data.days$date[k] <- base::as.character(base::unique (df00$date))  # working date
     
-    # order data by date-time
-    df00 <- df00[base::order(lubridate::dmy_hm(df00$DATE)),]
+  
+    data.days$date[k] <- base::as.character(base::unique (df00$date))  # working date
     
     # per day data
     rle_incR_score_values <- base::rle(df00[[vector.incubation]])$values
