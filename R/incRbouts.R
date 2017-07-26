@@ -49,14 +49,14 @@ incRbouts <- function (data, vector.incubation, dec_time, temp, sampling.rate) {
   
   # loop to fill table of results
   ## if only 2 days
-  if (base::length(df01)==2){
-    final.loop <- 2
-  } else {                              ## if more than 2 days...
-    final.loop <- base::length(df01)-1}
+  #if (base::length(df01)==2){
+   # final.loop <- 2
+  #} else {                              ## if more than 2 days...
+   # final.loop <- base::length(df01)-1}
   
   # bout specific data table
   list.bouts <- base::as.list(NA)
-  for (k in 1:final.loop) {
+  for (k in 1:length(df01)) {
     df00 <- df01[[k]] 
     # per day data
     rle_incR_score_values <- base::rle(df00[[vector.incubation]])$values
