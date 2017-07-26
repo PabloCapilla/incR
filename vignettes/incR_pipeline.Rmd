@@ -14,8 +14,8 @@ vignette: >
 
 
 # Introduction
-This vignette serves as an example of the suggested `incR` working pipeline. The
-accuracy of the method is found in another vignette which will be publicly available soon.
+This vignette serves as an example of the suggested `incR` working pipeline. Testing the
+accuracy of the method can be found in another vignette which will be publicly available soon.
 Throughout this vignette, I follow the examples found in the documentation for `incR` and use data distributed with the package.
 
 
@@ -33,7 +33,7 @@ head(incR_rawdata)
 `incRprep` takes these data and simply adds new columns that are going to be useful for
 other components of the pipeline. Please, do not use *date* as the name of the date/time 
 column. `incRprep` will create a new column named *date* and will, therefore, produce an
-error if such a name is found in the raw data table.
+error if such a name is already found in the raw data table.
 ```{r eval = TRUE}
 incR_rawdata_prep <- incRprep(data = incR_rawdata,
                                     date.name = "DATE",
@@ -67,7 +67,7 @@ After using `incRprep` and `incRenv`, our data table is ready for `incRscan`. Th
 applies an automatic algorithm that scores incubation. By looking at temperature variation
 when the incubating individual is assumed to be incubating. `incRscan` classifies presence
 or absence of the incubating individual (incubation score) for every line in the data set. 
-The details of the algorithm can be read here:  *LINK TO PAPER*.
+The details of the algorithm can be read here:  *LINK TO PAPER COMING SOON*.
 
 
 Several parameters in `incRscan` need to be chosen by the user. For such task, it is
@@ -76,7 +76,7 @@ for example video-recordings of the nest or pit-tagged individuals, so that the
 scores calculated by `incRscan` can be assessed. By comparing the performance of `incRscan` 
 over several parameters values, one can come up with the best combination of parameters. 
 This approach may also serve as a quality checking step as `incRscan` performance is thought
-to drop when data quality decrease. For this example, we use parameter values known to work well (in this case
+to drop when data quality decrease. A package vignette will be available soon showing how to perform such calibration. For this example, we use parameter values known to work well (in this case
 `incRscan` correctly scores over 95% of the data points).
 ```{r}
 incubation.analysis <- incRscan (data=incR_data, 
@@ -129,7 +129,7 @@ incRactivity(data = incubation.analysis[[1]],
 Note that if temperature data exists for the entire day, `first_offbout` and `last_onbout`
 times correspond to onset and end of activity. Biological interpretation of the times yielded 
 by `incRconstancy` is needed - e.g., in the example above, `last_onbout` for May 8 is not
-telling us end of daily activity but rather the last on-bout in an uncompleted day of
+telling us the end of daily activity but rather the last on-bout in an uncompleted day of
 temperature recordings.
 
 
@@ -177,10 +177,10 @@ average duration and ii) the starting time, duration, starting temperature and f
 for every on and off-bout detected by `incRscan`.
 ```{r eval = TRUE}
 bouts <- incRbouts(data = incubation.analysis[[1]], 
-          vector.incubation = "incR_score",
-          sampling.rate = incubation.analysis[[1]]$dec_time[56] - incubation.analysis[[1]]$dec_time[55],   # sampling interval
-          dec_time = "dec_time",
-          temp = "temperature")
+                   vector.incubation = "incR_score",
+                   sampling.rate = incubation.analysis[[1]]$dec_time[56] - incubation.analysis[[1]]$dec_time[55],   # sampling interval
+                   dec_time = "dec_time",
+                   temp = "temperature")
 
 # bouts per day
 head(bouts$day_bouts)
@@ -188,3 +188,7 @@ head(bouts$day_bouts)
 # bout specific data
 head(bouts$total_bouts)
 ```
+
+*****
+
+Please, if you use the package, cite it as: *Citation coming soon*

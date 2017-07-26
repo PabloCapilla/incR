@@ -98,7 +98,7 @@ incRbouts <- function (data, vector.incubation, dec_time, temp, sampling.rate) {
   
   # day specific data table
   # for each day
-  for (k in 1:final.loop) {
+  for (k in 1:length(df01)){#1:final.loop) {
     # selecting working day
     df00 <- df01[[k]] 
     
