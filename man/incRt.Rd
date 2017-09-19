@@ -31,8 +31,8 @@ When 'civil.twilight' is TRUE, 'coor' allows the user to define sunrise and suns
 based on the \code{\link{crepuscule}} function (in \code{maptools} package).}
 
 \item{activity.times}{TRUE or FALSE. Set as TRUE when time periods for calculation
-are defined by \code{\link{incRactivity}}. Data must contain a column named 
-'incR_score' for the use of \code{\link{incRactivity}}.}
+are defined by \code{\link{incRact}}. Data must contain a column named 
+'incR_score' for the use of \code{\link{incRact}}.}
 
 \item{civil.twilight}{TRUE or FALSE. Set as TRUE when time periods for calculation
 are to be defined by civil twilight times - calculated using \code{\link{crepuscule}}. 
@@ -40,7 +40,7 @@ If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.}
 
 \item{time.zone}{time zone for \code{\link{crepuscule}} dawn and dusk calculations.}
 
-\item{...}{use parameters in \code{\link{incRactivity}} if \emph{activity.times} = TRUE.}
+\item{...}{use parameters in \code{\link{incRact}} if \emph{activity.times} = TRUE.}
 }
 \value{
 a data frame containing temperature means and variance for the defined time 
@@ -73,8 +73,8 @@ incRt (data=incR_procdata,
         civil.twilight=FALSE, 
         activity.times=TRUE,
         time.zone=NULL,
-        time_column="time",             # extra argument needed for incRactivity
-        vector.incubation="incR_score") # extra argument needed for incRactivity
+        time_column="time",             # extra argument needed for incRact
+        vector.incubation="incR_score") # extra argument needed for incRact
         
 # calculation based on civil twilight
 incRt (data=incR_procdata, 
@@ -86,7 +86,7 @@ incRt (data=incR_procdata,
         time.zone="GMT")
 }
 \seealso{
-\code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
+\code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRact}}
 \code{\link{crepuscule}}
 }
 \author{

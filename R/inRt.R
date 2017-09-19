@@ -25,10 +25,10 @@
 #' are to be defined by civil twilight times - calculated using \code{\link{crepuscule}}. 
 #' If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.
 #' @param activity.times TRUE or FALSE. Set as TRUE when time periods for calculation
-#' are defined by \code{\link{incRactivity}}. Data must contain a column named 
-#' 'incR_score' for the use of \code{\link{incRactivity}}.
+#' are defined by \code{\link{incRact}}. Data must contain a column named 
+#' 'incR_score' for the use of \code{\link{incRact}}.
 #' @param time.zone time zone for \code{\link{crepuscule}} dawn and dusk calculations.
-#' @param ... use parameters in \code{\link{incRactivity}} if \emph{activity.times} = TRUE.
+#' @param ... use parameters in \code{\link{incRact}} if \emph{activity.times} = TRUE.
 #' @return a data frame containing temperature means and variance for the defined time 
 #' window.
 #' @author Pablo Capilla-Lasheras
@@ -53,8 +53,8 @@
 #'         civil.twilight=FALSE, 
 #'         activity.times=TRUE,
 #'         time.zone=NULL,
-#'         time_column="time",             # extra argument needed for incRactivity
-#'         vector.incubation="incR_score") # extra argument needed for incRactivity
+#'         time_column="time",             # extra argument needed for incRact
+#'         vector.incubation="incR_score") # extra argument needed for incRact
 #'         
 #' # calculation based on civil twilight
 #' incRt (data=incR_procdata, 
@@ -64,7 +64,7 @@
 #'         civil.twilight=TRUE, 
 #'         activity.times=FALSE,
 #'         time.zone="GMT")
-#' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
+#' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRact}}
 #' \code{\link{crepuscule}}
 #' @export 
 
@@ -96,14 +96,14 @@ incRt <- function (data,
   # two periods of time within 24hrs.
   # (1) you specify the time window you want
   ## to compute day and night mean and variation; 
-  # (2) it takes first_offbout and last_onbout activity using incRactivity; or,
+  # (2) it takes first_offbout and last_onbout activity using incRact; or,
   # (3) uses civil twilight times to define night 
   # times to define day and night periods and calculate variation and temperature.
   #
   # First I create a table which specifies such periods depending on 1, 2 or 3.
   if (activity.times==TRUE) {
     # calculates first_offbout and last_onbout activity times
-    act.times <- incRactivity (data= data.onoff.act, 
+    act.times <- incRact (data= data.onoff.act, 
                                ...)
     act.times$first_offbout <- do.call(args = base::lapply(strsplit(act.times$first_offbout, " "), 
                                                            FUN = function(x) {

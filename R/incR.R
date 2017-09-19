@@ -14,8 +14,8 @@
 #' The current version of incR contains the following functions and three example data sets:
 #' \code{\link{incRprep}}, \code{\link{incRenv}},
 #' \code{\link{incRscan}},
-#' \code{\link{incRactivity}}, 
-#' \code{\link{incRconstancy}}
+#' \code{\link{incRact}}, 
+#' \code{\link{incRatt}}
 #' \code{\link{incRbouts}} and 
 #' \code{\link{incRt}}, along with three example data sets.
 #' 

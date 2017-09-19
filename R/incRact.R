@@ -1,6 +1,6 @@
 #' @title Calculation of daily first incubation off-bout and last incubation on-bout
 #' @description Using a vector of incubation scores, 
-#' \emph{incRactivity}
+#' \emph{incRact}
 #' calculates onset of activity (first off-bout in the morning),
 #' and end of daily activity (last on-bout in the evening) per day. A column for dates, named "date"
 #' is needed in the data argument.
@@ -19,12 +19,12 @@
 #' @examples
 #' #' # loading example data
 #' data(incR_procdata)
-#' incRactivity (data=incR_procdata, 
+#' incRact (data=incR_procdata, 
 #'               time_column="time",
 #'               vector.incubation="incR_score")
 #' @seealso \code{\link{incRprep}} \code{\link{incRscan}}
 #' @export 
-incRactivity <- function (data, time_column, vector.incubation) {
+incRact <- function (data, time_column, vector.incubation) {
   # checking whether there is a date column
   if (base::is.null(data$date)) {
     stop("No column with name 'date' found")

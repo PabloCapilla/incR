@@ -1,3 +1,7 @@
+# incR 1.0.0.9000
+* incRconstancy changed by incRatt
+* incRactivity changed by incRact
+
 # incR 0.3.1.9000
 * Version for development available on GitHub
 

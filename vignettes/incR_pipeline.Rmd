@@ -117,18 +117,18 @@ incR functions to extract incubation information.
 ### Incubation constancy
 This is defined and calculated as the percentage of daily time spent in the nest.
 ```{r}
-incRconstancy(data = incubation.analysis[[1]], vector.incubation = "incR_score")
+incRatt(data = incubation.analysis[[1]], vector.incubation = "incR_score")
 ```
 ### Incubation activity
-`incRactivity` calculates onset and end of activity: firs off-bout in the morning and last on-bout in the evening.
+`incRact` calculates onset and end of activity: firs off-bout in the morning and last on-bout in the evening.
 ```{r}
-incRactivity(data = incubation.analysis[[1]],
+incRact(data = incubation.analysis[[1]],
              time_column = "time",
              vector.incubation = "incR_score")
 ```
 Note that if temperature data exists for the entire day, `first_offbout` and `last_onbout`
 times correspond to onset and end of activity. Biological interpretation of the times yielded 
-by `incRconstancy` is needed - e.g., in the example above, `last_onbout` for May 8 is not
+by `incRatt` is needed - e.g., in the example above, `last_onbout` for May 8 is not
 telling us the end of daily activity but rather the last on-bout in an uncompleted day of
 temperature recordings.
 
@@ -136,7 +136,7 @@ temperature recordings.
 ### Incubation temperatures
 This function offers three options. To calculate temperature averages and variance between **1)**
 two user-defined time windows, **2)** first off-bout and last on-bout as 
-calculated by `incRactivity` and **3)** calculate twilight times using `crepuscule{maptools}`
+calculated by `incRact` and **3)** calculate twilight times using `crepuscule{maptools}`
 and apply twilight times as times for calculation.
 
 **1**
@@ -155,7 +155,7 @@ incRt(data = incubation.analysis[[1]],
       temp.name = "temperature", 
       limits = NULL,                 
       coor = NULL, 
-      activity.times = TRUE,          # incRactivity is called to define time window
+      activity.times = TRUE,          # incRact is called to define time window
       civil.twilight = FALSE, 
       time.zone = "GMT",
       time_column= "time",

@@ -29,8 +29,8 @@
 #'            dec_time="dec_time",
 #'            temp="temperature",
 #'            sampling.rate=240) # sampling rate in seconds.
-#' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
-#' \code{\link{incRconstancy}}
+#' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRact}}
+#' \code{\link{incRatt}}
 #' @export
 incRbouts <- function (data, vector.incubation, dec_time, temp, sampling.rate) {
   ##### CHECKING FOR COLUMN NAMES #####

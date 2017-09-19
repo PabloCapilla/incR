@@ -47,8 +47,8 @@ incRbouts (data=incR_procdata,
            sampling.rate=240) # sampling rate in seconds.
 }
 \seealso{
-\code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
-\code{\link{incRconstancy}}
+\code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRact}}
+\code{\link{incRatt}}
 }
 \author{
 Pablo Capilla-Lasheras

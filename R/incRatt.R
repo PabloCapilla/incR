@@ -15,12 +15,12 @@
 #' @examples
 #' #' # loading example data
 #' data(incR_procdata)
-#' incRconstancy (data=incR_procdata, 
+#' incRatt (data=incR_procdata, 
 #'                vector.incubation="incR_score")
-#' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRactivity}}
+#' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRact}}
 #' @export 
 
-incRconstancy<- function (data, vector.incubation) {
+incRatt<- function (data, vector.incubation) {
   ##### CHECKING FOR COLUMN NAMES #####
   if (base::is.null (data$date)){
     stop("No column for date named 'date'")
