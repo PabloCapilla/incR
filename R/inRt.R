@@ -18,7 +18,7 @@
 #' and from 20 to 6 of the next day. 'civil.twilight' and 'activity.times' must be
 #' FALSE to allow the use of 'limits'.
 #' @param coor coordinates for the location where temperature was recorded,
-#' formatted as decimal degrees N/S, decimal degress E/W.
+#' formatted as decimal degrees N/S, decimal degrees E/W.
 #' When 'civil.twilight' is TRUE, 'coor' allows the user to define sunrise and sunset times
 #' based on the \code{\link{crepuscule}} function (in \code{maptools} package). 
 #' @param civil.twilight TRUE or FALSE. Set as TRUE when time periods for calculation
@@ -192,7 +192,7 @@ incRt <- function (data,
     # DAY CALCULATIONS
     #
     if (is.null(df00$dec_time)) {
-      stop("Dec_time column is missing. Please, use exactly that name.")
+      stop("'dec_time' column is missing. Please, use exactly that name.")
       }
     day.data <- df00[df00$dec_time > day.morning & df00$dec_time < day.evening, ]
     data.final$day.mean[k] <- base::mean (day.data[[temp.name]], na.rm=TRUE)
