@@ -27,11 +27,11 @@ Effectively, the rate at which data points were recorded
 The time units of the returned object will depend on the units of this argument.}
 }
 \value{
-a 5-column data frame with one day of study per row.
-Date, number on-bouts, number of off-bouts (number of on-bouts + 1 by definition) and 
-mean time duration of on- and off-bouts are displayed in the 5 columns 
-respectively. Mean times are shown in those time units you specify the argument
-\emph{sampling.rate}.
+This function returns a list with two objects. The first object, named \code{total_bouts}, is a list of 
+individual on- and off-bouts, giving information about their start time, duration, start nest temperature and 
+final nest temperature. The second object, \code{day_bouts}, provides a summary of on- 
+and off-bouts per day of observation. This second table shows number and mean duration of on- and off-bout
+per day. Mean times are shown in those time units you specify the argument \emph{sampling.rate}.
 }
 \description{
 Calculation of number and duration of incubation

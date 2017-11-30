@@ -26,7 +26,7 @@ and from 20 to 6 of the next day. 'civil.twilight' and 'activity.times' must be
 FALSE to allow the use of 'limits'.}
 
 \item{coor}{coordinates for the location where temperature was recorded,
-formatted as decimal degrees N/S, decimal degress E/W.
+formatted as decimal degrees N/S, decimal degrees E/W.
 When 'civil.twilight' is TRUE, 'coor' allows the user to define sunrise and sunset times
 based on the \code{\link{crepuscule}} function (in \code{maptools} package).}
 
@@ -48,9 +48,9 @@ window.
 }
 \description{
 Calculation of temperature average and variation between two customised
-time periods per day. Originally, this function was thought to calculate nest temperature
-between day and night. 'Day' and 'night' being defined either by the user, 
-by activity times or by civil twilight times.
+time periods per day. Time windows can be defined by the user using the \code{limits} argument,
+defined by bird activity time (using the \code{activity.times} parameter) or set accoring to
+twilight times if coordenates are provided (\code{coor}).
 }
 \examples{
 # loading example data

@@ -1,9 +1,9 @@
 #' @title Calculation of temperature average and variance for customised
 #' time windows
 #' @description Calculation of temperature average and variation between two customised
-#' time periods per day. Originally, this function was thought to calculate nest temperature
-#' between day and night. 'Day' and 'night' being defined either by the user, 
-#' by activity times or by civil twilight times.
+#' time periods per day. Time windows can be defined by the user using the \code{limits} argument,
+#' defined by bird activity time (using the \code{activity.times} parameter) or set accoring to
+#' twilight times if coordenates are provided (\code{coor}).
 #' @param data data frame containing a time-series vector of 1's and 0's (incubation scores), 
 #' where "1"
 #' means "incubating individual inside nest" and "0" means "incubating individual 
