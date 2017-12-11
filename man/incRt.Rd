@@ -49,8 +49,8 @@ window.
 \description{
 Calculation of temperature average and variation between two customised
 time periods per day. Time windows can be defined by the user using the \code{limits} argument,
-defined by bird activity time (using the \code{activity.times} parameter) or set accoring to
-twilight times if coordenates are provided (\code{coor}).
+defined by bird activity time (using the \code{activity.times} parameter) or set according to
+twilight times if coordinates are provided (\code{coor}).
 }
 \examples{
 # loading example data
