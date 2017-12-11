@@ -1,4 +1,6 @@
 # incR 1.0.2
+* Description of the package available on bioRxiv
+* Updated package vignette
 * updated documentation for incRt and incRbouts
 
 

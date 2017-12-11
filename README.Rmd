@@ -5,8 +5,9 @@
 
 # incR: R package for the analysis of animal incubation
 
-This is a beta version of an R package developed to analyse animal incubation. 
-The code and the documentation are being actively updated - check for latest version.
+This is the development site of `incR`, an R package to analyse avian incubation temperatures and
+incubation behaviour. 
+The code and the documentation are updated often - check for latest version here and on CRAN.
 
 `incR` takes a time-series of incubation temperature, scores incubation and provides
 a suite of functions to calculate biologically relevant metrics of incubation.
@@ -17,14 +18,18 @@ contact to implement your recommendations.
 
 ## Installation
 
-You can install incR from github with:
+You can install `incR` from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 githubinstall::githubinstall("incR")
 ```
+Or from CRAN:
+```{r eval = FALSE}
+install.packages("incR")
+```
 
-Read the package's vignettes to find out how it work!
+Read the package's vignettes to find out how it works!
 ```{r eval = FALSE}
 browseVignettes("incR")
 ``` 
