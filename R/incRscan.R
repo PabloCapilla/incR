@@ -25,8 +25,9 @@
 #' nest temperature follows environmental temperature at any point, 
 #' then adjustment of this value may
 #' be required to detect short on/off-bouts at lower nest temperatures (see details).
-#' @param temp.diff temperature difference between \code{env.temp} and an observation which
-#' triggers the sensitivity parameter.
+#' @param temp.diff.threshold threshold for temperature difference between \code{env.temp} and an observation which
+#' triggers the sensitivity parameter. 
+#' @param temp.diff deprecated. Use temp.diff.threshold.
 #' @param maxNightVariation maximum temperature variation between two consecutive points
 #' within the calibrating window that is considered normal of this period. 
 #' If this variation value is surpassed, the
@@ -58,7 +59,7 @@
 #'                                   lower.time=22,
 #'                                   upper.time=3,
 #'                                   sensitivity=0.15,
-#'                                   temp.diff=5,
+#'                                   temp.diff.threshold=5,
 #'                                   maxNightVariation=2,
 #'                                   env.temp="env_temp")
 #' inc.data <- incubation.analysis[[1]]
@@ -71,8 +72,14 @@ incRscan <- function (data,
                       upper.time,
                       sensitivity,
                       temp.diff,
+                      temp.diff.threshold,
                       maxNightVariation,
                       env.temp) {
+  ## deprec arg
+ if (!missing("temp.diff")){
+    warning("argument deprecated. Use temp.diff.threshold instead")
+ }
+  
   ##### CHECKING THE PRESENCE OF APPROPRIATE COLUMN NAMES #####
   if (base::is.null(data$date) || base::is.null(data$dec_time) || base::is.null(data$temp1) || base::is.null(data$index)){
     stop("Please, check that the columns 'date', 'dec_time', 'temp1' and 'index' exist in your data frame")
@@ -225,7 +232,7 @@ incRscan <- function (data,
       if (is.null(env.temp)){
         stop("Provide the name of the column with environmental temperatures")
       }
-      statement <-  base::abs((data.day[[temp.name]][i] - data.day[[env.temp]][i])) < temp.diff
+      statement <-  base::abs((data.day[[temp.name]][i] - data.day[[env.temp]][i])) < temp.diff.threshold
       if (statement) {
         correction.min <- sensitivity
         correction.max <- 1

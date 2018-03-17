@@ -1,7 +1,7 @@
 ---
 title: "incR Working Pipeline"
 author: "Pablo Capilla-Lasheras"
-date: "2017-11-30"
+date: "2018-03-17"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{"incR Working Pipeline"}
@@ -14,16 +14,15 @@ vignette: >
 
 
 # Introduction
-This vignette serves as an example for the suggested `incR` working pipeline. Testing the
-accuracy of the method can be found in a manuscript that will be available soon.
-Throughout this vignette, I follow the examples found in the documentation for `incR` and use data distributed with the package.
+This document serves as an example for a suggested `incR` working pipeline. I have tested the
+accuracy of the method and the results of such validation can be found [here](https://www.biorxiv.org/content/early/2017/12/12/232520). Throughout this vignette, I follow the examples found in the documentation for `incR` and use data distributed with the package.
 
 
 # `incR` working pipeline
 
 ## Data preparation: `incRprep`
-The data set contains raw nest temperature data coming from an iButton device (Maxim Integrated Products) and has two 
-columns, date/time and temperature values in Celsius Degrees. Several files, from the same nest
+The data table contains raw nest temperatures coming from an iButton device (Maxim Integrated Products) and has two 
+columns, date/time and temperature values in Celsius degrees. Several files, from the same nest
 where combined to create a completed nest temperature file.
 ```{r eval = TRUE}
 library("incR")
@@ -33,13 +32,14 @@ head(incR_rawdata)
 `incRprep` takes these data and simply adds new columns that are going to be useful for
 other components of the pipeline. Please, do not use *date* as the name of the date/time 
 column. `incRprep` will create a new column named *date* and will, therefore, produce an
-error if such a name is already found in the raw data table.
+error if such a name is already found in the raw data table. See ?incRprep to find information 
+about the new columns added by this function.
 ```{r eval = TRUE}
 incR_rawdata_prep <- incRprep(data = incR_rawdata,
-                                    date.name = "DATE",
-                                    date.format= "%d/%m/%Y %H:%M",
-                                    timezone="GMT",
-                                    temperature.name="temperature")
+                              date.name = "DATE",
+                              date.format= "%d/%m/%Y %H:%M",
+                              timezone="GMT",
+                              temperature.name="temperature")
 head(incR_rawdata_prep, 3)
 ```
 
@@ -65,9 +65,9 @@ head (incR_data, 3)
 ## Automatic incubation scoring: `incRscan`
 After using `incRprep` and `incRenv`, the data table is ready for `incRscan`. This function
 applies an automatic algorithm that scores incubation. By looking at temperature variation
-when the incubating individual is assumed to be incubating. `incRscan` classifies presence
-or absence of the incubating individual (incubation score) for every raw (i.e. time point) in the data set. 
-The details of the algorithm will be available soon.
+when the incubating individual is assumed to be incubating, `incRscan` determines presence
+or absence of the incubating individual (incubation score) for every data point (i.e. time point) in the data set. For details about the algorithm follow 
+[this link](https://www.biorxiv.org/content/early/2017/12/12/232520).
 
 
 Several parameters in `incRscan` need to be chosen by the user. For such task, it is
@@ -75,17 +75,17 @@ highly recommended to have an external source of data validation and calibration
 for example, video-recordings of the nest or pit-tagged individuals, so that the 
 scores calculated by `incRscan` can be assessed. By comparing the performance of `incRscan` 
 over several parameters values, one can decide on the best combination of parameters. 
-This approach may also serve as a quality checking step as `incRscan` performance is thought
+This approach may also serve as a quality-checking step as `incRscan` performance is thought
 to drop when data quality decreases. For this example, we use parameter values known to work well
-for this data set (in this case
-`incRscan` correctly scores over 95% of the data points).
+for this data set (see this [LINK](https://www.biorxiv.org/content/early/2017/12/12/232520)
+for more information).
 ```{r}
 incubation.analysis <- incRscan (data=incR_data, 
                                    temp.name="temperature",
                                    lower.time=22,
                                    upper.time=3,
                                    sensitivity=0.15,
-                                   temp.diff=5,
+                                   temp.diff.threshold =5,
                                    maxNightVariation=2,
                                    env.temp="env_temp")
 ```
@@ -101,15 +101,28 @@ with temperature thresholds used for incubation scoring.
 names(incubation.analysis)
 
 # incRscan output
-head(incubation.analysis[[1]])
-head(incubation.analysis[[2]])
+head(incubation.analysis$incRscan_data)
+head(incubation.analysis$incRscan_threshold)
 ```
 There is no `incR_score` information for May 6 as no `lower.time` - `upper.time` window was 
 available. The second table shows us the threshold used for on and off-bout detection. 
 The absence of data in `first.maxIncrease` and `first.maxDrop` informs us that the
 value set by `maxNightVariation` was not passed. 
 
+The results of incRscan can be quickly visualised with the `incRplot` function. In the plot below, 
+on-bout are shown in orange, off-bouts in blue and environmental temperatures appear as a 
+green line.
+```{r}
+my_plot <- incRplot(data = incubation.analysis$incRscan_data,
+                     time.var = "dec_time", 
+                     day.var = "date", 
+                     inc.temperature.var = "temperature", 
+                     env.temperature.var = "env_temp",
+                     vector.incubation = "incR_score")
 
+# a ggplot plot is created that can be modified by the user
+my_plot + ggplot2::labs(x = "Time", y = "Temperature")
+```
 ## Extracting incubation metrics
 Once we have produced incubation scores (located in `incR_score`), we can apply other 
 incR functions to extract incubation information.
@@ -132,10 +145,8 @@ times correspond to onset and end of activity. Biological interpretation of the 
 by `incRatt` is needed - e.g., in the example above, `last_onbout` for May 8 is not
 telling us the end of daily activity but rather the last on-bout in an uncompleted day of
 temperature recordings.
-
-
 ### Incubation temperatures
-This function offers three options. To calculate temperature averages and variance between **1)**
+This function offers three options. To calculate temperature average and variance between **1)**
 two user-defined time windows, **2)** first off-bout and last on-bout as 
 calculated by `incRact` and **3)** calculate twilight times using `crepuscule{maptools}`
 and apply twilight times as the temporal window for calculation.
@@ -183,6 +194,9 @@ bouts <- incRbouts(data = incubation.analysis[[1]],
                    dec_time = "dec_time",
                    temp = "temperature")
 
+# the results are in two tables
+names(bouts)
+
 # bouts per day
 head(bouts$day_bouts)
 
@@ -192,4 +206,7 @@ head(bouts$total_bouts)
 
 *****
 
-Please, if you use the package, cite it as: *Citation coming soon*
+Please, if you use the package, cite it as: 
+*incR: a free new R package to analyse incubation behaviour*
+*Pablo Capilla-Lasheras*
+*bioRxiv 232520; doi: https://doi.org/10.1101/232520*

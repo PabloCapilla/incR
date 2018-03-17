@@ -1,7 +1,13 @@
+# incR 1.1.0 (.9000)
+* New function for visualisation of incRscan results: incRplot
+* Updated vignette
+* temp.diff in incRscan deprecated. New argument name is temp.diff.threshold
+* Typo in DESCRIPTION corrected
+
 # incR 1.0.2
 * Description of the package available on bioRxiv
 * Updated package vignette
-* updated documentation for incRt and incRbouts
+* Updated documentation for incRt and incRbouts
 
 
 # incR 1.0.1
@@ -24,7 +30,6 @@
 * New vignette describing a suggested work flow
 
 # incR 0.2.1.9000
-
 * Checked on Travis CI
 
 

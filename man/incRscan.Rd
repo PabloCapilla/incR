@@ -5,7 +5,7 @@
 \title{Automated scoring of incubation}
 \usage{
 incRscan(data, temp.name, lower.time, upper.time, sensitivity, temp.diff,
-  maxNightVariation, env.temp)
+  temp.diff.threshold, maxNightVariation, env.temp)
 }
 \arguments{
 \item{data}{data frame for analysis. It must contained four columns named as follow:
@@ -28,7 +28,9 @@ nest temperature follows environmental temperature at any point,
 then adjustment of this value may
 be required to detect short on/off-bouts at lower nest temperatures (see details).}
 
-\item{temp.diff}{temperature difference between \code{env.temp} and an observation which
+\item{temp.diff}{deprecated. Use temp.diff.threshold.}
+
+\item{temp.diff.threshold}{threshold for temperature difference between \code{env.temp} and an observation which
 triggers the sensitivity parameter.}
 
 \item{maxNightVariation}{maximum temperature variation between two consecutive points
@@ -79,7 +81,7 @@ incubation.analysis <- incRscan (data=incR_procdata,
                                   lower.time=22,
                                   upper.time=3,
                                   sensitivity=0.15,
-                                  temp.diff=5,
+                                  temp.diff.threshold=5,
                                   maxNightVariation=2,
                                   env.temp="env_temp")
 inc.data <- incubation.analysis[[1]]
