@@ -22,7 +22,7 @@ You can install `incR` from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-githubinstall::githubinstall("incR")
+devtools::install_github(repo = "PabloCapilla/incR")
 ```
 Or from CRAN:
 ```{r eval = FALSE}

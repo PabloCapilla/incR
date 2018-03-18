@@ -1,20 +1,22 @@
-## 
-## To cite incR in publications use:
-## 
-##   incR: a new R package to analyse incubation behaviour.
-##   Pablo Capilla-Lasheras.
-##   bioRxiv 232520; doi: https://doi.org/10.1101/232520
-## 
-## A BibTeX entry for LaTeX users is
-## 
-##   @Manual{,
-##     title = {incR: a new R package to analyse incubation behaviour},
-##     author = {{Pablo Capilla-Lasheras}},
-##     organization = {University of Exeter},
-##     address = {Penryn, UK},
-##     year = {2018},
-##     url = {https://doi.org/10.1101/232520},
-##   }
-## 
-## I have invested a lot of time and effort in creating and improving incR, please
-## cite it when using it.
+citHeader("To cite incR in publications use:")
+
+citEntry(entry = "Article",
+  title        = "{incR}: a new {R} package to analyse incubation behaviour",
+  author       = personList(as.person("Pablo Capilla-Lasheras")),
+  publisher    = "bioRxiv",
+  year         = "2018",
+  number       = "232520",
+  doi          = "https://doi.org/10.1101/232520",
+
+  textVersion  =
+  paste("Pablo Capilla-Lasheras" (2018).",
+        "incR: a new R package to analyse incubation behaviour.",
+        "bioRxiv, 232520",
+        "URL https://doi.org/10.1101/232520")
+)
+
+
+
+
+
+
