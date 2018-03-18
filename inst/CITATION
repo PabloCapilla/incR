@@ -1,21 +1,11 @@
-citHeader("To cite incR in publications use:")
-
-citEntry(entry = "Article",
-  title        = "{incR}: a new {R} package to analyse incubation behaviour",
-  author       = personList(as.person("Pablo Capilla-Lasheras")),
-  publisher    = "bioRxiv",
-  year         = "2018",
-  number       = "232520",
-  doi          = "https://doi.org/10.1101/232520",
-
-  textVersion  =
-  paste("Pablo Capilla-Lasheras" (2018).",
-        "incR: a new R package to analyse incubation behaviour.",
-        "bioRxiv, 232520",
-        "URL https://doi.org/10.1101/232520")
+bibentry(bibtype = "Manual",
+         title        = "incR: a new R package to analyse incubation behaviour",
+         author       = person("Pablo", "Capilla-Lasheras"),
+         journal      = "bioRxiv",
+         year         = "2018",
+         number       = "232520",
+         doi          = "https://doi.org/10.1101/232520"
 )
-
-
 
 
 
