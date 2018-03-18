@@ -33,3 +33,10 @@ Read the package's vignettes to find out how it works!
 ```{r eval = FALSE}
 browseVignettes("incR")
 ``` 
+
+## Citation
+
+Please, if you use `incR` in your publications cite it as:
+```{r eval = TRUE}
+citation("incR")
+``` 

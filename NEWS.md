@@ -1,4 +1,4 @@
-# incR 1.1.0 (.9000)
+# incR 1.1.0 (.9000) - 17/03/2018
 * New function for visualisation of incRscan results: incRplot
 * Updated vignette
 * temp.diff in incRscan deprecated. New argument name is temp.diff.threshold
