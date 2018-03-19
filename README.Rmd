@@ -3,7 +3,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/PabloCapilla/incR.svg?branch=master)](https://travis-ci.org/PabloCapilla/incR)
 
-# incR: R package for the analysis of animal incubation
+# incR: R package for the analysis of avian incubation
 
 This is the development site of `incR`, an R package to analyse avian incubation temperatures and
 incubation behaviour. 
@@ -29,14 +29,13 @@ Or from CRAN:
 install.packages("incR")
 ```
 
-Read the package's vignettes to find out how it works!
+Read the package's vignettes to find out what it does:
 ```{r eval = FALSE}
 browseVignettes("incR")
 ``` 
 
 ## Citation
-
 Please, if you use `incR` in your publications cite it as:
-```{r eval = TRUE}
-citation("incR")
-``` 
+
+Capilla-Lasheras, Pablo (2018). incR: a new R package to analyse incubation behaviour. 
+bioRxiv, 232520. https://doi.org/10.1101/232520
