@@ -14,7 +14,7 @@
 #' @param inc.temperature.var Character string. Name of the variable with incubation 
 #' temperatures.
 #' @param env.temperature.var Character string. Name of the variable with environmental
-#' temperatures. If no value is provided, a plot with no environemtal temperatures
+#' temperatures. If no value is provided, a plot with no environmental temperatures
 #' is produced.
 #' @param vector.incubation name of the binary variable storing
 #' information about the presence/absence of the incubating individual in the nest.
