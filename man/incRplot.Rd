@@ -24,7 +24,7 @@ be used.}
 temperatures.}
 
 \item{env.temperature.var}{Character string. Name of the variable with environmental
-temperatures. If no value is provided, a plot with no environemtal temperatures
+temperatures. If no value is provided, a plot with no environmental temperatures
 is produced.}
 
 \item{vector.incubation}{name of the binary variable storing
