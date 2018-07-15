@@ -1,3 +1,7 @@
+# incR 1.1.1.9000
+* incRscan code amended to remove useless warning message
+* incRt code amended to remove useless warning message
+
 # incR 1.1.0 (.9000)
 * New function for visualisation of incRscan results: incRplot
 * Updated vignette

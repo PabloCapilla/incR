@@ -107,16 +107,28 @@ incRt <- function (data,
                                ...)
     act.times$first_offbout <- do.call(args = base::lapply(strsplit(act.times$first_offbout, " "), 
                                                            FUN = function(x) {
+                                                             
+                                                             if(is.na(x)){
+                                                               time <- NA 
+                                                               return(NA)
+                                                             } else {
                                                              time <- lubridate::hm(x)
                                                              lubridate::hour(time) + lubridate::minute(time)/60
+                                                             }
                                                            }),
                                        what = "rbind")
     
     
     act.times$last_onbout <- do.call(args = base::lapply(strsplit(act.times$last_onbout, " "), 
                                                            FUN = function(x) {
+                                                             
+                                                             if(is.na(x)){
+                                                               time <- NA 
+                                                               return(NA)
+                                                             } else {
                                                              time <- lubridate::hm(x)
                                                              lubridate::hour(time) + lubridate::minute(time)/60
+                                                             }
                                                            }),
                                        what = "rbind")
   

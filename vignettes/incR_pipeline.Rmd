@@ -208,6 +208,7 @@ head(bouts$total_bouts)
 
 Please, if you use the package, cite it as: 
 
+
 incR: a free new R package to analyse incubation behaviour.
 Pablo Capilla-Lasheras.
 bioRxiv 232520; doi: [https://doi.org/10.1101/232520](https://doi.org/10.1101/232520).

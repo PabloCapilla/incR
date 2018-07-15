@@ -221,6 +221,10 @@ incRscan <- function (data,
                                    final.maxDrop, 
                                    night_day_varRatio)
     
+    # initiate vectors for data
+    data.day$leaving <- NA
+    data.day$entering <- NA
+    
     # assessment of differential temperature
     for (i in 2:base::length(data.day$temp1)) {
       data.day$leaving[1] <- 0  # initial state
