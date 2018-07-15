@@ -1,8 +1,8 @@
 Package: incR
 Type: Package
 Title: Analysis of Incubation Data
-Version: 1.1.0
-Date: 2018-03-17
+Version: 1.1.1.9000
+Date: 2018-07-15
 Authors@R: person ("Pablo", "Capilla-Lasheras", email="pacapilla@gmail.com", role=c("aut",
     "cre"))
 Author: Pablo Capilla-Lasheras [aut, cre]
