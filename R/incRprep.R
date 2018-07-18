@@ -31,7 +31,7 @@
 #' @author Pablo Capilla-Lasheras
 #' @examples
 #' # loading example data
-#' data(incubation_rawdata)
+#' data(incR_rawdata)
 #' new.data <- incRprep (data=incR_rawdata,
 #'                        date.name= "DATE",
 #'                        date.format= "%d/%m/%Y %H:%M",
@@ -54,18 +54,19 @@ incRprep <- function (data,
   data$index <- base::seq(1, to=base::length(data[[temperature.name]]), by=1)
   # converting time and date in different formats
   dt <- base::strptime(data[[date.name]], format=date.format, tz=timezone)
-  data$time <- strftime (dt, format= "%H:%M")
+  data$time <- strftime(dt, format = "%H:%M:%S")
   # variables for hour and year
   data$hour <- base::as.numeric(base::format (dt, "%H"))
   data$minute <- base::as.numeric(base::format (dt, "%M"))
-
+  data$second <- base::as.numeric(base::format(dt, "%S"))
+  
   # date
   data$date <- base::as.Date(base::format(dt,"%Y-%m-%d"))
   # time in min decimals
-  data$dec_time <- base::sapply(base::strsplit(data$time,":"),
+  data$dec_time <- base::sapply(base::strsplit(data$time, ":"), 
                                 function(x) {
                                   x <- base::as.numeric(x)
-                                  x[1]+x[2]/60
+                                  x[1] + x[2]/60 + x[3]/3600
                                 })
   # diferential temperatures
   # loop to calculate t - (t-1)

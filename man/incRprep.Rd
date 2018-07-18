@@ -47,7 +47,7 @@ automatically.
 }
 \examples{
 # loading example data
-data(incubation_rawdata)
+data(incR_rawdata)
 new.data <- incRprep (data=incR_rawdata,
                        date.name= "DATE",
                        date.format= "\%d/\%m/\%Y \%H:\%M",

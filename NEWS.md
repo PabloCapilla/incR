@@ -1,3 +1,7 @@
+# incR 1.1.2.9000
+* incRprep code amended to include sampling intervals < 1min
+* Bug in incRprep example sorted
+
 # incR 1.1.1.9000
 * incRscan code amended to remove useless warning message
 * incRt code amended to remove useless warning message
