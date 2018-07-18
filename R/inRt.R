@@ -112,8 +112,10 @@ incRt <- function (data,
                                                                time <- NA 
                                                                return(NA)
                                                              } else {
-                                                             time <- lubridate::hm(x)
-                                                             lubridate::hour(time) + lubridate::minute(time)/60
+                                                             time <- lubridate::hms(x)
+                                                             lubridate::hour(time) + 
+                                                               lubridate::minute(time)/60 + 
+                                                               lubridate::second(time)/3600
                                                              }
                                                            }),
                                        what = "rbind")
@@ -126,8 +128,10 @@ incRt <- function (data,
                                                                time <- NA 
                                                                return(NA)
                                                              } else {
-                                                             time <- lubridate::hm(x)
-                                                             lubridate::hour(time) + lubridate::minute(time)/60
+                                                             time <- lubridate::hms(x)
+                                                             lubridate::hour(time) + 
+                                                               lubridate::minute(time)/60 +
+                                                               lubridate::second(time)/3600
                                                              }
                                                            }),
                                        what = "rbind")

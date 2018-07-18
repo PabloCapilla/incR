@@ -29,11 +29,12 @@ documentation for more details.}
 The original data frame with additional columns for:
 \enumerate{
 \item index: a running number identifying every row in the data set.
-\item dec_time: time in decimal hours (e.g. "22:30" becomes 22.5). 
-\item time: in  'H:M' format.
+\item time: in  '%H:%M:%S' format.
 \item hour: in 'H' format.
 \item minute: in 'M' format.
+\item second: in 'S' format. 
 \item date: in  'Y-m-d' format.
+\item dec_time: time in decimal hours (e.g. "22:30" becomes 22.5). 
 \item temp1: difference between the \emph{i}th temperature value and the \emph{i-1} one.
 }
 }
