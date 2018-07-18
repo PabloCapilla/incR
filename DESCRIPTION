@@ -19,7 +19,8 @@ License: GPL-3
 Depends: R (>= 3.4.0), 
     base, 
     stats
-Imports: dplyr,
+Imports: 
+    dplyr,
     ggplot2,
     maptools,
     lubridate,
