@@ -14,6 +14,7 @@ temperatures.
   \item{time}{}
   \item{hour}{}
   \item{minute}{}
+  \item{second}{}
   \item{date}{}
   \item{dec_time}{time in decimal hours.}
   \item{temp1}{difference between the \emph{ith} and the \emph{ith-1} 
