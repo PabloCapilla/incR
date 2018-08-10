@@ -1,3 +1,7 @@
+# incR 1.1.5.9000
+* incRscan code amended to handle missing data better
+* incRatt code amended to confirm adequate date format
+
 # incR 1.1.2.9000
 * incRprep code amended to include sampling intervals < 1min
 * Bug incRt fixed
