@@ -46,15 +46,15 @@
 #' This value may serve the user as an indication of the signal / noise ratio in the analysed
 #' data set.
 #' @section Details:
-#' For further details about the calculation performed by \code{\link{incRscan}}, consult the package vignettes and
+#' For further details about the calculation performed by \code{\link{incRscan2_beta}}, consult the package vignettes and
 #' the associated publications.
 #' @author Pablo Capilla-Lasheras
 #' @examples
-#' # incR_procdata is a dataframe processed by incRprep and incRscan and
-#' # contains suitable information to run incRscan
+#' # incR_procdata is a dataframe processed by incRprep and incRscan2_beta and
+#' # contains suitable information to run incRscan2_beta
 #' data(incR_procdata)
 #' 
-#' incubation.analysis <- incRscan (data=incR_procdata, 
+#' incubation.analysis <- incRscan2_beta (data=incR_procdata, 
 #'                                   temp.name="temperature",
 #'                                   lower.time=22,
 #'                                   upper.time=3,
@@ -66,7 +66,7 @@
 #' inc.thresholds <- incubation.analysis[[2]]
 #' @seealso \code{\link{incRprep}} \code{\link{incRenv}} 
 #' @export 
-incRscan <- function (data, 
+incRscan2_beta <- function (data, 
                       temp.name, 
                       lower.time, 
                       upper.time, 

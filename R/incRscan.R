@@ -33,8 +33,7 @@
 #' If this variation value is surpassed, the
 #' calibrating window is discarded and a previous night is used for calibration.
 #' @param env.temp name of a column containing environmental temperatures.
-#' @return 
-#' The function returns a list with two objects. The first object, named \code{incRscan_data}, is the original
+#' @return The function returns a list with two objects. The first object, named \code{incRscan_data}, is the original
 #' data frame with an extra column named 'incR_score'. This variable is formed by 1's and 0's,
 #' representing whether the incubating individual is inside (1) or outside the nest (0).
 #' 
@@ -71,7 +70,7 @@ incRscan <- function (data,
                       lower.time, 
                       upper.time, 
                       sensitivity, 
-                      temp.diff, 
+                      temp.diff,
                       temp.diff.threshold, 
                       maxNightVariation, 
                       env.temp) {
