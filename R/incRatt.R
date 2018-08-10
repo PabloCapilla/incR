@@ -10,6 +10,7 @@
 #' calculations.
 #' @param vector.incubation name of the column (vector class) storing the
 #' information about the presence/absence of the incubating individual in the nest.
+#' @details The 'date' column must have a 'year-month-day' format for this function to run correctly.
 #' @return Daily percentage of time in nest, returned in a 
 #' data frame with one day per raw.
 #' @examples
@@ -25,6 +26,10 @@ incRatt<- function (data, vector.incubation) {
   if (base::is.null (data$date)){
     stop("No column for date named 'date'")
   }
+  
+  # correct date format
+  data[["date"]] <- lubridate::ymd(data[["date"]]) 
+  
   # split data set by day
   data.time <- base::split (data, data$date)
   # data frame to fill later
@@ -38,4 +43,16 @@ incRatt<- function (data, vector.incubation) {
     day.latency$percentage_in[d] <- (day.in/seg.day) * 100                       # ratio
   }
   return (day.latency)
+}
+
+
+  data.time <- base::split(data, data$date)
+  day.latency <- base::data.frame(date = rep(NA, length(data.time)))
+  for (d in 1:base::length(data.time)) {
+    day.latency$date[d] <- base::as.character(base::unique(data.time[[d]]$date))
+    day.in <- base::sum(data.time[[d]][[vector.incubation]])
+    seg.day <- base::length(data.time[[d]][[vector.incubation]])
+    day.latency$percentage_in[d] <- (day.in/seg.day) * 100
+  }
+  return(day.latency)
 }
