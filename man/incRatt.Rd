@@ -26,6 +26,9 @@ This function calculates percentage of day time spent inside nest
 based on the "inc.vector" variable produced by \code{\link{incRscan}} (or any other method).
 Current version do not discriminate day and night times.
 }
+\details{
+The 'date' column must have a 'year-month-day' format for this function to run correctly.
+}
 \examples{
 #' # loading example data
 data(incR_procdata)

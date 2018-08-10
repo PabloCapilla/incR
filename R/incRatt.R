@@ -44,15 +44,3 @@ incRatt<- function (data, vector.incubation) {
   }
   return (day.latency)
 }
-
-
-  data.time <- base::split(data, data$date)
-  day.latency <- base::data.frame(date = rep(NA, length(data.time)))
-  for (d in 1:base::length(data.time)) {
-    day.latency$date[d] <- base::as.character(base::unique(data.time[[d]]$date))
-    day.in <- base::sum(data.time[[d]][[vector.incubation]])
-    seg.day <- base::length(data.time[[d]][[vector.incubation]])
-    day.latency$percentage_in[d] <- (day.in/seg.day) * 100
-  }
-  return(day.latency)
-}
