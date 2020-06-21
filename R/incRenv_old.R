@@ -1,7 +1,7 @@
-#' @title Matching environmental and nest temperatures
+#' @title Matching environmental and nest temperatures - Old version
 #' @description
 #' This function takes a data frame with recordings of environmental temperature and another
-#' with nest temperatures and merges both by time. The user can do this work manually, however, 
+#' with nest temperatures and merges both per unit of time. The user can do this work manually, however, 
 #' \code{\link{incRenv}} is thought to
 #' automate data preparation (in combination with \code{\link{incRprep}}) to use 
 #' \code{\link{incRscan}} after.
@@ -38,7 +38,7 @@
 #'                       temperature.name="temperature")
 #'                       
 #' # then use incRenv to merge environmental data
-#' new.data2 <- incRenv (data.nest = new.data,
+#' new.data2 <- incRenv_old (data.nest = new.data,
 #'                       data.env = incR_envdata, 
 #'                       env.temperature.name = "env_temperature", 
 #'                       env.date.name = "DATE", 
@@ -48,33 +48,45 @@
 #' head (new.data2, 3)
 #' @seealso \code{\link{incRprep}} \code{\link{incRscan}}
 #' @export 
-incRenv <- function (data.nest,
-                       data.env, 
-                       env.temperature.name, 
-                       env.date.name,
-                       env.date.format, 
-                       env.timezone) {
+incRenv_old <- function (data.nest,
+                         data.env, 
+                         env.temperature.name, 
+                         env.date.name,
+                         env.date.format, 
+                         env.timezone) {
   
   # data reading and creating variables
   data.env$t <- base::strptime(data.env[[env.date.name]], 
                                format=env.date.format, 
                                tz=env.timezone)
   data.env$time <-  base::strftime (data.env$t, format= "%H:%M")
-  data.env$date <-  base::as.Date(base::format(data.env$t,"%Y-%m-%d"))
+  data.env$date <-  base::as.Date( base::format(data.env$t,"%Y-%m-%d"))
   data.env$index <-  base::seq(1, to= base::nrow(data.env), by=1)
   data.env$hour <-  base::as.numeric(base::format (data.env$t, "%H"))
   # necessary list
-  time.temp.list <- base::list(NA)
+  time.temp.list <- list(NA)
   
   # average temperatures per hour
-  day_hour <- stats::aggregate(env_temperature ~ date + hour, FUN = mean, data = data.env)
-  names(day_hour) <- c("date", "hour", "env_temp")
+  for (d in 1: base::length(base::split(data.env, data.env$date))) {
+    df00 <-  base::split(data.env, data.env$date)[[d]]
+    temp <-  base::as.numeric( base::tapply(df00[[env.temperature.name]], 
+                                            df00$hour, 
+                                            base::mean, 
+                                            rm.na=TRUE))
+    hour <-  base::as.numeric( base::unique(df00$hour))
+    date <-  base::rep(base::unique(base::as.Date(df00$date)), 
+                       length= base::length(hour))
+    time.temp.list[[d]] <-  base::data.frame(date=date, hour=hour, temp=temp)
+  }
+  
+  
+  time.temp <-  base::do.call("rbind",time.temp.list)
   
   ######
   ###### matching env.temp with the inside-nest data
   ##
   # stop if there is no data and no hour in data.nest
-  if (base::is.null(data.nest[["date"]])){
+  if ( base::is.null(data.nest[["date"]])){
     stop("Provide a column in data.nest under the name 'date' containing
          the date of each observation")
   }
@@ -85,7 +97,21 @@ incRenv <- function (data.nest,
   }
   
   # actual calculation
-  data.nest <- base::merge(data.nest, day_hour, by=c("date", "hour"))
+  data.nest[["env_temp"]] <- NA
+  for (p in 1: base::length(base::split(data.nest, data.nest[["date"]]))){
+    df.nest <-  base::split(data.nest, data.nest[["date"]])[[p]]
+    df.env <- time.temp[time.temp$date== base::unique(df.nest$date),]
+    
+    for (h in 1: base::length(data.nest[["hour"]])){
+      hour.match <- data.nest[["hour"]][h]
+      index <- data.nest$index[data.nest$date== base::unique(df.nest$date) & 
+                                 data.nest$hour==hour.match]      
+      data.nest$env_temp[data.nest$date== base::unique(df.nest$date) & 
+                           data.nest$hour==hour.match] <- 
+        base::rep(df.env$temp[df.env$hour==hour.match], length= base::length(index))
+      
+    } 
+  }
   return(data.nest)
 }
 

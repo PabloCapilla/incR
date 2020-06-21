@@ -5,8 +5,9 @@
 \title{Calculation of temperature average and variance for customised
 time windows}
 \usage{
-incRt(data, temp.name, limits = NULL, coor = NULL, activity.times = FALSE,
-  civil.twilight = FALSE, time.zone = NULL, ...)
+incRt(data, temp.name, limits = NULL, coor = NULL,
+  activity.times = FALSE, civil.twilight = FALSE, time.zone = NULL,
+  ...)
 }
 \arguments{
 \item{data}{data frame containing a time-series vector of 1's and 0's (incubation scores), 

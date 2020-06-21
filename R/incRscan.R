@@ -49,8 +49,8 @@
 #' the associated publications.
 #' @author Pablo Capilla-Lasheras
 #' @examples
-#' # incR_procdata is a dataframe processed by incRprep and incRscan and
-#' # contains suitable information to run incRscan
+#' # incR_procdata is a dataframe processed by incRprep and incRenv.
+#' # it contains suitable information to run incRscan
 #' data(incR_procdata)
 #' 
 #' incubation.analysis <- incRscan (data=incR_procdata, 
@@ -226,6 +226,7 @@ incRscan <- function (data,
                                    night_day_varRatio)
     data.day$leaving <- NA
     data.day$entering <- NA
+    data.day <- data.day[order(data.day$dec_time),]
    
      for (i in 2:base::length(data.day$temp1)) {
       data.day$leaving[1] <- 0
@@ -263,48 +264,54 @@ incRscan <- function (data,
     seq.loop <- 1
     data.leaving <- data.day[data.day$leaving == 1, ]
     data.entering <- data.day[data.day$entering == 1, ]
+    
+    
+    
     if (base::nrow(data.leaving) == 0) {
       data.day$incR_score <- 1
-      (next)()
-    }
-    for (j in 1:base::length(data.day$entering)) {
-      if (j != utils::tail(seq.loop, 1)) {
-        (next)()
-      }
-      if (data.day$entering[j] == 1) {
-        index.dif <- data.leaving$index - data.day$index[j]
-        if (base::max(index.dif) <= 0) {
-          data.day$incR_score[j:base::length(data.day$entering)] <- 1
-          (break)()
+      incubation.list[[d]] <- data.day
+    } else {
+      for (j in 1:base::length(data.day$entering)) {
+        if (j != utils::tail(seq.loop, 1)) {
+          (next)()
         }
-        addition <- base::min(index.dif[index.dif > 0])
-        new.index <- j + addition
-        data.day$incR_score[(j):(new.index - 1)] <- 1
-        seq.loop <- base::c(seq.loop, utils::tail(seq.loop, 
-                                                  1) + addition)
-      }else {
-        if (data.day$leaving[j] == 1) {
-          index.dif <- data.entering$index - data.day$index[j]
+        if (data.day$entering[j] == 1) {
+          index.dif <- data.leaving$index - data.day$index[j]
           if (base::max(index.dif) <= 0) {
-            data.day$incR_score[j:base::length(data.day$entering)] <- 0
+            data.day$incR_score[j:base::length(data.day$entering)] <- 1
             (break)()
           }
-          addition <- base::min(index.dif[index.dif > 
-                                            0])
+          addition <- base::min(index.dif[index.dif > 0])
           new.index <- j + addition
-          data.day$incR_score[j:(new.index - 1)] <- 0
-          seq.loop <- base::c(seq.loop, utils::tail(seq.loop, 
-                                                    1) + addition)
+          data.day$incR_score[(j):(new.index - 1)] <- 1
+          seq.loop <- base::c(seq.loop, utils::tail(seq.loop,  1) + addition)
+          
+        }else {
+          if (data.day$leaving[j] == 1) {
+            index.dif <- data.entering$index - data.day$index[j]
+            if (base::max(index.dif) <= 0) {
+              data.day$incR_score[j:base::length(data.day$entering)] <- 0
+              (break)()
+            }
+            addition <- base::min(index.dif[index.dif > 
+                                              0])
+            new.index <- j + addition
+            data.day$incR_score[j:(new.index - 1)] <- 0
+            seq.loop <- base::c(seq.loop, utils::tail(seq.loop, 1) + addition)
+          } else {
+            (next)()
+          }
         }
       }
+      if (night.drop > -maxNightVariation || night.raise < +maxNightVariation) {
+        
+        data.day$incR_score[data.day$dec_time < upper.time] <- 1
+        data.day$incR_score[data.day$dec_time > lower.time] <- 1
+      }
+      incubation.list[[d]] <- data.day
     }
-    if (night.drop > -maxNightVariation || night.raise < +maxNightVariation) {
-       
-      data.day$incR_score[data.day$dec_time < upper.time] <- 1
-      data.day$incR_score[data.day$dec_time > lower.time] <- 1
-    }
-    incubation.list[[d]] <- data.day
   }
+  
   final.data <- base::do.call("rbind", incubation.list)
   final.data$entering <- NULL
   final.data$leaving <- NULL

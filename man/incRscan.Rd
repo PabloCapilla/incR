@@ -72,8 +72,8 @@ the associated publications.
 }
 
 \examples{
-# incR_procdata is a dataframe processed by incRprep and incRscan and
-# contains suitable information to run incRscan
+# incR_procdata is a dataframe processed by incRprep and incRenv.
+# it contains suitable information to run incRscan
 data(incR_procdata)
 
 incubation.analysis <- incRscan (data=incR_procdata, 

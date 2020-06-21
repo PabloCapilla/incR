@@ -1,8 +1,8 @@
 Package: incR
 Type: Package
 Title: Analysis of Incubation Data
-Version: 1.1.5.9000
-Date: 2018-08-10
+Version: 2.0.0.9000
+Date: 2020-06-22
 Authors@R: person ("Pablo", "Capilla-Lasheras", email="pacapilla@gmail.com", role=c("aut",
     "cre"))
 Author: Pablo Capilla-Lasheras [aut, cre]
@@ -32,4 +32,5 @@ Suggests: codetools,
 VignetteBuilder:
     knitr
 LazyData: true
-RoxygenNote: 6.0.1
+Encoding: UTF-8
+RoxygenNote: 6.1.1

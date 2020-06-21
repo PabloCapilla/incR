@@ -1,12 +1,14 @@
 ---
 title: "incR Working Pipeline"
 author: "Pablo Capilla-Lasheras"
-date: "2018-03-17"
+date: "2020-06-21"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{"incR Working Pipeline"}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 *This vignette was created using `incR` version `r packageVersion("incR")` and 
@@ -15,7 +17,7 @@ vignette: >
 
 # Introduction
 This document serves as an example for a suggested `incR` working pipeline. I have tested the
-accuracy of the method and the results of such validation can be found [here](https://www.biorxiv.org/content/early/2017/12/12/232520). Throughout this vignette, I follow the examples found in the documentation for `incR` and use data distributed with the package.
+accuracy of the method and the results of such validation can be found [here](https://onlinelibrary.wiley.com/doi/full/10.1111/jav.01710). Throughout this vignette, I follow the examples found in the documentation for `incR` and use data distributed with the package.
 
 
 # `incR` working pipeline
@@ -24,7 +26,7 @@ accuracy of the method and the results of such validation can be found [here](ht
 The data table contains raw nest temperatures coming from an iButton device (Maxim Integrated Products) and has two 
 columns, date/time and temperature values in Celsius degrees. Several files, from the same nest
 where combined to create a completed nest temperature file.
-```{r eval = TRUE}
+```{r include=FALSE}
 library("incR")
 data("incR_rawdata")  # loading the data
 head(incR_rawdata)
@@ -67,7 +69,7 @@ After using `incRprep` and `incRenv`, the data table is ready for `incRscan`. Th
 applies an automatic algorithm that scores incubation. By looking at temperature variation
 when the incubating individual is assumed to be incubating, `incRscan` determines presence
 or absence of the incubating individual (incubation score) for every data point (i.e. time point) in the data set. For details about the algorithm follow 
-[this link](https://www.biorxiv.org/content/early/2017/12/12/232520).
+[this link](https://onlinelibrary.wiley.com/doi/full/10.1111/jav.01710).
 
 
 Several parameters in `incRscan` need to be chosen by the user. For such task, it is
@@ -77,7 +79,7 @@ scores calculated by `incRscan` can be assessed. By comparing the performance of
 over several parameters values, one can decide on the best combination of parameters. 
 This approach may also serve as a quality-checking step as `incRscan` performance is thought
 to drop when data quality decreases. For this example, we use parameter values known to work well
-for this data set (see this [LINK](https://www.biorxiv.org/content/early/2017/12/12/232520)
+for this data set (see this [LINK](https://onlinelibrary.wiley.com/doi/full/10.1111/jav.01710)
 for more information).
 ```{r}
 incubation.analysis <- incRscan (data=incR_data, 
@@ -209,6 +211,5 @@ head(bouts$total_bouts)
 Please, if you use the package, cite it as: 
 
 
-incR: a free new R package to analyse incubation behaviour.
-Pablo Capilla-Lasheras.
-bioRxiv 232520; doi: [https://doi.org/10.1101/232520](https://doi.org/10.1101/232520).
+Capilla-Lasheras, P. (2018).incR: a new R package to analyse incubation behaviour.
+Journal of Avian Biology 49:e01710. doi: [https://doi.org/10.1111/jav.01710).

@@ -40,5 +40,5 @@ browseVignettes("incR")
 ## Citation
 Please, if you use `incR` cite it as:
 
-Capilla-Lasheras, Pablo (in press). incR: a new R package to analyse incubation behaviour. 
-Journal of Avian Biology. https://doi.org/10.1111/jav.01710
+Capilla-Lasheras, Pablo (2020). incR: a new R package to analyse incubation behaviour. 
+Journal of Avian Biology 49:e01710. https://doi.org/10.1111/jav.01710
