@@ -4,7 +4,7 @@
 #' with nest temperatures and merges both by time. The user can do this work manually, however, 
 #' \code{\link{incRenv}} is thought to
 #' automate data preparation (in combination with \code{\link{incRprep}}) to use 
-#' \code{\link{incRscan}} after.
+#' \code{\link{incRscan}} after. Code to update and improve this function provided by Natalie van Dis.
 #' @param data.nest data frame containing nest temperature recordings. It must have two compulsory
 #' columns 'date' and 'hour' displaying dates and the hour of each observation. These two columns
 #' are provided if the user uses \code{\link{incRprep}} before. 
