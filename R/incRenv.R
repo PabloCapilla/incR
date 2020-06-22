@@ -48,6 +48,7 @@
 #' head (new.data2, 3)
 #' @seealso \code{\link{incRprep}} \code{\link{incRscan}}
 #' @export 
+#' 
 incRenv <- function (data.nest,
                        data.env, 
                        env.temperature.name, 
@@ -67,7 +68,10 @@ incRenv <- function (data.nest,
   time.temp.list <- base::list(NA)
   
   # average temperatures per hour
-  day_hour <- stats::aggregate(env_temperature ~ date + hour, FUN = mean, data = data.env)
+  
+  
+  
+  day_hour <- stats::aggregate(data.env[[env.temperature.name]] ~ date + hour, FUN = mean, data = data.env)
   names(day_hour) <- c("date", "hour", "env_temp")
   
   ######
