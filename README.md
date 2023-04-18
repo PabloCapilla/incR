@@ -17,7 +17,7 @@ contact to implement your recommendations.
 
 # Latest news
 
-Version 2.0.0 has just been released. A new version of 'incRscan' ('incRscan_v2') has been created to process every day with information 
+Version 2.0.0 has been released. A new version of 'incRscan' ('incRscan_v2') has been created to process every day with information 
 (unlike the original 'incRscan') applying a fixed temperature threshold to detect on/off-bouts. Also, the code in
 'incRenv' has been revisited and the function is now a lot faster.
 
