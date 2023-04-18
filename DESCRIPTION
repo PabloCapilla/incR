@@ -20,7 +20,6 @@ Depends: R (>= 3.4.0),
     base, 
     stats
 Imports: 
-    dplyr,
     ggplot2,
     suncalc,
     lubridate,
