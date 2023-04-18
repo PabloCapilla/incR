@@ -36,7 +36,7 @@ FALSE to allow the use of 'limits'.}
 \item{coor}{coordinates for the location where temperature was recorded,
 formatted as decimal degrees N/S, decimal degrees E/W.
 When 'civil.twilight' is TRUE, 'coor' allows the user to define sunrise and sunset times
-based on the \code{\link{crepuscule}} function (in \code{maptools} package).}
+based on the \code{\link{getSunlightTimes}} function (in \code{suncalc} package).}
 
 \item{activity.times}{TRUE or FALSE. Set as TRUE when time periods for calculation
 are defined by \code{\link{incRact}}. Data must contain a column named 
@@ -46,7 +46,7 @@ are defined by \code{\link{incRact}}. Data must contain a column named
 are to be defined by civil twilight times - calculated using \code{\link{getSunlightTimes}}. 
 If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.}
 
-\item{time.zone}{time zone for \code{\link{crepuscule}} dawn and dusk calculations.}
+\item{time.zone}{time zone for \code{\link{getSunlightTimes}} dawn and dusk calculations.}
 
 \item{...}{use parameters in \code{\link{incRact}} if \emph{activity.times} = TRUE.}
 }
@@ -95,7 +95,7 @@ incRt (data=incR_procdata,
 }
 \seealso{
 \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRact}}
-\code{\link{crepuscule}}
+\code{\link{getSunlightTimes}}
 }
 \author{
 Pablo Capilla-Lasheras

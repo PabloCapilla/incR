@@ -1,4 +1,3 @@
-[![Travis-CI Build Status](https://travis-ci.org/PabloCapilla/incR.svg?branch=master)](https://travis-ci.org/PabloCapilla/incR)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/incR)](http://cran.r-project.org/package=incR)
 [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/grand-total/incR)](http://cran.r-project.org/package=incR)
 
