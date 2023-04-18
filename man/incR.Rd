@@ -3,7 +3,6 @@
 \docType{package}
 \name{incR}
 \alias{incR}
-\alias{incR-package}
 \title{incR: Analysis of animal incubation}
 \description{
 This packages is formed by a suite of R functions that help the user to get

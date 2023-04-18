@@ -4,8 +4,14 @@
 \alias{incRenv_old}
 \title{Matching environmental and nest temperatures - Old version}
 \usage{
-incRenv_old(data.nest, data.env, env.temperature.name, env.date.name,
-  env.date.format, env.timezone)
+incRenv_old(
+  data.nest,
+  data.env,
+  env.temperature.name,
+  env.date.name,
+  env.date.format,
+  env.timezone
+)
 }
 \arguments{
 \item{data.nest}{data frame containing nest temperature recordings. It must have two compulsory

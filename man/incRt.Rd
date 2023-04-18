@@ -5,9 +5,16 @@
 \title{Calculation of temperature average and variance for customised
 time windows}
 \usage{
-incRt(data, temp.name, limits = NULL, coor = NULL,
-  activity.times = FALSE, civil.twilight = FALSE, time.zone = NULL,
-  ...)
+incRt(
+  data,
+  temp.name,
+  limits = NULL,
+  coor = NULL,
+  activity.times = FALSE,
+  civil.twilight = FALSE,
+  time.zone = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{data frame containing a time-series vector of 1's and 0's (incubation scores), 
@@ -36,7 +43,7 @@ are defined by \code{\link{incRact}}. Data must contain a column named
 'incR_score' for the use of \code{\link{incRact}}.}
 
 \item{civil.twilight}{TRUE or FALSE. Set as TRUE when time periods for calculation
-are to be defined by civil twilight times - calculated using \code{\link{crepuscule}}. 
+are to be defined by civil twilight times - calculated using \code{\link{getSunlightTimes}}. 
 If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.}
 
 \item{time.zone}{time zone for \code{\link{crepuscule}} dawn and dusk calculations.}

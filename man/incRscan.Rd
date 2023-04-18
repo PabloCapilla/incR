@@ -4,8 +4,17 @@
 \alias{incRscan}
 \title{Automated scoring of incubation}
 \usage{
-incRscan(data, temp.name, lower.time, upper.time, sensitivity, temp.diff,
-  temp.diff.threshold, maxNightVariation, env.temp)
+incRscan(
+  data,
+  temp.name,
+  lower.time,
+  upper.time,
+  sensitivity,
+  temp.diff,
+  temp.diff.threshold,
+  maxNightVariation,
+  env.temp
+)
 }
 \arguments{
 \item{data}{data frame for analysis. It must contained four columns named as follow:

@@ -4,8 +4,14 @@
 \alias{incRenv}
 \title{Matching environmental and nest temperatures}
 \usage{
-incRenv(data.nest, data.env, env.temperature.name, env.date.name,
-  env.date.format, env.timezone)
+incRenv(
+  data.nest,
+  data.env,
+  env.temperature.name,
+  env.date.name,
+  env.date.format,
+  env.timezone
+)
 }
 \arguments{
 \item{data.nest}{data frame containing nest temperature recordings. It must have two compulsory
@@ -36,7 +42,7 @@ This function takes a data frame with recordings of environmental temperature an
 with nest temperatures and merges both by time. The user can do this work manually, however, 
 \code{\link{incRenv}} is thought to
 automate data preparation (in combination with \code{\link{incRprep}}) to use 
-\code{\link{incRscan}} after.
+\code{\link{incRscan}} after. Code to update and improve this function provided by Natalie van Dis.
 }
 \details{
 This function is thought to be used after \code{\link{incRprep}} as it uses some of the

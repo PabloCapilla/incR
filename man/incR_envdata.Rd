@@ -5,12 +5,14 @@
 \alias{incR_envdata}
 \title{An example data set of environmental temperatures to test
 the use of \code{link{incRenv}}.}
-\format{A data frame with 1570 rows and two variables, representing two days of 
+\format{
+A data frame with 1570 rows and two variables, representing two days of 
 environmental temperature recordings at two different locations in one study site.
 \describe{
   \item{DATE}{a date-time column. Both elements, date and time, are concatenated in one column.}
   \item{env_temperature}{environmental temperature recordings.}
-  }}
+  }
+}
 \usage{
 incR_envdata
 }

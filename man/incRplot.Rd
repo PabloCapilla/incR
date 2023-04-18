@@ -4,8 +4,14 @@
 \alias{incRplot}
 \title{Quick visualisation of incubation temperatures, on-bouts and off-bouts}
 \usage{
-incRplot(data, time.var, day.var, inc.temperature.var,
-  env.temperature.var = NULL, vector.incubation)
+incRplot(
+  data,
+  time.var,
+  day.var,
+  inc.temperature.var,
+  env.temperature.var = NULL,
+  vector.incubation
+)
 }
 \arguments{
 \item{data}{data table with incubation temperature data}

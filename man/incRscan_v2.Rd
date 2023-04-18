@@ -4,8 +4,14 @@
 \alias{incRscan_v2}
 \title{Scoring of incubation based on a fixed temperature threshold}
 \usage{
-incRscan_v2(data, temp.name, sensitivity, temperature_threshold,
-  temp.diff.threshold, env.temp)
+incRscan_v2(
+  data,
+  temp.name,
+  sensitivity,
+  temperature_threshold,
+  temp.diff.threshold,
+  env.temp
+)
 }
 \arguments{
 \item{data}{data frame for analysis. It must contained four columns named as follow:

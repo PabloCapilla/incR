@@ -4,12 +4,14 @@
 \name{incR_rawdata}
 \alias{incR_rawdata}
 \title{An example of incubation temperature time-series}
-\format{A data frame with 954 rows and 2 variables, representing three days of nest
+\format{
+A data frame with 954 rows and 2 variables, representing three days of nest
 temperatures.
 \describe{
   \item{DATE}{a date-time column. Both elements, date and time, are concatenated in one column}
   \item{temperature}{temperature recordings in Celsius}
-}}
+}
+}
 \usage{
 incR_rawdata
 }

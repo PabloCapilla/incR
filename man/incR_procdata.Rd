@@ -5,7 +5,8 @@
 \alias{incR_procdata}
 \title{An example of incubation temperature time-series after 
 the use of \code{\link{incRprep}} and \code{\link{incRenv}}.}
-\format{A data frame with 954 rows and 11 variables, representing two days of nest
+\format{
+A data frame with 954 rows and 11 variables, representing two days of nest
 temperatures.
 \describe{
   \item{DATE}{a date-time column. Both elements, date and time, are concatenated in one column.}
@@ -22,7 +23,8 @@ temperatures.
   \item{env_temp}{environmental temperature, calculated per as hour average using
   \code{\link{incRenv}}.}
   \item{incR_score}{Incubation scores (0/1) as calculated by \code{\link{incRscan}} }
-}}
+}
+}
 \usage{
 incR_procdata
 }
