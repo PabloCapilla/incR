@@ -1,8 +1,8 @@
 Package: incR
 Type: Package
 Title: Analysis of Incubation Data
-Version: 2.0.0.9000
-Date: 2020-06-22
+Version: 2.0.1.9000
+Date: 2023-04-18
 Authors@R: person ("Pablo", "Capilla-Lasheras", email="pacapilla@gmail.com", role=c("aut",
     "cre"))
 Author: Pablo Capilla-Lasheras [aut, cre]
@@ -22,9 +22,8 @@ Depends: R (>= 3.4.0),
 Imports: 
     dplyr,
     ggplot2,
-    maptools,
+    suncalc,
     lubridate,
-    rgeos,
     utils    
 Suggests: codetools,
     knitr,

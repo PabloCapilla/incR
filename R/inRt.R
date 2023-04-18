@@ -22,7 +22,7 @@
 #' When 'civil.twilight' is TRUE, 'coor' allows the user to define sunrise and sunset times
 #' based on the \code{\link{crepuscule}} function (in \code{maptools} package). 
 #' @param civil.twilight TRUE or FALSE. Set as TRUE when time periods for calculation
-#' are to be defined by civil twilight times - calculated using \code{\link{crepuscule}}. 
+#' are to be defined by civil twilight times - calculated using \code{\link{getSunlightTimes}}. 
 #' If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.
 #' @param activity.times TRUE or FALSE. Set as TRUE when time periods for calculation
 #' are defined by \code{\link{incRact}}. Data must contain a column named 
@@ -143,16 +143,26 @@ incRt <- function (data,
         stop ("Time zone and/or coor not specified; please, do it by passing the argument
               to the incRt function")
       }
-      # calculates civil twilinght times
-      dawn <- stats::na.omit(maptools::crepuscule(crds=base::matrix(c(coor[1], coor[2]), nrow=1), 
-                                                  dateTime=base::as.POSIXct (base::as.character(base::unique (data$date)), 
-                                                                             tz=time.zone),
-                                                  solarDep=6, direction="dawn", POSIXct.out=TRUE))
+      # calculates civil twilight times
+      
+    
+      
+      
+      
+      dawn <- stats::na.omit(suncalc::getSunlightTimes(date = base::as.Date(base::as.POSIXct(base::as.character(base::unique(data$date)), tz=time.zone)), 
+                                                        lat = coor[1],
+                                                        lon = coor[2],
+                                                        keep = c("dawn"), 
+                                                        tz = time.zone))
       dawn$day_frac <- NULL
-      dawn$dusk <-  stats::na.omit(maptools::crepuscule(base::matrix(c(coor[1], coor[2]), nrow=1), 
-                                                        base::as.POSIXct (base::as.character(base::unique (data$date)), 
-                                                                          tz=time.zone),
-                                                        solarDep=6, direction="dusk", POSIXct.out=TRUE))[,2]
+      dawn$dusk <-  stats::na.omit( suncalc::getSunlightTimes(date = base::as.Date(base::as.POSIXct(base::as.character(base::unique(data$date)), tz=time.zone)), 
+                                                              lat = coor[1],
+                                                              lon = coor[2],
+                                                              keep = c("dusk"), 
+                                                              tz = time.zone))[,4]
+      dawn$date <- NULL
+      dawn$lat <- NULL
+      dawn$lon <- NULL
       names(dawn) <- c("dawn.time", "dusk.time")
       
       
