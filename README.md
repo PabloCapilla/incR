@@ -16,9 +16,9 @@ contact to implement your recommendations.
 
 # Latest news
 
-Version 2.0.0 has been released. A new version of 'incRscan' ('incRscan_v2') has been created to process every day with information 
-(unlike the original 'incRscan') applying a fixed temperature threshold to detect on/off-bouts. Also, the code in
-'incRenv' has been revisited and the function is now a lot faster.
+Version 2.1.0 is available on CRAN. Please, check [NEWS](https://github.com/PabloCapilla/incR/blob/master/NEWS.md) document for the latest updates.
+
+Development version availabelon GitHub 2.1.0.9000 (2023-04-19).
 
 
 ## Citation
