@@ -1,5 +1,5 @@
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/incR)](http://cran.r-project.org/package=incR)
-[![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/grand-total/incR)](http://cran.r-project.org/package=incR)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/incR)](https://cran.r-project.org/package=incR)
+[![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/grand-total/incR)](https://cran.r-project.org/package=incR)
 
 
 # incR: R package for the analysis of avian incubation
