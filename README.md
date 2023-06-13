@@ -24,5 +24,5 @@ Development version availabelon GitHub 2.1.0.9000 (2023-04-19).
 ## Citation
 Please, if you use `incR` cite it as:
 
-Capilla-Lasheras, Pablo (2020). incR: a new R package to analyse incubation behaviour. 
+Capilla-Lasheras, Pablo (2018). incR: a new R package to analyse incubation behaviour. 
 Journal of Avian Biology 49:e01710. https://doi.org/10.1111/jav.01710
