@@ -1,7 +1,6 @@
 ##
-## combinantion of dynamic and fixed temperature thresholds in incRscan 
+## combination of dynamic and fixed temperature thresholds in incRscan 
 ##
-## For Natalie to try and test - 08/07/2020
 ##
 ##
 
