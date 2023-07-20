@@ -2,8 +2,8 @@
 % Please edit documentation in R/incRscan_v3.R
 \name{incRscan_v3}
 \alias{incRscan_v3}
-\title{Scoring of incubation based on combination of dynamic (such as in \code{\link{incRscan}} and fixed temperature thresholds 
-as in \code{\link{incRscan_v2}}}
+\title{Scoring of incubation based on combination of dynamic (as in \code{\link{incRscan}}) and fixed temperature thresholds 
+(as in \code{\link{incRscan_v2}}}
 \usage{
 incRscan_v3(
   data,

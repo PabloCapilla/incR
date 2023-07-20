@@ -1,5 +1,5 @@
-#' @title Scoring of incubation based on combination of dynamic (such as in \code{\link{incRscan}} and fixed temperature thresholds 
-#' as in \code{\link{incRscan_v2}}
+#' @title Scoring of incubation based on combination of dynamic (as in \code{\link{incRscan}}) and fixed temperature thresholds 
+#' (as in \code{\link{incRscan_v2}}
 #' @description Modified version of \code{incRscan}. It combines the assignment of incubation on/off-bout implemented in 
 #' \code{\link{incRscan}} and \code{\link{incRscan_v2}}.
 #' @param data data frame for analysis. It must contained four columns named as follow:
