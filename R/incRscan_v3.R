@@ -1,12 +1,40 @@
-##
-## combination of dynamic and fixed temperature thresholds in incRscan 
-##
-##
-##
-
+#' @title Scoring of incubation based on combination of dynamic (such as in \code{\link{incRscan}} and fixed temperature thresholds 
+#' as in \code{\link{incRscan_v2}}
+#' @description Modified version of \code{incRscan}. It combines the assignment of incubation on/off-bout implemented in 
+#' \code{\link{incRscan}} and \code{\link{incRscan_v2}}.
+#' @param data data frame for analysis. It must contained four columns named as follow:
+#' \code{date}, \code{temp1}, \code{dec_time} and \code{index}, where \code{temp1} is the difference between
+#' the \emph{ith} and  \emph{i-1th} temperature recordings; \code{dec_time} is time in
+#' decimal hours; and \code{index} is a running number from 1 to \emph{N}, \emph{N} being the 
+#' total number of observations. \code{\link{incRprep}} returns a data frame with
+#' these variables and the correct names, ready to be passed through \code{incRscan}.
+#' @param temp.name (character object) name of the column containing temperature data 
+#' in \code{data}. 
+#' @param lower.time lower limit of time window for calibration (numeric).
+#' @param upper.time upper limit of time window for calibration (numeric).
+#' @param sensitivity percentage of reduction in temperature threshold. When nest temperature
+#' does not drop close to environmental temperature, this value can be kept to 1. If 
+#' nest temperature follows environmental temperature at any point, 
+#' then, adjustment of this value may
+#' be required to detect short on/off-bouts at lower nest temperatures (see details).
+#' @param temp.diff deprecated. Use temp.diff.threshold.
+#' @param temp.diff.threshold threshold for temperature difference between \code{env.temp} and an observation which
+#' triggers application of the sensitivity parameter. 
+#' @param env.temp name of a column containing environmental temperatures.
+#' @param temperature_threshold Maximum temperature difference between two consecutive nest temperature recordings 
+#' allowed for an on-bout. When the difference in nest temperature between two consecutive recordings is higher than
+#' this value, an off-bout is detected. Only applies for days when a calibration window is not available or \code{temp.diff.threshold} is exceeded.
+#' @return The function returns the original data frame with a new column named 'incR_score'. 
+#' This new variable is formed by 1's and 0's,
+#' representing whether the incubating individual is inside ("1") or outside the nest ("0").
+#' #' @section Details:
+#' See \code{\link{incRenv}} for more details
+#' @author Pablo Capilla-Lasheras
+#' @seealso \code{\link{incRscan}} \code{\link{incRscan_v2}}
+#' @export 
 incRscan_v3 <- function (data, 
                          temp.name, 
-                         temperature_threshold,  ## specify here the fixed temperature threshold for days when a calibration window is not available or night var is passed
+                         temperature_threshold, 
                          lower.time, 
                          upper.time, 
                          sensitivity, 
