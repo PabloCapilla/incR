@@ -67,7 +67,7 @@ incRscan_v3 <- function (data,
   } else {
     if (lower.time < 24 && lower.time > upper.time) {
       subset.nightBefore <- data[data$dec_time > lower.time & data$dec_time < 24, ]
-      subset.nightBefore$effec.date <- ymd(subset.nightBefore$date) + 1
+      subset.nightBefore$effec.date <- lubridate::ymd(subset.nightBefore$date) + 1
       subset.morning <- data[data$dec_time > 0 & data$dec_time < upper.time, ]
       subset.morning$effec.date <- subset.morning$date
       subset.data <- base::rbind(subset.nightBefore, subset.morning)
