@@ -46,7 +46,7 @@ are defined by \code{\link{incRact}}. Data must contain a column named
 are to be defined by civil twilight times - calculated using \code{\link{getSunlightTimes}}. 
 If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.}
 
-\item{time.zone}{time zone for \code{\link{getSunlightTimes}} dawn and dusk calculations.}
+\item{time.zone}{time zone for \code{\link[suncalc]{getSunlightTimes}} dawn and dusk calculations.}
 
 \item{...}{use parameters in \code{\link{incRact}} if \emph{activity.times} = TRUE.}
 }

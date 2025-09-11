@@ -2,6 +2,7 @@
 % Please edit documentation in R/incR.R
 \docType{package}
 \name{incR}
+\alias{incR-package}
 \alias{incR}
 \title{incR: Analysis of animal incubation}
 \description{
@@ -27,3 +28,7 @@ The current version of incR contains the following functions and three example d
 \code{\link{incRt}}, along with three example data sets.
 }
 
+\author{
+\strong{Maintainer}: Pablo Capilla-Lasheras \email{pacapilla@gmail.com}
+
+}

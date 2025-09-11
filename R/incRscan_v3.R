@@ -20,6 +20,10 @@
 #' @param temp.diff deprecated. Use temp.diff.threshold.
 #' @param temp.diff.threshold threshold for temperature difference between \code{env.temp} and an observation which
 #' triggers application of the sensitivity parameter. 
+#' @param maxNightVariation maximum temperature variation between two consecutive points
+#' within the calibrating window that is considered normal of this period. 
+#' If this variation value is surpassed, the
+#' calibrating window is discarded and a previous night is used for calibration.
 #' @param env.temp name of a column containing environmental temperatures.
 #' @param temperature_threshold Maximum temperature difference between two consecutive nest temperature recordings 
 #' allowed for an on-bout. When the difference in nest temperature between two consecutive recordings is higher than

@@ -48,6 +48,11 @@ be required to detect short on/off-bouts at lower nest temperatures (see details
 \item{temp.diff.threshold}{threshold for temperature difference between \code{env.temp} and an observation which
 triggers application of the sensitivity parameter.}
 
+\item{maxNightVariation}{maximum temperature variation between two consecutive points
+within the calibrating window that is considered normal of this period. 
+If this variation value is surpassed, the
+calibrating window is discarded and a previous night is used for calibration.}
+
 \item{env.temp}{name of a column containing environmental temperatures.}
 }
 \value{

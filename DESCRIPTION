@@ -15,7 +15,7 @@ Description: Suite of functions to study animal incubation.
     and off-bout duration - for a review of avian incubation studies, 
     see Nests, Eggs, and Incubation: New ideas about avian reproduction (2015) 
     edited by D. Charles Deeming and S. James Reynolds <doi:10.1093/acprof:oso/9780198718666.001.0001>.
-License: GPL-3
+License: GPL-3 + file LICENSE
 Depends: R (>= 3.4.0), 
     base, 
     stats
@@ -31,4 +31,4 @@ VignetteBuilder:
     knitr
 LazyData: true
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3

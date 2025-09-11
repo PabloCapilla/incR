@@ -1,3 +1,6 @@
+# incR 2.1.1
+* Package anchors to links updated
+
 # incR 2.1.0
 
 # incR 2.0.1.9000
@@ -31,7 +34,6 @@
 * Description of the package available on bioRxiv
 * Updated package vignette
 * Updated documentation for incRt and incRbouts
-
 
 # incR 1.0.1
 * bug in incRt fixed
