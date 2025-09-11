@@ -27,7 +27,7 @@
 #' @param activity.times TRUE or FALSE. Set as TRUE when time periods for calculation
 #' are defined by \code{\link{incRact}}. Data must contain a column named 
 #' 'incR_score' for the use of \code{\link{incRact}}.
-#' @param time.zone time zone for \code{\link{getSunlightTimes}} dawn and dusk calculations.
+#' @param time.zone time zone for \code{\link[suncalc]{getSunlightTimes}} dawn and dusk calculations.
 #' @param ... use parameters in \code{\link{incRact}} if \emph{activity.times} = TRUE.
 #' @return a data frame containing temperature means and variance for the defined time 
 #' window.
