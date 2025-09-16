@@ -1,5 +1,5 @@
 # incR 2.1.1
-* Package anchors to links updated
+* Package anchors in links updated
 
 # incR 2.1.0
 

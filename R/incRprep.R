@@ -11,11 +11,11 @@
 #' handle date and time concatenated in one unique column (see example below).
 #' @param date.name name of the date and time column
 #' @param date.format format for date and time column. 
-#' It must be a character object as specified in the function \code{\link{strptime}}.   
+#' It must be a character object as specified in the function \code{\link[base:strptime]{base::strptime()}}.   
 #' \code{\link{incRprep}} assumes that the date and time column contains date and time, 
 #' If date and time are in different columns, please, concatenate them in one
 #' column before running the function.
-#' @param timezone time zone for time calculations. See \code{\link{strptime}}.
+#' @param timezone time zone for time calculations. See \code{\link[base:strptime]{base::strptime()}}.
 #' documentation for more details.
 #' @param  temperature.name name of the column storing temperature information.
 #' @return The original data frame with additional columns for:

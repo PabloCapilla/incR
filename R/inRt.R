@@ -20,14 +20,14 @@
 #' @param coor coordinates for the location where temperature was recorded,
 #' formatted as decimal degrees N/S, decimal degrees E/W.
 #' When 'civil.twilight' is TRUE, 'coor' allows the user to define sunrise and sunset times
-#' based on the \code{\link{getSunlightTimes}} function (in \code{suncalc} package). 
+#' based on the \code{\link[suncalc:getSunlightTimes]{suncalc::getSunlightTimes()}} function (in \code{suncalc} package). 
 #' @param civil.twilight TRUE or FALSE. Set as TRUE when time periods for calculation
-#' are to be defined by civil twilight times - calculated using \code{\link{getSunlightTimes}}. 
+#' are to be defined by civil twilight times - calculated using \code{\link[suncalc:getSunlightTimes]{suncalc::getSunlightTimes()}}. 
 #' If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.
 #' @param activity.times TRUE or FALSE. Set as TRUE when time periods for calculation
 #' are defined by \code{\link{incRact}}. Data must contain a column named 
 #' 'incR_score' for the use of \code{\link{incRact}}.
-#' @param time.zone time zone for \code{\link[suncalc]{getSunlightTimes}} dawn and dusk calculations.
+#' @param time.zone time zone for \code{\link[suncalc:getSunlightTimes]{suncalc::getSunlightTimes()}} dawn and dusk calculations.
 #' @param ... use parameters in \code{\link{incRact}} if \emph{activity.times} = TRUE.
 #' @return a data frame containing temperature means and variance for the defined time 
 #' window.
@@ -65,7 +65,7 @@
 #'         activity.times=FALSE,
 #'         time.zone="GMT")
 #' @seealso \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRact}}
-#' \code{\link{getSunlightTimes}}
+#' \code{\link[suncalc:getSunlightTimes]{suncalc::getSunlightTimes()}}
 #' @export 
 
 incRt <- function (data, 
@@ -155,7 +155,7 @@ incRt <- function (data,
                                                         keep = c("dawn"), 
                                                         tz = time.zone))
       dawn$day_frac <- NULL
-      dawn$dusk <-  stats::na.omit( suncalc::getSunlightTimes(date = base::as.Date(base::as.POSIXct(base::as.character(base::unique(data$date)), tz=time.zone)), 
+      dawn$dusk <-  stats::na.omit(suncalc::getSunlightTimes(date = base::as.Date(base::as.POSIXct(base::as.character(base::unique(data$date)), tz=time.zone)), 
                                                               lat = coor[1],
                                                               lon = coor[2],
                                                               keep = c("dusk"), 

@@ -18,9 +18,9 @@ contact to implement your recommendations.
 
 # Latest news
 
-Version 2.1.0 is available on CRAN. Please, check [NEWS](https://github.com/PabloCapilla/incR/blob/master/NEWS.md) document for the latest updates.
+Version 2.1.1 is available on CRAN. Please, check [NEWS](https://github.com/PabloCapilla/incR/blob/master/NEWS.md) document for the latest updates.
 
-Development version availabelon GitHub 2.1.0.9000 (2023-04-19).
+Development version available on GitHub 2.1.1.9000 (September 2025).
 
 
 ## Citation

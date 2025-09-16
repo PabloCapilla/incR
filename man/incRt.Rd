@@ -36,17 +36,17 @@ FALSE to allow the use of 'limits'.}
 \item{coor}{coordinates for the location where temperature was recorded,
 formatted as decimal degrees N/S, decimal degrees E/W.
 When 'civil.twilight' is TRUE, 'coor' allows the user to define sunrise and sunset times
-based on the \code{\link{getSunlightTimes}} function (in \code{suncalc} package).}
+based on the \code{\link[suncalc:getSunlightTimes]{suncalc::getSunlightTimes()}} function (in \code{suncalc} package).}
 
 \item{activity.times}{TRUE or FALSE. Set as TRUE when time periods for calculation
 are defined by \code{\link{incRact}}. Data must contain a column named 
 'incR_score' for the use of \code{\link{incRact}}.}
 
 \item{civil.twilight}{TRUE or FALSE. Set as TRUE when time periods for calculation
-are to be defined by civil twilight times - calculated using \code{\link{getSunlightTimes}}. 
+are to be defined by civil twilight times - calculated using \code{\link[suncalc:getSunlightTimes]{suncalc::getSunlightTimes()}}. 
 If 'civil.twilight = TRUE', 'coor' and 'time.zone' need to be specified.}
 
-\item{time.zone}{time zone for \code{\link[suncalc]{getSunlightTimes}} dawn and dusk calculations.}
+\item{time.zone}{time zone for \code{\link[suncalc:getSunlightTimes]{suncalc::getSunlightTimes()}} dawn and dusk calculations.}
 
 \item{...}{use parameters in \code{\link{incRact}} if \emph{activity.times} = TRUE.}
 }
@@ -95,7 +95,7 @@ incRt (data=incR_procdata,
 }
 \seealso{
 \code{\link{incRprep}} \code{\link{incRscan}} \code{\link{incRact}}
-\code{\link{getSunlightTimes}}
+\code{\link[suncalc:getSunlightTimes]{suncalc::getSunlightTimes()}}
 }
 \author{
 Pablo Capilla-Lasheras

@@ -20,9 +20,9 @@
 #' information about the presence/absence of the incubating individual in the nest.
 #' If \code{\link{incRscan}} has been used, "incR_score" can be used.
 #' @return Plot of incubation temperature, on-bouts and off-bouts with (optional) 
-#' environmental temperatures. The plot is generated using \code{\link[ggplot2]{ggplot2}}.The
+#' environmental temperatures. The plot is generated using \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.The
 #' user can customised the appearance of the plot using tools 
-#' within \code{\link[ggplot2]{ggplot2}}(see example) 
+#' within \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}(see example) 
 #' @examples
 #' # loading example data
 #' data(incR_procdata)
