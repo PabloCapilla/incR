@@ -1,3 +1,12 @@
+RE-SUBMISSION
+
+Re-submission after receiving comments from CRAN
+
+* I have deleted "+ file LICENSE" in the DESCRIPION file and the LICENSE file itself.
+
+
+INITIL SUBMISSION
+
 I have updated missing package anchors in links as requested by CRAN.
 
 Results of devtools::check_win_devel()
